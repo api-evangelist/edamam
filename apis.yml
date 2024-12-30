@@ -15,6 +15,65 @@ apis:
       Copy/paste any food recipe and learn its nutrition details in under a
       second. More info. Food Database API Get free access to a database with
       close to 900,000 foods and over 680,000 unique UPC codes. More info.
+  - aid: edamam:edamam-nutrition-analysis-api
+    name: Edamam Nutrition Analysis API
+    description: >-
+      The Edamam B2B API is accessed by sending HTTPS requests on specific URLs
+      as described below. The base URL is https://api.edamam.com, and you obtain
+      the full URL by appending requests path to the base URL, for example,
+      https://api.edamam.com/api/nutrition-details.
+    humanURL: https://developer.edamam.com/edamam-docs-nutrition-api
+    tags: []
+    properties: []
+  - aid: edamam:edamam-food-and-grocery-database-api
+    name: Edamam Food and Grocery Database API
+    description: >-
+      The Edamam B2B API is accessed by sending HTTPS requests on specific URLs
+      as described below. The base URL is https://api.edamam.com, and you obtain
+      the full URL by appending requests path to the base URL, for example,
+      https://api.edamam.com/api/food-database/v2/parser.
+    humanURL: https://developer.edamam.com/food-database-api-docs
+    tags: []
+    properties: []
+  - aid: edamam:edamam-recipe-search-api
+    name: Edamam Recipe Search API
+    description: >-
+      The Edamam B2B API is accessed by sending HTTPS requests on specific URLs
+      as described below. The base URL is https://api.edamam.com, and you obtain
+      the full URL by appending requests path to the base URL, for example,
+      https://api.edamam.com/api/recipes/v2.
+    humanURL: https://developer.edamam.com/edamam-docs-recipe-api
+    tags: []
+    properties: []
+  - aid: edamam:edamam-recipe-management-api-and-private-search-api
+    name: Edamam Recipe Management API and Private Search API
+    description: >-
+      The Recipe Book functionality provides the ability to manage and search
+      your private recipes. It consists of two parts:Recipe Book Management API
+       store, analyze, publish 
+    humanURL: https://developer.edamam.com/edamam-docs-recipe-content-management-api
+    tags: []
+    properties: []
+  - aid: edamam:edamam-food-analytics-and-recipe-trend-analysis
+    name: Edamam Food Analytics and Recipe Trend Analysis
+    description: >-
+      Edamam tracks trending ingredients and combination of ingredients from
+      across the English language recipe web. We detect early trends to help
+      grocery retailers, food manufacturers, and food service companies
+      understand what items will become wanted and popular.
+    humanURL: https://developer.edamam.com/food-analytics-recipe-trend-analysis
+    tags: []
+    properties: []
+  - aid: edamam:edamam-meal-planner-api
+    name: Edamam Meal Planner API
+    description: >-
+      The Edamam B2B API is accessed by sending HTTPS requests on specific URLs
+      as described below. The base URL is https://api.edamam.com, and you obtain
+      the full URL by appending requests path to the base URL, for example,
+      https://api.edamam.com/api/meal-planner/v1.
+    humanURL: https://developer.edamam.com/edamam-docs-meal-planner-api
+    tags: []
+    properties: []
 name: Edamam
 tags:
   - Nutrition
@@ -36,3 +95,4 @@ maintainers:
   - FN: Kin Lane
     email: info@apievangelist.com
 specificationVersion: '0.19'
+common: []
