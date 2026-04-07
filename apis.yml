@@ -11,9 +11,9 @@ apis:
     humanURL: https://developer.edamam.com/edamam-docs-nutrition-api
     baseURL: https://api.edamam.com
     tags:
-      - Nutrition
       - Food
       - Health
+      - Nutrition
     properties:
       - url: https://developer.edamam.com/edamam-docs-nutrition-api
         type: Documentation
@@ -28,9 +28,9 @@ apis:
     humanURL: https://developer.edamam.com/food-database-api-docs
     baseURL: https://api.edamam.com
     tags:
-      - Nutrition
       - Food
       - Grocery
+      - Nutrition
     properties:
       - url: https://developer.edamam.com/food-database-api-docs
         type: Documentation
@@ -45,8 +45,8 @@ apis:
     humanURL: https://developer.edamam.com/edamam-docs-recipe-api
     baseURL: https://api.edamam.com
     tags:
-      - Nutrition
       - Food
+      - Nutrition
       - Recipes
     properties:
       - url: https://developer.edamam.com/edamam-docs-recipe-api
@@ -62,9 +62,9 @@ apis:
     humanURL: https://developer.edamam.com/edamam-docs-meal-planner-api
     baseURL: https://api.edamam.com
     tags:
-      - Nutrition
       - Food
       - Meal Planning
+      - Nutrition
     properties:
       - url: https://developer.edamam.com/edamam-docs-meal-planner-api
         type: Documentation
@@ -72,8 +72,8 @@ apis:
         type: Pricing
 name: Edamam
 tags:
-  - Nutrition
   - Food
+  - Nutrition
   - UPC
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
