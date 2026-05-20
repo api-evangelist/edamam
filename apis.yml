@@ -92,6 +92,10 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: GitHubOrganization
+    url: https://github.com/edamam
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/edamam
   - name: FAQ - Edamam
     description: 'null'
     url: https://developer.edamam.com/api/faq
