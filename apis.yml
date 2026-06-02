@@ -72,6 +72,7 @@ apis:
         type: Pricing
 name: Edamam
 tags:
+  - Restaurant
   - Food
   - Nutrition
   - UPC
@@ -79,7 +80,7 @@ type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 created: '2024-11-13'
-modified: '2026-04-28'
+modified: '2026-06-02'
 position: Consumer
 description: >-
   Edamam is a leading provider of nutrition data and analytics. They offer
