@@ -1,0 +1,14 @@
+{
+  "foodId": "food_bpdj2labtmnvf2a8tk4nqa1y9pty",
+  "label": "Apple",
+  "knownAs": "apple",
+  "nutrients": {
+    "ENERC_KCAL": 52,
+    "PROCNT": 0.26,
+    "FAT": 0.17,
+    "CHOCDF": 13.81
+  },
+  "category": "Generic foods",
+  "categoryLabel": "food",
+  "image": "https://www.edamam.com/food-img/apple.jpg"
+}

@@ -1,0 +1,243 @@
+openapi: 3.1.0
+info:
+  title: Edamam Meal Planner API
+  description: |
+    REST API for the Edamam Meal Planner. Generate multi-day, multi-section
+    meal plans constrained by health labels, diet labels, and nutrient ranges
+    at both the plan and per-section level. The Meal Planner is authenticated
+    with HTTP Basic credentials (app_id / app_key) and requires the
+    `Edamam-Account-User` header. This specification is a best-effort,
+    documentation-derived description and may omit fields.
+  version: 1.0.0
+  contact:
+    name: Edamam
+    url: https://developer.edamam.com/edamam-docs-meal-planner-api
+  x-generated-from: documentation
+  x-last-validated: '2026-06-02'
+servers:
+  - url: https://api.edamam.com
+    description: Production
+security:
+  - BasicAuth: []
+tags:
+  - name: Meal Planner
+    description: Generate constraint-based multi-day meal plans.
+paths:
+  /api/meal-planner/v1/{app_id}/select:
+    post:
+      summary: Edamam Generate Meal Plan
+      description: >-
+        Generate a meal plan for a given number of days and meal sections
+        (for example Breakfast, Lunch, Dinner), constrained by health labels,
+        diet labels, and nutrient ranges supplied in the request body at the
+        plan level and per section. Returns a selection of recipes that satisfy
+        the constraints.
+      operationId: selectMealPlan
+      tags:
+        - Meal Planner
+      parameters:
+        - in: path
+          name: app_id
+          required: true
+          description: Application identifier from the Edamam developer dashboard.
+          schema:
+            type: string
+          example: 1234abcd
+        - in: header
+          name: Edamam-Account-User
+          required: true
+          description: Active user identifier for the meal plan request.
+          schema:
+            type: string
+          example: user-12345
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MealPlanRequest'
+            examples:
+              SelectMealPlanRequestExample:
+                summary: Default selectMealPlan request
+                x-microcks-default: true
+                value:
+                  size: 7
+                  plan:
+                    accept:
+                      all:
+                        - health: [SOY_FREE, FISH_FREE]
+                    fit:
+                      ENERC_KCAL:
+                        min: 1000
+                        max: 2000
+                    sections:
+                      Breakfast:
+                        accept:
+                          all:
+                            - meal: [breakfast]
+                        fit:
+                          ENERC_KCAL:
+                            min: 100
+                            max: 600
+                      Lunch:
+                        accept:
+                          all:
+                            - meal: [lunch/dinner]
+                              dish: [main course, salad]
+                        fit:
+                          ENERC_KCAL:
+                            min: 300
+                            max: 900
+      responses:
+        '200':
+          description: Generated meal plan selection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MealPlanResponse'
+              examples:
+                SelectMealPlan200Example:
+                  summary: Default selectMealPlan 200 response
+                  x-microcks-default: true
+                  value:
+                    status: OK
+                    selection:
+                      - sections:
+                          Breakfast:
+                            _links:
+                              self:
+                                href: https://api.edamam.com/api/recipes/v2/abc123?type=public
+                                title: Self
+                          Lunch:
+                            _links:
+                              self:
+                                href: https://api.edamam.com/api/recipes/v2/def456?type=public
+                                title: Self
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic authentication using your Edamam app_id as username and app_key as password.
+  responses:
+    Unauthorized:
+      description: Invalid or missing credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Unauthorized401Example:
+              summary: Default unauthorized response
+              x-microcks-default: true
+              value:
+                status: error
+                message: Invalid credentials
+  schemas:
+    NutrientRange:
+      type: object
+      description: Minimum and/or maximum bound for a nutrient code (e.g. ENERC_KCAL).
+      properties:
+        min:
+          type: number
+          example: 100
+        max:
+          type: number
+          example: 600
+    Constraint:
+      type: object
+      properties:
+        all:
+          type: array
+          items:
+            type: object
+            properties:
+              health:
+                type: array
+                items:
+                  type: string
+                example: [SOY_FREE, FISH_FREE]
+              diet:
+                type: array
+                items:
+                  type: string
+                example: [balanced]
+              dish:
+                type: array
+                items:
+                  type: string
+                example: [main course, salad]
+              meal:
+                type: array
+                items:
+                  type: string
+                example: [lunch/dinner]
+    Section:
+      type: object
+      properties:
+        accept:
+          $ref: '#/components/schemas/Constraint'
+        fit:
+          type: object
+          description: Per-section nutrient ranges keyed by nutrient code.
+          additionalProperties:
+            $ref: '#/components/schemas/NutrientRange'
+    MealPlanRequest:
+      type: object
+      required:
+        - size
+        - plan
+      properties:
+        size:
+          type: integer
+          description: Number of days in the meal plan.
+          example: 7
+        plan:
+          type: object
+          properties:
+            accept:
+              $ref: '#/components/schemas/Constraint'
+            fit:
+              type: object
+              description: Plan-level nutrient ranges keyed by nutrient code.
+              additionalProperties:
+                $ref: '#/components/schemas/NutrientRange'
+            sections:
+              type: object
+              description: Meal sections such as Breakfast, Lunch, and Dinner.
+              additionalProperties:
+                $ref: '#/components/schemas/Section'
+    MealPlanResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: OK
+        selection:
+          type: array
+          description: One entry per day, each containing selected sections.
+          items:
+            type: object
+            properties:
+              sections:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    _links:
+                      type: object
+                      additionalProperties: true
+    Error:
+      type: object
+      properties:
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+          example: Invalid credentials

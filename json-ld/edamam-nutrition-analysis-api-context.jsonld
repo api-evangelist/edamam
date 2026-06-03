@@ -1,0 +1,89 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "edamam": "https://schema.edamam.com/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Nutrient": "edamam:Nutrient",
+    "NutritionResponse": "edamam:NutritionResponse",
+    "RecipeRequest": "edamam:RecipeRequest",
+    "label": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "quantity": {
+      "@id": "edamam:quantity",
+      "@type": "xsd:decimal"
+    },
+    "unit": {
+      "@id": "edamam:unit",
+      "@type": "xsd:string"
+    },
+    "uri": {
+      "@id": "edamam:uri",
+      "@type": "xsd:string"
+    },
+    "yield": {
+      "@id": "edamam:yield",
+      "@type": "xsd:decimal"
+    },
+    "calories": {
+      "@id": "edamam:calories",
+      "@type": "xsd:integer"
+    },
+    "totalWeight": {
+      "@id": "edamam:totalWeight",
+      "@type": "xsd:decimal"
+    },
+    "dietLabels": {
+      "@id": "edamam:dietLabels",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "healthLabels": {
+      "@id": "edamam:healthLabels",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "cautions": {
+      "@id": "edamam:cautions",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "totalNutrients": {
+      "@id": "edamam:totalNutrients",
+      "@type": "@id"
+    },
+    "totalDaily": {
+      "@id": "edamam:totalDaily",
+      "@type": "@id"
+    },
+    "ingredients": {
+      "@id": "edamam:ingredients",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "title": {
+      "@id": "edamam:title",
+      "@type": "xsd:string"
+    },
+    "prep": {
+      "@id": "edamam:prep",
+      "@type": "xsd:string"
+    },
+    "ingr": {
+      "@id": "edamam:ingr",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "url": {
+      "@id": "schema:url",
+      "@type": "@id"
+    },
+    "summary": {
+      "@id": "edamam:summary",
+      "@type": "xsd:string"
+    }
+  }
+}

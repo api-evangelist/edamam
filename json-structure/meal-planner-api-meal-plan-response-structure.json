@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-structure/meal-planner-api-meal-plan-response-structure.json",
+  "name": "MealPlanResponse",
+  "description": "MealPlanResponse schema from Edamam Meal Planner API",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "example": "OK"
+    },
+    "selection": {
+      "type": "array",
+      "description": "One entry per day, each containing selected sections.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "sections": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "_links": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

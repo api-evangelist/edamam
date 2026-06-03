@@ -1,0 +1,55 @@
+{
+  "recipe": {
+    "uri": "http://www.edamam.com/ontologies/edamam.owl#recipe_abc123",
+    "label": "Chicken Vesuvio",
+    "image": "https://edamam-product-images.s3.amazonaws.com/web-img/chicken-vesuvio.jpg",
+    "source": "Serious Eats",
+    "url": "https://www.seriouseats.com/recipes/chicken-vesuvio.html",
+    "yield": 4,
+    "dietLabels": [
+      "Low-Carb"
+    ],
+    "healthLabels": [
+      "Sugar-Conscious",
+      "Dairy-Free"
+    ],
+    "cautions": [
+      "Sulfites"
+    ],
+    "ingredientLines": [
+      "1 whole chicken cut into pieces",
+      "4 russet potatoes",
+      "1 cup white wine"
+    ],
+    "ingredients": [
+      {}
+    ],
+    "calories": 4228.79,
+    "totalWeight": 2249.6,
+    "totalTime": 60,
+    "cuisineType": [
+      "italian"
+    ],
+    "mealType": [
+      "lunch/dinner"
+    ],
+    "dishType": [
+      "main course"
+    ],
+    "totalNutrients": {
+      "ENERC_KCAL": {
+        "label": "Energy",
+        "quantity": 4228.79,
+        "unit": "kcal"
+      }
+    },
+    "totalDaily": {
+      "ENERC_KCAL": {
+        "label": "Energy",
+        "quantity": 4228.79,
+        "unit": "kcal"
+      }
+    }
+  },
+  "_links": {}
+}

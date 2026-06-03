@@ -1,0 +1,27 @@
+{
+  "uri": "http://www.edamam.com/ontologies/edamam.owl#recipe_xyz789",
+  "calories": 95,
+  "totalWeight": 182,
+  "dietLabels": [
+    "Low-Fat",
+    "Low-Sodium"
+  ],
+  "healthLabels": [
+    "Vegan",
+    "Vegetarian"
+  ],
+  "totalNutrients": {
+    "ENERC_KCAL": {
+      "label": "Energy",
+      "quantity": 95,
+      "unit": "kcal"
+    }
+  },
+  "totalDaily": {
+    "ENERC_KCAL": {
+      "label": "Energy",
+      "quantity": 95,
+      "unit": "kcal"
+    }
+  }
+}

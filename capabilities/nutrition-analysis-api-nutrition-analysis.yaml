@@ -1,0 +1,169 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Edamam Nutrition Analysis API — Nutrition Analysis"
+  description: >-
+    Nutrition Analysis — Nutrition Analysis. 2 operations. Lead operation:
+    Edamam Analyze Full Recipe Nutrition. Submit a full recipe or a single
+    ingredient line and receive calories, total weight, diet and health labels,
+    cautions, and a full macro- and micronutrient breakdown. Self-contained
+    Naftiko capability covering one Edamam business surface.
+  tags:
+    - Edamam
+    - Nutrition Analysis
+    - Nutrition
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      EDAMAM_APP_ID: EDAMAM_APP_ID
+      EDAMAM_APP_KEY: EDAMAM_APP_KEY
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "nutrition-analysis-api-nutrition-analysis"
+      baseUri: "https://api.edamam.com"
+      description: "Edamam Nutrition Analysis API — Nutrition Analysis business capability. Self-contained, no shared references."
+      authentication:
+        type: apikey
+        key: app_key
+        value: "{{env.EDAMAM_APP_KEY}}"
+        placement: query
+      resources:
+        - name: "nutrition-details"
+          path: "/api/nutrition-details"
+          operations:
+            - name: "analyzeRecipe"
+              method: POST
+              description: "Edamam Analyze Full Recipe Nutrition"
+              inputParameters:
+                - name: "app_id"
+                  in: query
+                  type: string
+                  required: true
+                  description: "Application identifier from the Edamam developer dashboard."
+                - name: "force"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Force re-evaluation even if a cached result exists."
+                - name: "beta"
+                  in: query
+                  type: boolean
+                  required: false
+                  description: "Enable recipe classification beta features."
+                - name: "body"
+                  in: body
+                  type: object
+                  required: true
+                  description: "Recipe payload with title, ingredient lines, and yield."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "nutrition-data"
+          path: "/api/nutrition-data"
+          operations:
+            - name: "analyzeIngredient"
+              method: GET
+              description: "Edamam Analyze Single Ingredient Line"
+              inputParameters:
+                - name: "app_id"
+                  in: query
+                  type: string
+                  required: true
+                  description: "Application identifier from the Edamam developer dashboard."
+                - name: "ingr"
+                  in: query
+                  type: string
+                  required: true
+                  description: "Ingredient text to analyze, e.g. 1 cup of rice."
+                - name: "nutrition-type"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Whether to apply cooking or logging nutrient profiles."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "nutrition-analysis-api-nutrition-analysis-rest"
+      port: 8080
+      description: "REST adapter for Edamam Nutrition Analysis API — Nutrition Analysis. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+      resources:
+        - path: "/v1/nutrition-details"
+          name: "nutrition-details"
+          description: "REST surface for full recipe nutrition analysis."
+          operations:
+            - method: POST
+              name: "analyzeRecipe"
+              description: "Edamam Analyze Full Recipe Nutrition"
+              call: "nutrition-analysis-api-nutrition-analysis.analyzeRecipe"
+              with:
+                "app_id": "rest.app_id"
+                "force": "rest.force"
+                "beta": "rest.beta"
+                "body": "rest.body"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/nutrition-data"
+          name: "nutrition-data"
+          description: "REST surface for single ingredient line analysis."
+          operations:
+            - method: GET
+              name: "analyzeIngredient"
+              description: "Edamam Analyze Single Ingredient Line"
+              call: "nutrition-analysis-api-nutrition-analysis.analyzeIngredient"
+              with:
+                "app_id": "rest.app_id"
+                "ingr": "rest.ingr"
+                "nutrition-type": "rest.nutrition-type"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "nutrition-analysis-api-nutrition-analysis-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Edamam Nutrition Analysis API — Nutrition Analysis. One tool per consumed operation, routed inline through this capability's consumes block."
+      tools:
+        - name: "analyze-recipe-nutrition"
+          description: "Edamam Analyze Full Recipe Nutrition"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "nutrition-analysis-api-nutrition-analysis.analyzeRecipe"
+          with:
+            "app_id": "tools.app_id"
+            "force": "tools.force"
+            "beta": "tools.beta"
+            "body": "tools.body"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "analyze-ingredient-line"
+          description: "Edamam Analyze Single Ingredient Line"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "nutrition-analysis-api-nutrition-analysis.analyzeIngredient"
+          with:
+            "app_id": "tools.app_id"
+            "ingr": "tools.ingr"
+            "nutrition-type": "tools.nutrition-type"
+          outputParameters:
+            - type: object
+              mapping: "$."

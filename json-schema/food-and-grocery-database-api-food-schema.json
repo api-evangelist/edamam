@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Food",
+  "description": "Food schema from Edamam Food and Grocery Database API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-schema/food-and-grocery-database-api-food-schema.json",
+  "type": "object",
+  "properties": {
+    "foodId": {
+      "type": "string",
+      "example": "food_bpdj2labtmnvf2a8tk4nqa1y9pty"
+    },
+    "label": {
+      "type": "string",
+      "example": "Apple"
+    },
+    "knownAs": {
+      "type": "string",
+      "example": "apple"
+    },
+    "nutrients": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "number"
+      },
+      "example": {
+        "ENERC_KCAL": 52,
+        "PROCNT": 0.26,
+        "FAT": 0.17,
+        "CHOCDF": 13.81
+      }
+    },
+    "category": {
+      "type": "string",
+      "example": "Generic foods"
+    },
+    "categoryLabel": {
+      "type": "string",
+      "example": "food"
+    },
+    "image": {
+      "type": "string",
+      "format": "uri",
+      "example": "https://www.edamam.com/food-img/apple.jpg"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Measure",
+  "description": "Measure schema from Edamam Food and Grocery Database API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-schema/food-and-grocery-database-api-measure-schema.json",
+  "type": "object",
+  "properties": {
+    "uri": {
+      "type": "string",
+      "example": "http://www.edamam.com/ontologies/edamam.owl#Measure_unit"
+    },
+    "label": {
+      "type": "string",
+      "example": "Whole"
+    },
+    "weight": {
+      "type": "number",
+      "example": 182
+    }
+  }
+}

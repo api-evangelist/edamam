@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-structure/meal-planner-api-constraint-structure.json",
+  "name": "Constraint",
+  "description": "Constraint schema from Edamam Meal Planner API",
+  "type": "object",
+  "properties": {
+    "all": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "health": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "SOY_FREE",
+              "FISH_FREE"
+            ]
+          },
+          "diet": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "balanced"
+            ]
+          },
+          "dish": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "main course",
+              "salad"
+            ]
+          },
+          "meal": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "lunch/dinner"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

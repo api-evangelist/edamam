@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-structure/nutrition-analysis-api-nutrient-structure.json",
+  "name": "Nutrient",
+  "description": "Nutrient schema from Edamam Nutrition Analysis API",
+  "type": "object",
+  "properties": {
+    "label": {
+      "type": "string",
+      "example": "Protein"
+    },
+    "quantity": {
+      "type": "double",
+      "example": 24.5
+    },
+    "unit": {
+      "type": "string",
+      "example": "g"
+    }
+  }
+}

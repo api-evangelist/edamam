@@ -1,0 +1,28 @@
+{
+  "accept": {
+    "all": [
+      {
+        "health": [
+          "SOY_FREE",
+          "FISH_FREE"
+        ],
+        "diet": [
+          "balanced"
+        ],
+        "dish": [
+          "main course",
+          "salad"
+        ],
+        "meal": [
+          "lunch/dinner"
+        ]
+      }
+    ]
+  },
+  "fit": {
+    "ENERC_KCAL": {
+      "min": 100,
+      "max": 600
+    }
+  }
+}

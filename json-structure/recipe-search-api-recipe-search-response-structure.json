@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-structure/recipe-search-api-recipe-search-response-structure.json",
+  "name": "RecipeSearchResponse",
+  "description": "RecipeSearchResponse schema from Edamam Recipe Search API",
+  "type": "object",
+  "properties": {
+    "from": {
+      "type": "int32",
+      "example": 1
+    },
+    "to": {
+      "type": "int32",
+      "example": 20
+    },
+    "count": {
+      "type": "int32",
+      "example": 10000
+    },
+    "_links": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "hits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "recipe": {
+            "type": "object",
+            "properties": {
+              "uri": {
+                "type": "string",
+                "example": "http://www.edamam.com/ontologies/edamam.owl#recipe_abc123"
+              },
+              "label": {
+                "type": "string",
+                "example": "Chicken Vesuvio"
+              },
+              "image": {
+                "type": "uri",
+                "example": "https://edamam-product-images.s3.amazonaws.com/web-img/chicken-vesuvio.jpg"
+              },
+              "source": {
+                "type": "string",
+                "example": "Serious Eats"
+              },
+              "url": {
+                "type": "uri",
+                "example": "https://www.seriouseats.com/recipes/chicken-vesuvio.html"
+              },
+              "yield": {
+                "type": "double",
+                "example": 4
+              },
+              "dietLabels": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "Low-Carb"
+                ]
+              },
+              "healthLabels": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "Sugar-Conscious",
+                  "Dairy-Free"
+                ]
+              },
+              "cautions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "Sulfites"
+                ]
+              },
+              "ingredientLines": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "1 whole chicken cut into pieces",
+                  "4 russet potatoes",
+                  "1 cup white wine"
+                ]
+              },
+              "ingredients": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              },
+              "calories": {
+                "type": "double",
+                "example": 4228.79
+              },
+              "totalWeight": {
+                "type": "double",
+                "example": 2249.6
+              },
+              "totalTime": {
+                "type": "double",
+                "example": 60
+              },
+              "cuisineType": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "italian"
+                ]
+              },
+              "mealType": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "lunch/dinner"
+                ]
+              },
+              "dishType": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "example": [
+                  "main course"
+                ]
+              },
+              "totalNutrients": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "example": "Energy"
+                    },
+                    "quantity": {
+                      "type": "double",
+                      "example": 4228.79
+                    },
+                    "unit": {
+                      "type": "string",
+                      "example": "kcal"
+                    }
+                  }
+                }
+              },
+              "totalDaily": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "properties": {
+                    "label": {
+                      "type": "string",
+                      "example": "Energy"
+                    },
+                    "quantity": {
+                      "type": "double",
+                      "example": 4228.79
+                    },
+                    "unit": {
+                      "type": "string",
+                      "example": "kcal"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "_links": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        }
+      }
+    }
+  }
+}

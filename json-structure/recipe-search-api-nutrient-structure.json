@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-structure/recipe-search-api-nutrient-structure.json",
+  "name": "Nutrient",
+  "description": "Nutrient schema from Edamam Recipe Search API",
+  "type": "object",
+  "properties": {
+    "label": {
+      "type": "string",
+      "example": "Energy"
+    },
+    "quantity": {
+      "type": "double",
+      "example": 4228.79
+    },
+    "unit": {
+      "type": "string",
+      "example": "kcal"
+    }
+  }
+}

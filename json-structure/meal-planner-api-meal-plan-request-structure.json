@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-structure/meal-planner-api-meal-plan-request-structure.json",
+  "name": "MealPlanRequest",
+  "description": "MealPlanRequest schema from Edamam Meal Planner API",
+  "type": "object",
+  "properties": {
+    "size": {
+      "type": "int32",
+      "description": "Number of days in the meal plan.",
+      "example": 7
+    },
+    "plan": {
+      "type": "object",
+      "properties": {
+        "accept": {
+          "type": "object",
+          "properties": {
+            "all": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "health": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "SOY_FREE",
+                      "FISH_FREE"
+                    ]
+                  },
+                  "diet": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "balanced"
+                    ]
+                  },
+                  "dish": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "main course",
+                      "salad"
+                    ]
+                  },
+                  "meal": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "example": [
+                      "lunch/dinner"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "fit": {
+          "type": "object",
+          "description": "Plan-level nutrient ranges keyed by nutrient code.",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Minimum and/or maximum bound for a nutrient code (e.g. ENERC_KCAL).",
+            "properties": {
+              "min": {
+                "type": "double",
+                "example": 100
+              },
+              "max": {
+                "type": "double",
+                "example": 600
+              }
+            }
+          }
+        },
+        "sections": {
+          "type": "object",
+          "description": "Meal sections such as Breakfast, Lunch, and Dinner.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "accept": {
+                "type": "object",
+                "properties": {
+                  "all": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "health": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": [
+                            "SOY_FREE",
+                            "FISH_FREE"
+                          ]
+                        },
+                        "diet": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": [
+                            "balanced"
+                          ]
+                        },
+                        "dish": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": [
+                            "main course",
+                            "salad"
+                          ]
+                        },
+                        "meal": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          },
+                          "example": [
+                            "lunch/dinner"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "fit": {
+                "type": "object",
+                "description": "Per-section nutrient ranges keyed by nutrient code.",
+                "additionalProperties": {
+                  "type": "object",
+                  "description": "Minimum and/or maximum bound for a nutrient code (e.g. ENERC_KCAL).",
+                  "properties": {
+                    "min": {
+                      "type": "double",
+                      "example": 100
+                    },
+                    "max": {
+                      "type": "double",
+                      "example": 600
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "size",
+    "plan"
+  ]
+}

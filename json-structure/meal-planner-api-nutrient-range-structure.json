@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-structure/meal-planner-api-nutrient-range-structure.json",
+  "name": "NutrientRange",
+  "description": "Minimum and/or maximum bound for a nutrient code (e.g. ENERC_KCAL).",
+  "type": "object",
+  "properties": {
+    "min": {
+      "type": "double",
+      "example": 100
+    },
+    "max": {
+      "type": "double",
+      "example": 600
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "uri": "http://www.edamam.com/ontologies/edamam.owl#recipe_abc123",
+  "yield": 4,
+  "calories": 640,
+  "totalWeight": 812.3,
+  "dietLabels": [
+    "High-Fiber"
+  ],
+  "healthLabels": [
+    "Vegan",
+    "Vegetarian",
+    "Dairy-Free"
+  ],
+  "cautions": [],
+  "totalNutrients": {
+    "ENERC_KCAL": {
+      "label": "Protein",
+      "quantity": 24.5,
+      "unit": "g"
+    }
+  },
+  "totalDaily": {
+    "ENERC_KCAL": {
+      "label": "Protein",
+      "quantity": 24.5,
+      "unit": "g"
+    }
+  },
+  "ingredients": [
+    {}
+  ]
+}

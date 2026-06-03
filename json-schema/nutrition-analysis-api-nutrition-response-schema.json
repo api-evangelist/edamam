@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NutritionResponse",
+  "description": "NutritionResponse schema from Edamam Nutrition Analysis API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-schema/nutrition-analysis-api-nutrition-response-schema.json",
+  "type": "object",
+  "properties": {
+    "uri": {
+      "type": "string",
+      "example": "http://www.edamam.com/ontologies/edamam.owl#recipe_abc123"
+    },
+    "yield": {
+      "type": "number",
+      "example": 4
+    },
+    "calories": {
+      "type": "integer",
+      "example": 640
+    },
+    "totalWeight": {
+      "type": "number",
+      "example": 812.3
+    },
+    "dietLabels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "High-Fiber"
+      ]
+    },
+    "healthLabels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "Vegan",
+        "Vegetarian",
+        "Dairy-Free"
+      ]
+    },
+    "cautions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": []
+    },
+    "totalNutrients": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "example": "Protein"
+          },
+          "quantity": {
+            "type": "number",
+            "example": 24.5
+          },
+          "unit": {
+            "type": "string",
+            "example": "g"
+          }
+        }
+      }
+    },
+    "totalDaily": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "example": "Protein"
+          },
+          "quantity": {
+            "type": "number",
+            "example": 24.5
+          },
+          "unit": {
+            "type": "string",
+            "example": "g"
+          }
+        }
+      }
+    },
+    "ingredients": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true
+      }
+    }
+  }
+}

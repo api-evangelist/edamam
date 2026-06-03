@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NutrientsRequest",
+  "description": "NutrientsRequest schema from Edamam Food and Grocery Database API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-schema/food-and-grocery-database-api-nutrients-request-schema.json",
+  "type": "object",
+  "properties": {
+    "ingredients": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "quantity",
+          "measureURI",
+          "foodId"
+        ],
+        "properties": {
+          "quantity": {
+            "type": "number",
+            "example": 1
+          },
+          "measureURI": {
+            "type": "string",
+            "example": "http://www.edamam.com/ontologies/edamam.owl#Measure_unit"
+          },
+          "foodId": {
+            "type": "string",
+            "example": "food_bpdj2labtmnvf2a8tk4nqa1y9pty"
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "ingredients"
+  ]
+}

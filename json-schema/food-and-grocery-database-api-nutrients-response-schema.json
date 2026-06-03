@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "NutrientsResponse",
+  "description": "NutrientsResponse schema from Edamam Food and Grocery Database API",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-schema/food-and-grocery-database-api-nutrients-response-schema.json",
+  "type": "object",
+  "properties": {
+    "uri": {
+      "type": "string",
+      "example": "http://www.edamam.com/ontologies/edamam.owl#recipe_xyz789"
+    },
+    "calories": {
+      "type": "integer",
+      "example": 95
+    },
+    "totalWeight": {
+      "type": "number",
+      "example": 182
+    },
+    "dietLabels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "Low-Fat",
+        "Low-Sodium"
+      ]
+    },
+    "healthLabels": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "Vegan",
+        "Vegetarian"
+      ]
+    },
+    "totalNutrients": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "example": "Energy"
+          },
+          "quantity": {
+            "type": "number",
+            "example": 95
+          },
+          "unit": {
+            "type": "string",
+            "example": "kcal"
+          }
+        }
+      }
+    },
+    "totalDaily": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "example": "Energy"
+          },
+          "quantity": {
+            "type": "number",
+            "example": 95
+          },
+          "unit": {
+            "type": "string",
+            "example": "kcal"
+          }
+        }
+      }
+    }
+  }
+}

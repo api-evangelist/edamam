@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -9,65 +10,33 @@ alignedWith:
 provider: Edamam
 providerId: edamam
 publisherName: Edamam
-serviceCategory: API
+serviceCategory: Developer Tools / API
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-06-02'
+reconciled: true
 tags:
   - Food
   - Nutrition
   - UPC
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Edamam API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+  - Cost Management
+description: >-
+  FOCUS-aligned FinOps for Edamam: prepaid monthly Enterprise subscription tiers
+  (Basic / Core / Plus) that bundle a fixed call quota, plus pay-as-you-go Vision
+  API metering and a custom Unlimited tier.
+sources:
+  - https://developer.edamam.com/food-database-api
+  - https://developer.edamam.com/api/faq
+  - https://developer.edamam.com/buyer/stats
+  - https://focus.finops.org/focus-specification/v1-3/
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Tiered Subscription + Pay-As-You-Go
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
+    - Usage
     - Tax
     - Credit
     - Adjustment
@@ -78,36 +47,55 @@ focusColumns:
   ProviderName: Edamam
   PublisherName: Edamam
   InvoiceIssuerName: Edamam
-  PricingCategory: Usage-Based
+  PricingCategory: Tiered Subscription + Pay-As-You-Go
   PricingUnit: request
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
+principles:
+  - name: Visibility
+    description: >-
+      Track consumption against the active plan's monthly call quota and
+      per-minute rate ceilings from the Edamam buyer usage stats dashboard
+      (developer.edamam.com/buyer/stats).
+  - name: Allocation
+    description: >-
+      Attribute spend by issuing a distinct app_id / app_key per consuming
+      application or environment, and by passing the Edamam-Account-User header
+      to break usage down per end user where active-user tracking is enabled.
+  - name: Optimization
+    description: >-
+      Right-size the prepaid tier (Basic / Core / Plus) against forecast monthly
+      call volume, cache permitted nutrient fields per the tier's caching rights
+      to cut repeat calls, and batch ingredient resolution to stay under
+      per-minute ceilings rather than over-provisioning.
+  - name: Accountability
+    description: >-
+      Assign a budget owner per app_key, alert before the monthly quota is
+      exhausted, and review tier fit at each renewal since quotas are prepaid
+      and do not roll over.
 meters:
   - name: api_requests
-    description: Count of billable API requests
+    description: Count of billable API requests against the plan's monthly quota.
     unit: request
     aggregation: sum
     dimensions:
       - api
       - endpoint
       - tier
-      - region
+      - category
       - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+  - name: vision_calls
+    description: Vision API image-analysis calls, bundled or metered pay-as-you-go by tier.
+    unit: request
     aggregation: sum
     dimensions:
-      - api
-      - region
+      - tier
       - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
+  - name: subscription_months
+    description: Recurring prepaid monthly subscription charge for the active Enterprise tier.
+    unit: month
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
       - tier
 apis:
   - name: Edamam Nutrition Analysis API

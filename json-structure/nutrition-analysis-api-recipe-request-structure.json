@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-structure/nutrition-analysis-api-recipe-request-structure.json",
+  "name": "RecipeRequest",
+  "description": "RecipeRequest schema from Edamam Nutrition Analysis API",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "example": "Quinoa Salad"
+    },
+    "prep": {
+      "type": "string",
+      "example": "15 minutes"
+    },
+    "yield": {
+      "type": "string",
+      "example": "4 servings"
+    },
+    "ingr": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "1 cup quinoa",
+        "2 cups water",
+        "1 cucumber diced"
+      ]
+    },
+    "url": {
+      "type": "uri",
+      "example": "https://example.com/recipes/quinoa-salad"
+    },
+    "summary": {
+      "type": "string",
+      "example": "A light quinoa salad"
+    }
+  },
+  "required": [
+    "ingr"
+  ]
+}

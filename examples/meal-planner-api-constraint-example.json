@@ -1,0 +1,20 @@
+{
+  "all": [
+    {
+      "health": [
+        "SOY_FREE",
+        "FISH_FREE"
+      ],
+      "diet": [
+        "balanced"
+      ],
+      "dish": [
+        "main course",
+        "salad"
+      ],
+      "meal": [
+        "lunch/dinner"
+      ]
+    }
+  ]
+}

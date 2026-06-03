@@ -1,0 +1,22 @@
+{
+  "size": 7,
+  "plan": {
+    "accept": {
+      "all": [
+        {}
+      ]
+    },
+    "fit": {
+      "ENERC_KCAL": {
+        "min": 100,
+        "max": 600
+      }
+    },
+    "sections": {
+      "ENERC_KCAL": {
+        "accept": {},
+        "fit": {}
+      }
+    }
+  }
+}

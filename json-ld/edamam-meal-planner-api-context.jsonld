@@ -1,0 +1,76 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "edamam": "https://schema.edamam.com/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "Constraint": "edamam:Constraint",
+    "MealPlanRequest": "edamam:MealPlanRequest",
+    "MealPlanResponse": "edamam:MealPlanResponse",
+    "NutrientRange": "edamam:NutrientRange",
+    "Section": "edamam:Section",
+    "all": {
+      "@id": "edamam:all",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "health": {
+      "@id": "edamam:health",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "diet": {
+      "@id": "edamam:diet",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "dish": {
+      "@id": "edamam:dish",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "meal": {
+      "@id": "edamam:meal",
+      "@container": "@set",
+      "@type": "xsd:string"
+    },
+    "size": {
+      "@id": "edamam:size",
+      "@type": "xsd:integer"
+    },
+    "plan": {
+      "@id": "edamam:plan",
+      "@type": "@id"
+    },
+    "accept": {
+      "@id": "edamam:accept",
+      "@type": "@id"
+    },
+    "fit": {
+      "@id": "edamam:fit",
+      "@type": "@id"
+    },
+    "sections": {
+      "@id": "edamam:sections",
+      "@type": "@id"
+    },
+    "status": {
+      "@id": "edamam:status",
+      "@type": "xsd:string"
+    },
+    "selection": {
+      "@id": "edamam:selection",
+      "@container": "@set",
+      "@type": "@id"
+    },
+    "min": {
+      "@id": "edamam:min",
+      "@type": "xsd:decimal"
+    },
+    "max": {
+      "@id": "edamam:max",
+      "@type": "xsd:decimal"
+    }
+  }
+}

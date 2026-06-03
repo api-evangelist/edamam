@@ -1,0 +1,323 @@
+openapi: 3.1.0
+info:
+  title: Edamam Nutrition Analysis API
+  description: |
+    REST API for Edamam Nutrition Analysis. Submit a full recipe for nutrition
+    analysis or a single ingredient line and receive comprehensive nutritional
+    information including calories, macronutrients, and micronutrients.
+    Requests are authenticated with `app_id` and `app_key` query parameters
+    issued from the Edamam developer dashboard. This specification is a
+    best-effort, documentation-derived description and may omit fields.
+  version: 1.0.0
+  contact:
+    name: Edamam
+    url: https://developer.edamam.com/edamam-docs-nutrition-api
+  x-generated-from: documentation
+  x-last-validated: '2026-06-02'
+servers:
+  - url: https://api.edamam.com
+    description: Production
+security:
+  - AppCreds: []
+tags:
+  - name: Nutrition Analysis
+    description: Analyze recipes and ingredient lines for nutrition content.
+paths:
+  /api/nutrition-details:
+    post:
+      summary: Edamam Analyze Full Recipe Nutrition
+      description: >-
+        Submit a full recipe (title, ingredient lines, yield, and optional
+        source URL) and receive a comprehensive nutrition analysis including
+        calories, total weight, diet and health labels, cautions, and a full
+        breakdown of macro- and micronutrients.
+      operationId: analyzeRecipe
+      tags:
+        - Nutrition Analysis
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/AppKey'
+        - in: query
+          name: force
+          description: Force re-evaluation even if a cached result exists.
+          schema:
+            type: boolean
+          example: false
+        - in: query
+          name: beta
+          description: Enable recipe classification beta features.
+          schema:
+            type: boolean
+          example: false
+        - in: header
+          name: Edamam-Account-User
+          description: Active user identifier for tracking.
+          schema:
+            type: string
+          example: user-12345
+        - in: header
+          name: Content-Language
+          description: Language of the submitted recipe text.
+          schema:
+            type: string
+            enum: [ar, de, en, es, fr, it, nl, pt, ru, tr]
+          example: en
+        - in: header
+          name: If-None-Match
+          description: ETag for caching previously analyzed recipes.
+          schema:
+            type: string
+          example: '"a1b2c3d4"'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecipeRequest'
+            examples:
+              AnalyzeRecipeRequestExample:
+                summary: Default analyzeRecipe request
+                x-microcks-default: true
+                value:
+                  title: Quinoa Salad
+                  yield: '4 servings'
+                  ingr:
+                    - 1 cup quinoa
+                    - 2 cups water
+                    - 1 cucumber diced
+      responses:
+        '200':
+          description: Full nutrition analysis
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NutritionResponse'
+              examples:
+                AnalyzeRecipe200Example:
+                  summary: Default analyzeRecipe 200 response
+                  x-microcks-default: true
+                  value:
+                    uri: http://www.edamam.com/ontologies/edamam.owl#recipe_abc123
+                    yield: 4
+                    calories: 640
+                    totalWeight: 812.3
+                    dietLabels: [High-Fiber]
+                    healthLabels: [Vegan, Vegetarian, Dairy-Free]
+                    cautions: []
+                    totalNutrients:
+                      PROCNT:
+                        label: Protein
+                        quantity: 24.5
+                        unit: g
+                    totalDaily:
+                      PROCNT:
+                        label: Protein
+                        quantity: 49
+                        unit: '%'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          description: Could not parse one or more ingredients
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/nutrition-data:
+    get:
+      summary: Edamam Analyze Single Ingredient Line
+      description: >-
+        Analyze a single natural-language ingredient line (for example
+        `1 cup of rice`) and receive per-ingredient nutrition data including
+        calories, total weight, and the full nutrient breakdown.
+      operationId: analyzeIngredient
+      tags:
+        - Nutrition Analysis
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/AppKey'
+        - in: query
+          name: ingr
+          required: true
+          description: Ingredient text to analyze, e.g. `1 cup of rice`.
+          schema:
+            type: string
+          example: 1 cup of rice
+        - in: query
+          name: nutrition-type
+          description: Whether to apply cooking or logging nutrient profiles.
+          schema:
+            type: string
+            enum: [cooking, logging]
+            default: cooking
+          example: cooking
+        - in: header
+          name: Edamam-Account-User
+          description: Active user identifier for tracking.
+          schema:
+            type: string
+          example: user-12345
+      responses:
+        '200':
+          description: Per-ingredient nutrition data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NutritionResponse'
+              examples:
+                AnalyzeIngredient200Example:
+                  summary: Default analyzeIngredient 200 response
+                  x-microcks-default: true
+                  value:
+                    uri: http://www.edamam.com/ontologies/edamam.owl#recipe_def456
+                    yield: 1
+                    calories: 206
+                    totalWeight: 158
+                    dietLabels: [Low-Fat, Low-Sodium]
+                    healthLabels: [Vegan, Vegetarian, Gluten-Free]
+                    cautions: []
+                    totalNutrients:
+                      ENERC_KCAL:
+                        label: Energy
+                        quantity: 206
+                        unit: kcal
+                    totalDaily:
+                      ENERC_KCAL:
+                        label: Energy
+                        quantity: 10.3
+                        unit: '%'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    AppCreds:
+      type: apiKey
+      in: query
+      name: app_key
+      description: App key issued by Edamam. Must be sent with the matching `app_id` query parameter.
+  parameters:
+    AppId:
+      in: query
+      name: app_id
+      required: true
+      description: Application identifier from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 1234abcd
+    AppKey:
+      in: query
+      name: app_key
+      required: true
+      description: Application key from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 0123456789abcdef0123456789abcdef
+  responses:
+    Unauthorized:
+      description: Invalid or missing app_id / app_key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Unauthorized401Example:
+              summary: Default unauthorized response
+              x-microcks-default: true
+              value:
+                error: unauthorized
+                message: Invalid app_id or app_key
+  schemas:
+    RecipeRequest:
+      type: object
+      required:
+        - ingr
+      properties:
+        title:
+          type: string
+          example: Quinoa Salad
+        prep:
+          type: string
+          example: 15 minutes
+        yield:
+          type: string
+          example: '4 servings'
+        ingr:
+          type: array
+          items:
+            type: string
+          example:
+            - 1 cup quinoa
+            - 2 cups water
+            - 1 cucumber diced
+        url:
+          type: string
+          format: uri
+          example: https://example.com/recipes/quinoa-salad
+        summary:
+          type: string
+          example: A light quinoa salad
+    Nutrient:
+      type: object
+      properties:
+        label:
+          type: string
+          example: Protein
+        quantity:
+          type: number
+          example: 24.5
+        unit:
+          type: string
+          example: g
+    NutritionResponse:
+      type: object
+      properties:
+        uri:
+          type: string
+          example: http://www.edamam.com/ontologies/edamam.owl#recipe_abc123
+        yield:
+          type: number
+          example: 4
+        calories:
+          type: integer
+          example: 640
+        totalWeight:
+          type: number
+          example: 812.3
+        dietLabels:
+          type: array
+          items:
+            type: string
+          example: [High-Fiber]
+        healthLabels:
+          type: array
+          items:
+            type: string
+          example: [Vegan, Vegetarian, Dairy-Free]
+        cautions:
+          type: array
+          items:
+            type: string
+          example: []
+        totalNutrients:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Nutrient'
+        totalDaily:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Nutrient'
+        ingredients:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: unauthorized
+        message:
+          type: string
+          example: Invalid app_id or app_key

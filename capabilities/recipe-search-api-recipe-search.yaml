@@ -1,0 +1,211 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  label: "Edamam Recipe Search API — Recipe Search"
+  description: >-
+    Recipe Search — Recipe Search. 2 operations. Lead operation: Edamam Search
+    Recipes. Search over 2 million recipes by keyword with rich diet, health,
+    cuisine, meal, dish, calorie, and time filtering, then retrieve a single
+    recipe by id. Self-contained Naftiko capability covering one Edamam
+    business surface.
+  tags:
+    - Edamam
+    - Recipe Search
+    - Recipes
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+binds:
+  - namespace: env
+    keys:
+      EDAMAM_APP_ID: EDAMAM_APP_ID
+      EDAMAM_APP_KEY: EDAMAM_APP_KEY
+
+capability:
+
+  consumes:
+    - type: http
+      namespace: "recipe-search-api-recipe-search"
+      baseUri: "https://api.edamam.com"
+      description: "Edamam Recipe Search API — Recipe Search business capability. Self-contained, no shared references."
+      authentication:
+        type: apikey
+        key: app_key
+        value: "{{env.EDAMAM_APP_KEY}}"
+        placement: query
+      resources:
+        - name: "recipes-v2"
+          path: "/api/recipes/v2"
+          operations:
+            - name: "searchRecipes"
+              method: GET
+              description: "Edamam Search Recipes"
+              inputParameters:
+                - name: "type"
+                  in: query
+                  type: string
+                  required: true
+                  description: "Recipe access type. Use public for the public recipe pool."
+                - name: "app_id"
+                  in: query
+                  type: string
+                  required: true
+                  description: "Application identifier from the Edamam developer dashboard."
+                - name: "q"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Free-text search query."
+                - name: "diet"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Diet label filter."
+                - name: "health"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Health label filter."
+                - name: "cuisineType"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Cuisine type filter."
+                - name: "mealType"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Meal type filter."
+                - name: "dishType"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Dish type filter."
+                - name: "calories"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Calorie range filter."
+                - name: "time"
+                  in: query
+                  type: string
+                  required: false
+                  description: "Preparation time range in minutes."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+        - name: "recipes-v2-by-id"
+          path: "/api/recipes/v2/{id}"
+          operations:
+            - name: "getRecipeById"
+              method: GET
+              description: "Edamam Get Recipe by ID"
+              inputParameters:
+                - name: "id"
+                  in: path
+                  type: string
+                  required: true
+                  description: "Edamam recipe identifier."
+                - name: "type"
+                  in: query
+                  type: string
+                  required: true
+                  description: "Recipe access type."
+                - name: "app_id"
+                  in: query
+                  type: string
+                  required: true
+                  description: "Application identifier from the Edamam developer dashboard."
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      namespace: "recipe-search-api-recipe-search-rest"
+      port: 8080
+      description: "REST adapter for Edamam Recipe Search API — Recipe Search. One Spectral-compliant resource per consumed operation, prefixed with /v1."
+      resources:
+        - path: "/v1/recipes/v2"
+          name: "recipes"
+          description: "REST surface for recipe search."
+          operations:
+            - method: GET
+              name: "searchRecipes"
+              description: "Edamam Search Recipes"
+              call: "recipe-search-api-recipe-search.searchRecipes"
+              with:
+                "type": "rest.type"
+                "app_id": "rest.app_id"
+                "q": "rest.q"
+                "diet": "rest.diet"
+                "health": "rest.health"
+                "cuisineType": "rest.cuisineType"
+                "mealType": "rest.mealType"
+                "dishType": "rest.dishType"
+                "calories": "rest.calories"
+                "time": "rest.time"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: "/v1/recipes/v2/{id}"
+          name: "recipe-by-id"
+          description: "REST surface for retrieving a recipe by id."
+          operations:
+            - method: GET
+              name: "getRecipeById"
+              description: "Edamam Get Recipe by ID"
+              call: "recipe-search-api-recipe-search.getRecipeById"
+              with:
+                "id": "rest.id"
+                "type": "rest.type"
+                "app_id": "rest.app_id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      namespace: "recipe-search-api-recipe-search-mcp"
+      port: 9090
+      transport: http
+      description: "MCP adapter for Edamam Recipe Search API — Recipe Search. One tool per consumed operation, routed inline through this capability's consumes block."
+      tools:
+        - name: "search-recipes"
+          description: "Edamam Search Recipes"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "recipe-search-api-recipe-search.searchRecipes"
+          with:
+            "type": "tools.type"
+            "app_id": "tools.app_id"
+            "q": "tools.q"
+            "diet": "tools.diet"
+            "health": "tools.health"
+            "cuisineType": "tools.cuisineType"
+            "mealType": "tools.mealType"
+            "dishType": "tools.dishType"
+            "calories": "tools.calories"
+            "time": "tools.time"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: "get-recipe"
+          description: "Edamam Get Recipe by ID"
+          hints:
+            readOnly: true
+            destructive: false
+            idempotent: true
+          call: "recipe-search-api-recipe-search.getRecipeById"
+          with:
+            "id": "tools.id"
+            "type": "tools.type"
+            "app_id": "tools.app_id"
+          outputParameters:
+            - type: object
+              mapping: "$."

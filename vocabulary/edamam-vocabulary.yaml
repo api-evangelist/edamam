@@ -1,0 +1,311 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Edamam"
+  description: >-
+    Unified vocabulary for the Edamam food, nutrition, recipe, and meal-planning
+    API surface. Maps the operational dimension (OpenAPI resources, actions,
+    schemas, parameters, and enums across the Nutrition Analysis, Food and
+    Grocery Database, Recipe Search, and Meal Planner APIs) to the capability
+    dimension (Naftiko REST and MCP workflows) and the personas that consume
+    them.
+  created: "2026-06-02"
+  modified: "2026-06-02"
+
+# OPERATIONAL DIMENSION (from OpenAPI)
+operational:
+  apis:
+    - name: Edamam Nutrition Analysis API
+      namespace: nutrition-analysis-api
+      version: 1.0.0
+      baseUrl: https://api.edamam.com
+      status: active
+    - name: Edamam Food and Grocery Database API
+      namespace: food-and-grocery-database-api
+      version: 2.0.0
+      baseUrl: https://api.edamam.com
+      status: active
+    - name: Edamam Recipe Search API
+      namespace: recipe-search-api
+      version: 2.0.0
+      baseUrl: https://api.edamam.com
+      status: active
+    - name: Edamam Meal Planner API
+      namespace: meal-planner-api
+      version: 1.0.0
+      baseUrl: https://api.edamam.com
+      status: active
+
+  resources:
+    - name: nutrition
+      api: Edamam Nutrition Analysis API
+      description: Nutrition analysis of recipes and ingredient lines.
+      actions: [analyze]
+    - name: foods
+      api: Edamam Food and Grocery Database API
+      description: Foods, branded packaged products, and UPC/barcode records.
+      actions: [search, resolve]
+    - name: recipes
+      api: Edamam Recipe Search API
+      description: Recipe records with nutrition, labels, and attribution.
+      actions: [search, get]
+    - name: mealPlans
+      api: Edamam Meal Planner API
+      description: Constraint-based multi-day meal plans.
+      actions: [generate]
+
+  actions:
+    - name: analyze
+      httpMethods: [GET, POST]
+      pattern: query
+    - name: search
+      httpMethods: [GET]
+      pattern: query
+    - name: resolve
+      httpMethods: [POST]
+      pattern: read
+    - name: get
+      httpMethods: [GET]
+      pattern: read
+    - name: generate
+      httpMethods: [POST]
+      pattern: write
+
+  schemas:
+    nutrition:
+      - NutritionResponse
+      - Nutrient
+      - RecipeRequest
+    food:
+      - Food
+      - Measure
+      - FoodHint
+      - ParserResponse
+      - NutrientsRequest
+      - NutrientsResponse
+    recipe:
+      - Recipe
+      - RecipeHit
+      - RecipeSearchResponse
+    mealPlanning:
+      - MealPlanRequest
+      - MealPlanResponse
+      - Section
+      - Constraint
+      - NutrientRange
+
+  parameters:
+    pagination:
+      - from
+      - to
+      - count
+      - next
+    identifiers:
+      - app_id
+      - app_key
+      - foodId
+      - measureURI
+      - id
+      - Edamam-Account-User
+    filters:
+      - q
+      - ingr
+      - upc
+      - category
+      - categoryLabel
+      - diet
+      - health
+      - cuisineType
+      - mealType
+      - dishType
+      - calories
+      - time
+      - nutrition-type
+    measurement:
+      - quantity
+      - unit
+      - weight
+      - totalWeight
+      - calories
+
+  enums:
+    foodCategories:
+      - generic-foods
+      - packaged-foods
+      - generic-meals
+      - fast-foods
+    dietLabels:
+      - balanced
+      - high-fiber
+      - high-protein
+      - low-carb
+      - low-fat
+      - low-sodium
+    nutritionTypes:
+      - cooking
+      - logging
+    imageSizes:
+      - THUMBNAIL
+      - SMALL
+      - REGULAR
+      - LARGE
+    co2EmissionsClasses:
+      - A+
+      - A
+      - B
+      - C
+      - D
+      - E
+      - F
+      - G
+    contentLanguages:
+      - ar
+      - de
+      - en
+      - es
+      - fr
+      - it
+      - nl
+      - pt
+      - ru
+      - tr
+
+  authentication:
+    - scheme: AppCreds
+      type: apiKey
+      in: query
+      params: [app_id, app_key]
+      appliesTo:
+        - Edamam Nutrition Analysis API
+        - Edamam Food and Grocery Database API
+        - Edamam Recipe Search API
+    - scheme: BasicAuth
+      type: http
+      flow: basic
+      appliesTo:
+        - Edamam Meal Planner API
+
+# CAPABILITY DIMENSION (from Naftiko)
+capability:
+  workflows:
+    - name: Nutrition Analysis
+      file: capabilities/nutrition-analysis-api-nutrition-analysis.yaml
+      description: Analyze full recipes and single ingredient lines for nutrition.
+      apis: [Edamam Nutrition Analysis API]
+      tools: 2
+      personas: [Developer, Nutrition Analyst]
+      domains: [Nutrition]
+    - name: Food Database
+      file: capabilities/food-and-grocery-database-api-food-database.yaml
+      description: Search foods and barcodes, then resolve nutrient breakdowns.
+      apis: [Edamam Food and Grocery Database API]
+      tools: 2
+      personas: [Developer, Grocery App Builder]
+      domains: [Food Database]
+    - name: Recipe Search
+      file: capabilities/recipe-search-api-recipe-search.yaml
+      description: Search and retrieve recipes with rich dietary filtering.
+      apis: [Edamam Recipe Search API]
+      tools: 2
+      personas: [Developer, Recipe App Builder]
+      domains: [Recipes]
+    - name: Meal Planner
+      file: capabilities/meal-planner-api-meal-planner.yaml
+      description: Generate constraint-based multi-day meal plans.
+      apis: [Edamam Meal Planner API]
+      tools: 1
+      personas: [Developer, Wellness Coach]
+      domains: [Meal Planning]
+
+  personas:
+    - id: developer
+      name: Developer
+      description: Integrates Edamam APIs into health, fitness, and food applications.
+      workflows: [Nutrition Analysis, Food Database, Recipe Search, Meal Planner]
+    - id: nutrition-analyst
+      name: Nutrition Analyst
+      description: Uses nutrition analysis to evaluate recipes and food logs.
+      workflows: [Nutrition Analysis]
+    - id: grocery-app-builder
+      name: Grocery App Builder
+      description: Builds grocery and barcode-scanning experiences on the food database.
+      workflows: [Food Database]
+    - id: recipe-app-builder
+      name: Recipe App Builder
+      description: Builds recipe discovery and search experiences.
+      workflows: [Recipe Search]
+    - id: wellness-coach
+      name: Wellness Coach
+      description: Generates personalized meal plans for clients.
+      workflows: [Meal Planner]
+
+  domains:
+    - name: Nutrition
+      resources: [nutrition]
+      workflows: [Nutrition Analysis]
+    - name: Food Database
+      resources: [foods]
+      workflows: [Food Database]
+    - name: Recipes
+      resources: [recipes]
+      workflows: [Recipe Search]
+    - name: Meal Planning
+      resources: [mealPlans]
+      workflows: [Meal Planner]
+
+  namespaces:
+    - consumed: nutrition-analysis-api-nutrition-analysis
+      rest: nutrition-analysis-api-nutrition-analysis-rest
+      mcp: nutrition-analysis-api-nutrition-analysis-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: food-and-grocery-database-api-food-database
+      rest: food-and-grocery-database-api-food-database-rest
+      mcp: food-and-grocery-database-api-food-database-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: recipe-search-api-recipe-search
+      rest: recipe-search-api-recipe-search-rest
+      mcp: recipe-search-api-recipe-search-mcp
+      restPort: 8080
+      mcpPort: 9090
+    - consumed: meal-planner-api-meal-planner
+      rest: meal-planner-api-meal-planner-rest
+      mcp: meal-planner-api-meal-planner-mcp
+      restPort: 8080
+      mcpPort: 9090
+
+  binds:
+    - key: EDAMAM_APP_ID
+      description: Edamam application identifier.
+      workflows: [Nutrition Analysis, Food Database, Recipe Search, Meal Planner]
+    - key: EDAMAM_APP_KEY
+      description: Edamam application key.
+      workflows: [Nutrition Analysis, Food Database, Recipe Search, Meal Planner]
+
+# CROSS-REFERENCE
+crossReference:
+  - resource: nutrition
+    operations: [analyzeRecipe, analyzeIngredient]
+    workflows: [Nutrition Analysis]
+    personas: [Developer, Nutrition Analyst]
+  - resource: foods
+    operations: [parseFood, foodNutrients]
+    workflows: [Food Database]
+    personas: [Developer, Grocery App Builder]
+  - resource: recipes
+    operations: [searchRecipes, getRecipeById]
+    workflows: [Recipe Search]
+    personas: [Developer, Recipe App Builder]
+  - resource: mealPlans
+    operations: [selectMealPlan]
+    workflows: [Meal Planner]
+    personas: [Developer, Wellness Coach]
+
+tags:
+  - Edamam
+  - Food
+  - Nutrition
+  - Recipes
+  - Meal Planning
+  - Food Database

@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/edamam/refs/heads/main/json-structure/food-and-grocery-database-api-parser-response-structure.json",
+  "name": "ParserResponse",
+  "description": "ParserResponse schema from Edamam Food and Grocery Database API",
+  "type": "object",
+  "properties": {
+    "text": {
+      "type": "string",
+      "example": "apple"
+    },
+    "parsed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "food": {
+            "type": "object",
+            "properties": {
+              "foodId": {
+                "type": "string",
+                "example": "food_bpdj2labtmnvf2a8tk4nqa1y9pty"
+              },
+              "label": {
+                "type": "string",
+                "example": "Apple"
+              },
+              "knownAs": {
+                "type": "string",
+                "example": "apple"
+              },
+              "nutrients": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "double"
+                },
+                "example": {
+                  "ENERC_KCAL": 52,
+                  "PROCNT": 0.26,
+                  "FAT": 0.17,
+                  "CHOCDF": 13.81
+                }
+              },
+              "category": {
+                "type": "string",
+                "example": "Generic foods"
+              },
+              "categoryLabel": {
+                "type": "string",
+                "example": "food"
+              },
+              "image": {
+                "type": "uri",
+                "example": "https://www.edamam.com/food-img/apple.jpg"
+              }
+            }
+          }
+        }
+      }
+    },
+    "hints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "food": {
+            "type": "object",
+            "properties": {
+              "foodId": {
+                "type": "string",
+                "example": "food_bpdj2labtmnvf2a8tk4nqa1y9pty"
+              },
+              "label": {
+                "type": "string",
+                "example": "Apple"
+              },
+              "knownAs": {
+                "type": "string",
+                "example": "apple"
+              },
+              "nutrients": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "double"
+                },
+                "example": {
+                  "ENERC_KCAL": 52,
+                  "PROCNT": 0.26,
+                  "FAT": 0.17,
+                  "CHOCDF": 13.81
+                }
+              },
+              "category": {
+                "type": "string",
+                "example": "Generic foods"
+              },
+              "categoryLabel": {
+                "type": "string",
+                "example": "food"
+              },
+              "image": {
+                "type": "uri",
+                "example": "https://www.edamam.com/food-img/apple.jpg"
+              }
+            }
+          },
+          "measures": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "uri": {
+                  "type": "string",
+                  "example": "http://www.edamam.com/ontologies/edamam.owl#Measure_unit"
+                },
+                "label": {
+                  "type": "string",
+                  "example": "Whole"
+                },
+                "weight": {
+                  "type": "double",
+                  "example": 182
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "_links": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

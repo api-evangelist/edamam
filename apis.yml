@@ -19,6 +19,10 @@ apis:
         type: Documentation
       - url: https://developer.edamam.com/edamam-nutrition-api
         type: Pricing
+      - url: https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-nutrition-analysis-api-openapi.yml
+        type: OpenAPI
+      - url: capabilities/nutrition-analysis-api-nutrition-analysis.yaml
+        type: NaftikoCapability
   - aid: edamam:edamam-food-and-grocery-database-api
     name: Edamam Food and Grocery Database API
     description: >-
@@ -36,6 +40,10 @@ apis:
         type: Documentation
       - url: https://developer.edamam.com/food-database-api
         type: Pricing
+      - url: https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-food-and-grocery-database-api-openapi.yml
+        type: OpenAPI
+      - url: capabilities/food-and-grocery-database-api-food-database.yaml
+        type: NaftikoCapability
   - aid: edamam:edamam-recipe-search-api
     name: Edamam Recipe Search API
     description: >-
@@ -53,6 +61,10 @@ apis:
         type: Documentation
       - url: https://developer.edamam.com/edamam-recipe-api
         type: Pricing
+      - url: https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-recipe-search-api-openapi.yml
+        type: OpenAPI
+      - url: capabilities/recipe-search-api-recipe-search.yaml
+        type: NaftikoCapability
   - aid: edamam:edamam-meal-planner-api
     name: Edamam Meal Planner API
     description: >-
@@ -70,6 +82,10 @@ apis:
         type: Documentation
       - url: https://developer.edamam.com/meal-planner-api
         type: Pricing
+      - url: https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-meal-planner-api-openapi.yml
+        type: OpenAPI
+      - url: capabilities/meal-planner-api-meal-planner.yaml
+        type: NaftikoCapability
 name: Edamam
 tags:
   - Restaurant
@@ -97,6 +113,44 @@ common:
     url: https://github.com/edamam
   - type: LinkedIn
     url: https://www.linkedin.com/company/edamam
+  - type: Tools
+    title: MCP Server (Food Database)
+    url: https://github.com/edamam-llc/mcp-edamam-food
+  - name: Edamam Food MCP
+    description: >-
+      Official Edamam Model Context Protocol server exposing the Food Database
+      and Vision capabilities as LLM-friendly tools (get_food_nutrition,
+      analyze_food_image) over Streamable HTTP / JSON-RPC 2.0 at
+      https://mcp.edamam.com/mcp/food.
+    url: https://developer.edamam.com/mcp-edamam-food
+    type: Tools
+  - type: CodeExamples
+    title: Java Demo (Nutrition Analysis API)
+    url: https://github.com/edamam-llc/edamam-api-demo
+  - type: Spectral
+    title: Edamam Spectral Rules
+    url: rules/edamam-spectral-rules.yml
+  - type: Vocabulary
+    title: Edamam Vocabulary
+    url: vocabulary/edamam-vocabulary.yaml
+  - type: Plans
+    url: plans/edamam-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/edamam-rate-limits.yml
+  - type: FinOps
+    url: finops/edamam-finops.yml
+  - type: JSONLD
+    title: Nutrition Analysis Context
+    url: json-ld/edamam-nutrition-analysis-api-context.jsonld
+  - type: JSONLD
+    title: Food Database Context
+    url: json-ld/edamam-food-and-grocery-database-api-context.jsonld
+  - type: JSONLD
+    title: Recipe Search Context
+    url: json-ld/edamam-recipe-search-api-context.jsonld
+  - type: JSONLD
+    title: Meal Planner Context
+    url: json-ld/edamam-meal-planner-api-context.jsonld
   - name: FAQ - Edamam
     description: 'null'
     url: https://developer.edamam.com/api/faq

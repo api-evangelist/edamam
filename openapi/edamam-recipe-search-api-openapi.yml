@@ -1,0 +1,415 @@
+openapi: 3.1.0
+info:
+  title: Edamam Recipe Search API
+  description: |
+    REST API for Edamam Recipe Search v2. Search over 2 million recipes by
+    keyword with rich filtering on diet, health, cuisine type, meal type,
+    dish type, calories, and preparation time, and retrieve full recipes by
+    URI. Each recipe includes nutrition analysis, diet and health labels,
+    ingredient details, and source attribution. Requests are authenticated
+    with `app_id` and `app_key` query parameters issued from the Edamam
+    developer dashboard. This specification is a best-effort,
+    documentation-derived description and may omit fields.
+  version: 2.0.0
+  contact:
+    name: Edamam
+    url: https://developer.edamam.com/edamam-docs-recipe-api
+  x-generated-from: documentation
+  x-last-validated: '2026-06-02'
+servers:
+  - url: https://api.edamam.com
+    description: Production
+security:
+  - AppCreds: []
+tags:
+  - name: Recipe Search
+    description: Search recipes and retrieve recipe records by URI.
+paths:
+  /api/recipes/v2:
+    get:
+      summary: Edamam Search Recipes
+      description: >-
+        Search the recipe database by keyword with rich filtering on diet,
+        health, cuisine type, meal type, dish type, calorie range, and
+        preparation time. Returns a paginated set of recipe hits with full
+        nutrition analysis and source attribution.
+      operationId: searchRecipes
+      tags:
+        - Recipe Search
+      parameters:
+        - in: query
+          name: type
+          required: true
+          description: Recipe access type. Use `public` for the public recipe pool.
+          schema:
+            type: string
+            enum: [public, user, any]
+            default: public
+          example: public
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/AppKey'
+        - in: query
+          name: q
+          description: Free-text search query, e.g. `chicken`.
+          schema:
+            type: string
+          example: chicken
+        - in: query
+          name: diet
+          description: Diet label filter (repeatable).
+          schema:
+            type: string
+            enum: [balanced, high-fiber, high-protein, low-carb, low-fat, low-sodium]
+          example: high-protein
+        - in: query
+          name: health
+          description: Health label filter (repeatable), e.g. `vegan`, `gluten-free`.
+          schema:
+            type: string
+          example: gluten-free
+        - in: query
+          name: cuisineType
+          description: Cuisine type filter (repeatable), e.g. `Italian`.
+          schema:
+            type: string
+          example: Italian
+        - in: query
+          name: mealType
+          description: Meal type filter (repeatable), e.g. `Breakfast`.
+          schema:
+            type: string
+          example: Dinner
+        - in: query
+          name: dishType
+          description: Dish type filter (repeatable), e.g. `Main course`.
+          schema:
+            type: string
+          example: Main course
+        - in: query
+          name: calories
+          description: Calorie range filter, e.g. `100-300`.
+          schema:
+            type: string
+          example: 100-300
+        - in: query
+          name: time
+          description: Preparation time range in minutes, e.g. `1-60`.
+          schema:
+            type: string
+          example: 1-60
+        - in: query
+          name: imageSize
+          description: Requested image resolution.
+          schema:
+            type: string
+            enum: [THUMBNAIL, SMALL, REGULAR, LARGE]
+          example: REGULAR
+        - in: query
+          name: co2EmissionsClass
+          description: Carbon footprint rating filter (requires beta=true).
+          schema:
+            type: string
+            enum: ['A+', A, B, C, D, E, F, G]
+          example: A
+        - in: query
+          name: beta
+          description: Enable beta features such as CO2 emissions filtering.
+          schema:
+            type: boolean
+          example: false
+        - in: header
+          name: Edamam-Account-User
+          description: Active user identifier for tracking.
+          schema:
+            type: string
+          example: user-12345
+      responses:
+        '200':
+          description: Paginated recipe search results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeSearchResponse'
+              examples:
+                SearchRecipes200Example:
+                  summary: Default searchRecipes 200 response
+                  x-microcks-default: true
+                  value:
+                    from: 1
+                    to: 20
+                    count: 10000
+                    _links:
+                      next:
+                        href: https://api.edamam.com/api/recipes/v2?type=public&q=chicken&_cont=CHcVQ
+                        title: Next page
+                    hits:
+                      - recipe:
+                          uri: http://www.edamam.com/ontologies/edamam.owl#recipe_abc123
+                          label: Chicken Vesuvio
+                          image: https://edamam-product-images.s3.amazonaws.com/web-img/chicken-vesuvio.jpg
+                          source: Serious Eats
+                          url: https://www.seriouseats.com/recipes/chicken-vesuvio.html
+                          yield: 4
+                          dietLabels: [Low-Carb]
+                          healthLabels: [Sugar-Conscious, Dairy-Free]
+                          cautions: [Sulfites]
+                          ingredientLines:
+                            - 1 whole chicken cut into pieces
+                            - 4 russet potatoes
+                            - 1 cup white wine
+                          calories: 4228.79
+                          totalWeight: 2249.6
+                          totalTime: 60
+                          cuisineType: [italian]
+                          mealType: [lunch/dinner]
+                          dishType: [main course]
+                        _links:
+                          self:
+                            href: https://api.edamam.com/api/recipes/v2/abc123?type=public
+                            title: Self
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/recipes/v2/{id}:
+    get:
+      summary: Edamam Get Recipe by ID
+      description: >-
+        Retrieve a single recipe record by its Edamam recipe identifier,
+        returning the full recipe object including nutrition, labels, and
+        ingredients.
+      operationId: getRecipeById
+      tags:
+        - Recipe Search
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Edamam recipe identifier.
+          schema:
+            type: string
+          example: abc123
+        - in: query
+          name: type
+          required: true
+          description: Recipe access type.
+          schema:
+            type: string
+            enum: [public, user, any]
+            default: public
+          example: public
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/AppKey'
+      responses:
+        '200':
+          description: Single recipe record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeHit'
+              examples:
+                GetRecipeById200Example:
+                  summary: Default getRecipeById 200 response
+                  x-microcks-default: true
+                  value:
+                    recipe:
+                      uri: http://www.edamam.com/ontologies/edamam.owl#recipe_abc123
+                      label: Chicken Vesuvio
+                      image: https://edamam-product-images.s3.amazonaws.com/web-img/chicken-vesuvio.jpg
+                      source: Serious Eats
+                      url: https://www.seriouseats.com/recipes/chicken-vesuvio.html
+                      yield: 4
+                      dietLabels: [Low-Carb]
+                      healthLabels: [Sugar-Conscious, Dairy-Free]
+                      cautions: [Sulfites]
+                      ingredientLines:
+                        - 1 whole chicken cut into pieces
+                        - 4 russet potatoes
+                      calories: 4228.79
+                      totalWeight: 2249.6
+                      totalTime: 60
+                      cuisineType: [italian]
+                      mealType: [lunch/dinner]
+                      dishType: [main course]
+                    _links:
+                      self:
+                        href: https://api.edamam.com/api/recipes/v2/abc123?type=public
+                        title: Self
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          description: Recipe not found
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    AppCreds:
+      type: apiKey
+      in: query
+      name: app_key
+      description: App key issued by Edamam. Must be sent with the matching `app_id` query parameter.
+  parameters:
+    AppId:
+      in: query
+      name: app_id
+      required: true
+      description: Application identifier from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 1234abcd
+    AppKey:
+      in: query
+      name: app_key
+      required: true
+      description: Application key from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 0123456789abcdef0123456789abcdef
+  responses:
+    Unauthorized:
+      description: Invalid or missing app_id / app_key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Unauthorized401Example:
+              summary: Default unauthorized response
+              x-microcks-default: true
+              value:
+                error: unauthorized
+                message: Invalid app_id or app_key
+  schemas:
+    Recipe:
+      type: object
+      properties:
+        uri:
+          type: string
+          example: http://www.edamam.com/ontologies/edamam.owl#recipe_abc123
+        label:
+          type: string
+          example: Chicken Vesuvio
+        image:
+          type: string
+          format: uri
+          example: https://edamam-product-images.s3.amazonaws.com/web-img/chicken-vesuvio.jpg
+        source:
+          type: string
+          example: Serious Eats
+        url:
+          type: string
+          format: uri
+          example: https://www.seriouseats.com/recipes/chicken-vesuvio.html
+        yield:
+          type: number
+          example: 4
+        dietLabels:
+          type: array
+          items:
+            type: string
+          example: [Low-Carb]
+        healthLabels:
+          type: array
+          items:
+            type: string
+          example: [Sugar-Conscious, Dairy-Free]
+        cautions:
+          type: array
+          items:
+            type: string
+          example: [Sulfites]
+        ingredientLines:
+          type: array
+          items:
+            type: string
+          example:
+            - 1 whole chicken cut into pieces
+            - 4 russet potatoes
+            - 1 cup white wine
+        ingredients:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+        calories:
+          type: number
+          example: 4228.79
+        totalWeight:
+          type: number
+          example: 2249.6
+        totalTime:
+          type: number
+          example: 60
+        cuisineType:
+          type: array
+          items:
+            type: string
+          example: [italian]
+        mealType:
+          type: array
+          items:
+            type: string
+          example: [lunch/dinner]
+        dishType:
+          type: array
+          items:
+            type: string
+          example: [main course]
+        totalNutrients:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Nutrient'
+        totalDaily:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Nutrient'
+    RecipeHit:
+      type: object
+      properties:
+        recipe:
+          $ref: '#/components/schemas/Recipe'
+        _links:
+          type: object
+          additionalProperties: true
+    RecipeSearchResponse:
+      type: object
+      properties:
+        from:
+          type: integer
+          example: 1
+        to:
+          type: integer
+          example: 20
+        count:
+          type: integer
+          example: 10000
+        _links:
+          type: object
+          additionalProperties: true
+        hits:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecipeHit'
+    Nutrient:
+      type: object
+      properties:
+        label:
+          type: string
+          example: Energy
+        quantity:
+          type: number
+          example: 4228.79
+        unit:
+          type: string
+          example: kcal
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: unauthorized
+        message:
+          type: string
+          example: Invalid app_id or app_key
