@@ -4,10 +4,8 @@ apis:
   - aid: edamam:edamam-nutrition-analysis-api
     name: Edamam Nutrition Analysis API
     description: >-
-      The Edamam Nutrition Analysis API provides detailed nutrition data for
-      recipes and food items. Send a recipe or food description and receive
-      comprehensive nutritional information including calories, macros, and
-      micronutrients.
+      The Edamam Nutrition Analysis API provides detailed nutrition data for recipes and food items. Send a recipe or
+      food description and receive comprehensive nutritional information including calories, macros, and micronutrients.
     humanURL: https://developer.edamam.com/edamam-docs-nutrition-api
     baseURL: https://api.edamam.com
     tags:
@@ -21,14 +19,11 @@ apis:
         type: Pricing
       - url: https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-nutrition-analysis-api-openapi.yml
         type: OpenAPI
-      - url: capabilities/nutrition-analysis-api-nutrition-analysis.yaml
-        type: NaftikoCapability
   - aid: edamam:edamam-food-and-grocery-database-api
     name: Edamam Food and Grocery Database API
     description: >-
-      The Edamam Food and Grocery Database API provides access to a database
-      of close to 900,000 foods and over 680,000 unique UPC codes with
-      full nutritional information.
+      The Edamam Food and Grocery Database API provides access to a database of close to 900,000 foods and over 680,000
+      unique UPC codes with full nutritional information.
     humanURL: https://developer.edamam.com/food-database-api-docs
     baseURL: https://api.edamam.com
     tags:
@@ -40,16 +35,14 @@ apis:
         type: Documentation
       - url: https://developer.edamam.com/food-database-api
         type: Pricing
-      - url: https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-food-and-grocery-database-api-openapi.yml
+      - url: >-
+          https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-food-and-grocery-database-api-openapi.yml
         type: OpenAPI
-      - url: capabilities/food-and-grocery-database-api-food-database.yaml
-        type: NaftikoCapability
   - aid: edamam:edamam-recipe-search-api
     name: Edamam Recipe Search API
     description: >-
-      The Edamam Recipe Search API provides access to over 2 million recipes
-      with full nutritional analysis, diet and health labels, ingredient
-      details, and cuisine type.
+      The Edamam Recipe Search API provides access to over 2 million recipes with full nutritional analysis, diet and
+      health labels, ingredient details, and cuisine type.
     humanURL: https://developer.edamam.com/edamam-docs-recipe-api
     baseURL: https://api.edamam.com
     tags:
@@ -63,14 +56,11 @@ apis:
         type: Pricing
       - url: https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-recipe-search-api-openapi.yml
         type: OpenAPI
-      - url: capabilities/recipe-search-api-recipe-search.yaml
-        type: NaftikoCapability
   - aid: edamam:edamam-meal-planner-api
     name: Edamam Meal Planner API
     description: >-
-      The Edamam Meal Planner API provides personalized meal planning
-      capabilities based on dietary preferences, nutrition goals, and
-      available ingredients.
+      The Edamam Meal Planner API provides personalized meal planning capabilities based on dietary preferences,
+      nutrition goals, and available ingredients.
     humanURL: https://developer.edamam.com/edamam-docs-meal-planner-api
     baseURL: https://api.edamam.com
     tags:
@@ -84,8 +74,6 @@ apis:
         type: Pricing
       - url: https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-meal-planner-api-openapi.yml
         type: OpenAPI
-      - url: capabilities/meal-planner-api-meal-planner.yaml
-        type: NaftikoCapability
 name: Edamam
 tags:
   - Restaurant
@@ -99,11 +87,9 @@ created: '2024-11-13'
 modified: '2026-06-02'
 position: Consumer
 description: >-
-  Edamam is a leading provider of nutrition data and analytics. They offer
-  nutrition analysis, food database, recipe search, and meal planning APIs
-  that power thousands of health, fitness, and food apps. Their databases
-  contain close to 900,000 foods, over 2 million recipes, and comprehensive
-  nutritional information.
+  Edamam is a leading provider of nutrition data and analytics. They offer nutrition analysis, food database, recipe
+  search, and meal planning APIs that power thousands of health, fitness, and food apps. Their databases contain close
+  to 900,000 foods, over 2 million recipes, and comprehensive nutritional information.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
@@ -118,9 +104,8 @@ common:
     url: https://github.com/edamam-llc/mcp-edamam-food
   - name: Edamam Food MCP
     description: >-
-      Official Edamam Model Context Protocol server exposing the Food Database
-      and Vision capabilities as LLM-friendly tools (get_food_nutrition,
-      analyze_food_image) over Streamable HTTP / JSON-RPC 2.0 at
+      Official Edamam Model Context Protocol server exposing the Food Database and Vision capabilities as LLM-friendly
+      tools (get_food_nutrition, analyze_food_image) over Streamable HTTP / JSON-RPC 2.0 at
       https://mcp.edamam.com/mcp/food.
     url: https://developer.edamam.com/mcp-edamam-food
     type: Tools
