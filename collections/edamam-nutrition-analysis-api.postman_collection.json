@@ -1,0 +1,579 @@
+{
+  "item": [
+    {
+      "id": "8ab0e229-d0d1-47be-af22-622e186872f9",
+      "name": "Nutrition Analysis",
+      "description": {
+        "content": "Analyze recipes and ingredient lines for nutrition content.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "451fe746-a9f2-4f81-9d90-5b51e140499a",
+          "name": "Edamam Analyze Full Recipe Nutrition",
+          "request": {
+            "name": "Edamam Analyze Full Recipe Nutrition",
+            "description": {
+              "content": "Submit a full recipe (title, ingredient lines, yield, and optional source URL) and receive a comprehensive nutrition analysis including calories, total weight, diet and health labels, cautions, and a full breakdown of macro- and micronutrients.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "nutrition-details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_id",
+                  "value": "<string>",
+                  "description": "(Required) Application identifier from the Edamam developer dashboard."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_key",
+                  "value": "<string>",
+                  "description": "(Required) Application key from the Edamam developer dashboard."
+                },
+                {
+                  "disabled": false,
+                  "key": "force",
+                  "value": "<boolean>",
+                  "description": "Force re-evaluation even if a cached result exists."
+                },
+                {
+                  "disabled": false,
+                  "key": "beta",
+                  "value": "<boolean>",
+                  "description": "Enable recipe classification beta features."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Active user identifier for tracking.",
+                "key": "Edamam-Account-User",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "Language of the submitted recipe text.",
+                "key": "Content-Language",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "ETag for caching previously analyzed recipes.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ingr\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"title\": \"<string>\",\n  \"prep\": \"<string>\",\n  \"yield\": \"<string>\",\n  \"url\": \"<uri>\",\n  \"summary\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d997d85-c841-4811-8347-61a3c04ed94d",
+              "name": "Full nutrition analysis",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "nutrition-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "1234abcd"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "0123456789abcdef0123456789abcdef"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "false"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Active user identifier for tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "user-12345"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the submitted recipe text.",
+                    "key": "Content-Language",
+                    "value": "en"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "ETag for caching previously analyzed recipes.",
+                    "key": "If-None-Match",
+                    "value": "\"a1b2c3d4\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Quinoa Salad\",\n  \"yield\": \"4 servings\",\n  \"ingr\": [\n    \"1 cup quinoa\",\n    \"2 cups water\",\n    \"1 cucumber diced\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uri\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_abc123\",\n  \"yield\": 4,\n  \"calories\": 640,\n  \"totalWeight\": 812.3,\n  \"dietLabels\": [\n    \"High-Fiber\"\n  ],\n  \"healthLabels\": [\n    \"Vegan\",\n    \"Vegetarian\",\n    \"Dairy-Free\"\n  ],\n  \"cautions\": [],\n  \"totalNutrients\": {\n    \"PROCNT\": {\n      \"label\": \"Protein\",\n      \"quantity\": 24.5,\n      \"unit\": \"g\"\n    }\n  },\n  \"totalDaily\": {\n    \"PROCNT\": {\n      \"label\": \"Protein\",\n      \"quantity\": 49,\n      \"unit\": \"%\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e35415e-169a-4f50-8781-105996540511",
+              "name": "Invalid or missing app_id / app_key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "nutrition-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "1234abcd"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "0123456789abcdef0123456789abcdef"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "false"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Active user identifier for tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "user-12345"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the submitted recipe text.",
+                    "key": "Content-Language",
+                    "value": "en"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "ETag for caching previously analyzed recipes.",
+                    "key": "If-None-Match",
+                    "value": "\"a1b2c3d4\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Quinoa Salad\",\n  \"yield\": \"4 servings\",\n  \"ingr\": [\n    \"1 cup quinoa\",\n    \"2 cups water\",\n    \"1 cucumber diced\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid app_id or app_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67834127-d23e-42fb-b8f8-f0152cc64864",
+              "name": "Could not parse one or more ingredients",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "nutrition-details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "1234abcd"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "0123456789abcdef0123456789abcdef"
+                    },
+                    {
+                      "key": "force",
+                      "value": "false"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "false"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Active user identifier for tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "user-12345"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Language of the submitted recipe text.",
+                    "key": "Content-Language",
+                    "value": "en"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "ETag for caching previously analyzed recipes.",
+                    "key": "If-None-Match",
+                    "value": "\"a1b2c3d4\""
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Quinoa Salad\",\n  \"yield\": \"4 servings\",\n  \"ingr\": [\n    \"1 cup quinoa\",\n    \"2 cups water\",\n    \"1 cucumber diced\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ec60f555-2130-4b82-adc2-1a01531c936b",
+          "name": "Edamam Analyze Single Ingredient Line",
+          "request": {
+            "name": "Edamam Analyze Single Ingredient Line",
+            "description": {
+              "content": "Analyze a single natural-language ingredient line (for example `1 cup of rice`) and receive per-ingredient nutrition data including calories, total weight, and the full nutrient breakdown.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "nutrition-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_id",
+                  "value": "<string>",
+                  "description": "(Required) Application identifier from the Edamam developer dashboard."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_key",
+                  "value": "<string>",
+                  "description": "(Required) Application key from the Edamam developer dashboard."
+                },
+                {
+                  "disabled": false,
+                  "key": "ingr",
+                  "value": "<string>",
+                  "description": "(Required) Ingredient text to analyze, e.g. `1 cup of rice`."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrition-type",
+                  "value": "cooking",
+                  "description": "Whether to apply cooking or logging nutrient profiles."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Active user identifier for tracking.",
+                "key": "Edamam-Account-User",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4977c643-3ecf-41ba-a7b2-c5048787fa2b",
+              "name": "Per-ingredient nutrition data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "nutrition-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "1234abcd"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "0123456789abcdef0123456789abcdef"
+                    },
+                    {
+                      "key": "ingr",
+                      "value": "1 cup of rice"
+                    },
+                    {
+                      "key": "nutrition-type",
+                      "value": "cooking"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Active user identifier for tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "user-12345"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uri\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_def456\",\n  \"yield\": 1,\n  \"calories\": 206,\n  \"totalWeight\": 158,\n  \"dietLabels\": [\n    \"Low-Fat\",\n    \"Low-Sodium\"\n  ],\n  \"healthLabels\": [\n    \"Vegan\",\n    \"Vegetarian\",\n    \"Gluten-Free\"\n  ],\n  \"cautions\": [],\n  \"totalNutrients\": {\n    \"ENERC_KCAL\": {\n      \"label\": \"Energy\",\n      \"quantity\": 206,\n      \"unit\": \"kcal\"\n    }\n  },\n  \"totalDaily\": {\n    \"ENERC_KCAL\": {\n      \"label\": \"Energy\",\n      \"quantity\": 10.3,\n      \"unit\": \"%\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "25686823-dda9-416e-bcd8-d511495e6d64",
+              "name": "Invalid or missing app_id / app_key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "nutrition-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "1234abcd"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "0123456789abcdef0123456789abcdef"
+                    },
+                    {
+                      "key": "ingr",
+                      "value": "1 cup of rice"
+                    },
+                    {
+                      "key": "nutrition-type",
+                      "value": "cooking"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Active user identifier for tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "user-12345"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid app_id or app_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edamam.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "app_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "47037a87-90a3-4a68-ad4e-daf7f72235bf",
+    "name": "Edamam Nutrition Analysis API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Edamam Nutrition Analysis. Submit a full recipe for nutrition\nanalysis or a single ingredient line and receive comprehensive nutritional\ninformation including calories, macronutrients, and micronutrients.\nRequests are authenticated with `app_id` and `app_key` query parameters\nissued from the Edamam developer dashboard. This specification is a\nbest-effort, documentation-derived description and may omit fields.\n\n\nContact Support:\n Name: Edamam",
+      "type": "text/plain"
+    }
+  }
+}

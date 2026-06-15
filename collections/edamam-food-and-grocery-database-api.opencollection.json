@@ -1,0 +1,128 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Edamam Food and Grocery Database API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "app_key",
+      "value": "{{app_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Food Database",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Edamam Search Foods by Keyword or Barcode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edamam.com/api/food-database/v2/parser",
+            "headers": [
+              {
+                "name": "Edamam-Account-User",
+                "value": "user-12345"
+              }
+            ],
+            "params": [
+              {
+                "name": "app_id",
+                "value": "1234abcd",
+                "type": "query",
+                "description": "Application identifier from the Edamam developer dashboard."
+              },
+              {
+                "name": "app_key",
+                "value": "0123456789abcdef0123456789abcdef",
+                "type": "query",
+                "description": "Application key from the Edamam developer dashboard."
+              },
+              {
+                "name": "ingr",
+                "value": "apple",
+                "type": "query",
+                "description": "Food keyword or name to search for."
+              },
+              {
+                "name": "upc",
+                "value": "038000138416",
+                "type": "query",
+                "description": "UPC/EAN barcode to look up."
+              },
+              {
+                "name": "category",
+                "value": "generic-foods",
+                "type": "query",
+                "description": "Filter results by food category."
+              },
+              {
+                "name": "categoryLabel",
+                "value": "food",
+                "type": "query",
+                "description": "Broader category filter."
+              },
+              {
+                "name": "nutrition-type",
+                "value": "cooking",
+                "type": "query",
+                "description": "Nutrient profile to apply to returned foods."
+              },
+              {
+                "name": "health",
+                "value": "vegan",
+                "type": "query",
+                "description": "Health label filter (repeatable)."
+              }
+            ]
+          },
+          "docs": "Search the food and grocery database by keyword, food name, or UPC/EAN barcode. Returns a parsed top match plus a ranked list of hints, each including the food record and its available measures and qualifiers."
+        },
+        {
+          "info": {
+            "name": "Edamam Resolve Nutrients for Selected Foods",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.edamam.com/api/food-database/v2/nutrients",
+            "headers": [
+              {
+                "name": "Edamam-Account-User",
+                "value": "user-12345"
+              }
+            ],
+            "params": [
+              {
+                "name": "app_id",
+                "value": "1234abcd",
+                "type": "query",
+                "description": "Application identifier from the Edamam developer dashboard."
+              },
+              {
+                "name": "app_key",
+                "value": "0123456789abcdef0123456789abcdef",
+                "type": "query",
+                "description": "Application key from the Edamam developer dashboard."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve the full nutrient breakdown for one or more foods at specific quantities and measures, using the `foodId` and `measureURI` values returned by the parser endpoint."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

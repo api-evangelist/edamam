@@ -1,0 +1,249 @@
+{
+  "item": [
+    {
+      "id": "16beae90-fac0-40f4-8f6c-ed0e3210aed8",
+      "name": "Meal Planner",
+      "description": {
+        "content": "Generate constraint-based multi-day meal plans.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4595e2ee-a3d2-4499-95c5-58502df3b71f",
+          "name": "Edamam Generate Meal Plan",
+          "request": {
+            "name": "Edamam Generate Meal Plan",
+            "description": {
+              "content": "Generate a meal plan for a given number of days and meal sections (for example Breakfast, Lunch, Dinner), constrained by health labels, diet labels, and nutrient ranges supplied in the request body at the plan level and per section. Returns a selection of recipes that satisfy the constraints.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "meal-planner",
+                "v1",
+                ":app_id",
+                "select"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "app_id",
+                  "description": "(Required) Application identifier from the Edamam developer dashboard."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) Active user identifier for the meal plan request.",
+                "key": "Edamam-Account-User",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"size\": \"<integer>\",\n  \"plan\": {\n    \"accept\": {\n      \"all\": [\n        {\n          \"health\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"diet\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"dish\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"meal\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"health\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"diet\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"dish\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"meal\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    },\n    \"fit\": {\n      \"key_0\": {\n        \"min\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    },\n    \"sections\": {\n      \"key_0\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"health\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"diet\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"dish\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"meal\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"health\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"diet\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"dish\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"meal\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"key_0\": {\n            \"min\": \"<number>\",\n            \"max\": \"<number>\"\n          },\n          \"key_1\": {\n            \"min\": \"<number>\",\n            \"max\": \"<number>\"\n          }\n        }\n      },\n      \"key_1\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"health\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"diet\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"dish\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"meal\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"health\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"diet\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"dish\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"meal\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"key_0\": {\n            \"min\": \"<number>\",\n            \"max\": \"<number>\"\n          },\n          \"key_1\": {\n            \"min\": \"<number>\",\n            \"max\": \"<number>\"\n          }\n        }\n      },\n      \"key_2\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"health\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"diet\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"dish\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"meal\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"health\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"diet\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"dish\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ],\n              \"meal\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"key_0\": {\n            \"min\": \"<number>\",\n            \"max\": \"<number>\"\n          }\n        }\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1e2943bf-0fe3-4240-a35b-ab855febc80e",
+              "name": "Generated meal plan selection",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "meal-planner",
+                    "v1",
+                    ":app_id",
+                    "select"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app_id",
+                      "description": "(Required) Application identifier from the Edamam developer dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Active user identifier for the meal plan request.",
+                    "key": "Edamam-Account-User",
+                    "value": "user-12345"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"size\": 7,\n  \"plan\": {\n    \"accept\": {\n      \"all\": [\n        {\n          \"health\": [\n            \"SOY_FREE\",\n            \"FISH_FREE\"\n          ]\n        }\n      ]\n    },\n    \"fit\": {\n      \"ENERC_KCAL\": {\n        \"min\": 1000,\n        \"max\": 2000\n      }\n    },\n    \"sections\": {\n      \"Breakfast\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"meal\": [\n                \"breakfast\"\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"ENERC_KCAL\": {\n            \"min\": 100,\n            \"max\": 600\n          }\n        }\n      },\n      \"Lunch\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"meal\": [\n                \"lunch/dinner\"\n              ],\n              \"dish\": [\n                \"main course\",\n                \"salad\"\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"ENERC_KCAL\": {\n            \"min\": 300,\n            \"max\": 900\n          }\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"OK\",\n  \"selection\": [\n    {\n      \"sections\": {\n        \"Breakfast\": {\n          \"_links\": {\n            \"self\": {\n              \"href\": \"https://api.edamam.com/api/recipes/v2/abc123?type=public\",\n              \"title\": \"Self\"\n            }\n          }\n        },\n        \"Lunch\": {\n          \"_links\": {\n            \"self\": {\n              \"href\": \"https://api.edamam.com/api/recipes/v2/def456?type=public\",\n              \"title\": \"Self\"\n            }\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29bf38bf-e6aa-4a70-983d-f856ccc7431e",
+              "name": "Invalid or missing credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "meal-planner",
+                    "v1",
+                    ":app_id",
+                    "select"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app_id",
+                      "description": "(Required) Application identifier from the Edamam developer dashboard."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) Active user identifier for the meal plan request.",
+                    "key": "Edamam-Account-User",
+                    "value": "user-12345"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"size\": 7,\n  \"plan\": {\n    \"accept\": {\n      \"all\": [\n        {\n          \"health\": [\n            \"SOY_FREE\",\n            \"FISH_FREE\"\n          ]\n        }\n      ]\n    },\n    \"fit\": {\n      \"ENERC_KCAL\": {\n        \"min\": 1000,\n        \"max\": 2000\n      }\n    },\n    \"sections\": {\n      \"Breakfast\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"meal\": [\n                \"breakfast\"\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"ENERC_KCAL\": {\n            \"min\": 100,\n            \"max\": 600\n          }\n        }\n      },\n      \"Lunch\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"meal\": [\n                \"lunch/dinner\"\n              ],\n              \"dish\": [\n                \"main course\",\n                \"salad\"\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"ENERC_KCAL\": {\n            \"min\": 300,\n            \"max\": 900\n          }\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"error\",\n  \"message\": \"Invalid credentials\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edamam.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "bce98c63-4037-4040-bdeb-4388c8f7675f",
+    "name": "Edamam Meal Planner API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for the Edamam Meal Planner. Generate multi-day, multi-section\nmeal plans constrained by health labels, diet labels, and nutrient ranges\nat both the plan and per-section level. The Meal Planner is authenticated\nwith HTTP Basic credentials (app_id / app_key) and requires the\n`Edamam-Account-User` header. This specification is a best-effort,\ndocumentation-derived description and may omit fields.\n\n\nContact Support:\n Name: Edamam",
+      "type": "text/plain"
+    }
+  }
+}

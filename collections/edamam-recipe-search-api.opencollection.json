@@ -1,0 +1,166 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Edamam Recipe Search API",
+    "version": "2.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "app_key",
+      "value": "{{app_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recipe Search",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Edamam Search Recipes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edamam.com/api/recipes/v2",
+            "headers": [
+              {
+                "name": "Edamam-Account-User",
+                "value": "user-12345"
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "public",
+                "type": "query",
+                "description": "Recipe access type. Use `public` for the public recipe pool."
+              },
+              {
+                "name": "app_id",
+                "value": "1234abcd",
+                "type": "query",
+                "description": "Application identifier from the Edamam developer dashboard."
+              },
+              {
+                "name": "app_key",
+                "value": "0123456789abcdef0123456789abcdef",
+                "type": "query",
+                "description": "Application key from the Edamam developer dashboard."
+              },
+              {
+                "name": "q",
+                "value": "chicken",
+                "type": "query",
+                "description": "Free-text search query, e.g. `chicken`."
+              },
+              {
+                "name": "diet",
+                "value": "high-protein",
+                "type": "query",
+                "description": "Diet label filter (repeatable)."
+              },
+              {
+                "name": "health",
+                "value": "gluten-free",
+                "type": "query",
+                "description": "Health label filter (repeatable), e.g. `vegan`, `gluten-free`."
+              },
+              {
+                "name": "cuisineType",
+                "value": "Italian",
+                "type": "query",
+                "description": "Cuisine type filter (repeatable), e.g. `Italian`."
+              },
+              {
+                "name": "mealType",
+                "value": "Dinner",
+                "type": "query",
+                "description": "Meal type filter (repeatable), e.g. `Breakfast`."
+              },
+              {
+                "name": "dishType",
+                "value": "Main course",
+                "type": "query",
+                "description": "Dish type filter (repeatable), e.g. `Main course`."
+              },
+              {
+                "name": "calories",
+                "value": "100-300",
+                "type": "query",
+                "description": "Calorie range filter, e.g. `100-300`."
+              },
+              {
+                "name": "time",
+                "value": "1-60",
+                "type": "query",
+                "description": "Preparation time range in minutes, e.g. `1-60`."
+              },
+              {
+                "name": "imageSize",
+                "value": "REGULAR",
+                "type": "query",
+                "description": "Requested image resolution."
+              },
+              {
+                "name": "co2EmissionsClass",
+                "value": "A",
+                "type": "query",
+                "description": "Carbon footprint rating filter (requires beta=true)."
+              },
+              {
+                "name": "beta",
+                "value": "false",
+                "type": "query",
+                "description": "Enable beta features such as CO2 emissions filtering."
+              }
+            ]
+          },
+          "docs": "Search the recipe database by keyword with rich filtering on diet, health, cuisine type, meal type, dish type, calorie range, and preparation time. Returns a paginated set of recipe hits with full nutrition analysis and source attribution."
+        },
+        {
+          "info": {
+            "name": "Edamam Get Recipe by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edamam.com/api/recipes/v2/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "abc123",
+                "type": "path",
+                "description": "Edamam recipe identifier."
+              },
+              {
+                "name": "type",
+                "value": "public",
+                "type": "query",
+                "description": "Recipe access type."
+              },
+              {
+                "name": "app_id",
+                "value": "1234abcd",
+                "type": "query",
+                "description": "Application identifier from the Edamam developer dashboard."
+              },
+              {
+                "name": "app_key",
+                "value": "0123456789abcdef0123456789abcdef",
+                "type": "query",
+                "description": "Application key from the Edamam developer dashboard."
+              }
+            ]
+          },
+          "docs": "Retrieve a single recipe record by its Edamam recipe identifier, returning the full recipe object including nutrition, labels, and ingredients."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

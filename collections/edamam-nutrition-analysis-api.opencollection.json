@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Edamam Nutrition Analysis API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "app_key",
+      "value": "{{app_key}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Nutrition Analysis",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Edamam Analyze Full Recipe Nutrition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.edamam.com/api/nutrition-details",
+            "headers": [
+              {
+                "name": "Edamam-Account-User",
+                "value": "user-12345"
+              },
+              {
+                "name": "Content-Language",
+                "value": "en"
+              },
+              {
+                "name": "If-None-Match",
+                "value": "\"a1b2c3d4\""
+              }
+            ],
+            "params": [
+              {
+                "name": "app_id",
+                "value": "1234abcd",
+                "type": "query",
+                "description": "Application identifier from the Edamam developer dashboard."
+              },
+              {
+                "name": "app_key",
+                "value": "0123456789abcdef0123456789abcdef",
+                "type": "query",
+                "description": "Application key from the Edamam developer dashboard."
+              },
+              {
+                "name": "force",
+                "value": "false",
+                "type": "query",
+                "description": "Force re-evaluation even if a cached result exists."
+              },
+              {
+                "name": "beta",
+                "value": "false",
+                "type": "query",
+                "description": "Enable recipe classification beta features."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit a full recipe (title, ingredient lines, yield, and optional source URL) and receive a comprehensive nutrition analysis including calories, total weight, diet and health labels, cautions, and a full breakdown of macro- and micronutrients."
+        },
+        {
+          "info": {
+            "name": "Edamam Analyze Single Ingredient Line",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edamam.com/api/nutrition-data",
+            "headers": [
+              {
+                "name": "Edamam-Account-User",
+                "value": "user-12345"
+              }
+            ],
+            "params": [
+              {
+                "name": "app_id",
+                "value": "1234abcd",
+                "type": "query",
+                "description": "Application identifier from the Edamam developer dashboard."
+              },
+              {
+                "name": "app_key",
+                "value": "0123456789abcdef0123456789abcdef",
+                "type": "query",
+                "description": "Application key from the Edamam developer dashboard."
+              },
+              {
+                "name": "ingr",
+                "value": "1 cup of rice",
+                "type": "query",
+                "description": "Ingredient text to analyze, e.g. `1 cup of rice`."
+              },
+              {
+                "name": "nutrition-type",
+                "value": "cooking",
+                "type": "query",
+                "description": "Whether to apply cooking or logging nutrient profiles."
+              }
+            ]
+          },
+          "docs": "Analyze a single natural-language ingredient line (for example `1 cup of rice`) and receive per-ingredient nutrition data including calories, total weight, and the full nutrient breakdown."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

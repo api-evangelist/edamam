@@ -1,0 +1,633 @@
+{
+  "item": [
+    {
+      "id": "1cf9242a-2f6f-4977-a308-6cd14a2fb651",
+      "name": "Recipe Search",
+      "description": {
+        "content": "Search recipes and retrieve recipe records by URI.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "44bd3af4-000e-47ec-b0c1-fa6f08b270e0",
+          "name": "Edamam Search Recipes",
+          "request": {
+            "name": "Edamam Search Recipes",
+            "description": {
+              "content": "Search the recipe database by keyword with rich filtering on diet, health, cuisine type, meal type, dish type, calorie range, and preparation time. Returns a paginated set of recipe hits with full nutrition analysis and source attribution.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "recipes",
+                "v2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "public",
+                  "description": "(Required) Recipe access type. Use `public` for the public recipe pool."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_id",
+                  "value": "<string>",
+                  "description": "(Required) Application identifier from the Edamam developer dashboard."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_key",
+                  "value": "<string>",
+                  "description": "(Required) Application key from the Edamam developer dashboard."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Free-text search query, e.g. `chicken`."
+                },
+                {
+                  "disabled": false,
+                  "key": "diet",
+                  "value": "<string>",
+                  "description": "Diet label filter (repeatable)."
+                },
+                {
+                  "disabled": false,
+                  "key": "health",
+                  "value": "<string>",
+                  "description": "Health label filter (repeatable), e.g. `vegan`, `gluten-free`."
+                },
+                {
+                  "disabled": false,
+                  "key": "cuisineType",
+                  "value": "<string>",
+                  "description": "Cuisine type filter (repeatable), e.g. `Italian`."
+                },
+                {
+                  "disabled": false,
+                  "key": "mealType",
+                  "value": "<string>",
+                  "description": "Meal type filter (repeatable), e.g. `Breakfast`."
+                },
+                {
+                  "disabled": false,
+                  "key": "dishType",
+                  "value": "<string>",
+                  "description": "Dish type filter (repeatable), e.g. `Main course`."
+                },
+                {
+                  "disabled": false,
+                  "key": "calories",
+                  "value": "<string>",
+                  "description": "Calorie range filter, e.g. `100-300`."
+                },
+                {
+                  "disabled": false,
+                  "key": "time",
+                  "value": "<string>",
+                  "description": "Preparation time range in minutes, e.g. `1-60`."
+                },
+                {
+                  "disabled": false,
+                  "key": "imageSize",
+                  "value": "<string>",
+                  "description": "Requested image resolution."
+                },
+                {
+                  "disabled": false,
+                  "key": "co2EmissionsClass",
+                  "value": "<string>",
+                  "description": "Carbon footprint rating filter (requires beta=true)."
+                },
+                {
+                  "disabled": false,
+                  "key": "beta",
+                  "value": "<boolean>",
+                  "description": "Enable beta features such as CO2 emissions filtering."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Active user identifier for tracking.",
+                "key": "Edamam-Account-User",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "afa2ab9f-6efb-46ce-b824-ba58f9626c97",
+              "name": "Paginated recipe search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "public"
+                    },
+                    {
+                      "key": "app_id",
+                      "value": "1234abcd"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "0123456789abcdef0123456789abcdef"
+                    },
+                    {
+                      "key": "q",
+                      "value": "chicken"
+                    },
+                    {
+                      "key": "diet",
+                      "value": "high-protein"
+                    },
+                    {
+                      "key": "health",
+                      "value": "gluten-free"
+                    },
+                    {
+                      "key": "cuisineType",
+                      "value": "Italian"
+                    },
+                    {
+                      "key": "mealType",
+                      "value": "Dinner"
+                    },
+                    {
+                      "key": "dishType",
+                      "value": "Main course"
+                    },
+                    {
+                      "key": "calories",
+                      "value": "100-300"
+                    },
+                    {
+                      "key": "time",
+                      "value": "1-60"
+                    },
+                    {
+                      "key": "imageSize",
+                      "value": "REGULAR"
+                    },
+                    {
+                      "key": "co2EmissionsClass",
+                      "value": "A"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "false"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Active user identifier for tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "user-12345"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"from\": 1,\n  \"to\": 20,\n  \"count\": 10000,\n  \"_links\": {\n    \"next\": {\n      \"href\": \"https://api.edamam.com/api/recipes/v2?type=public&q=chicken&_cont=CHcVQ\",\n      \"title\": \"Next page\"\n    }\n  },\n  \"hits\": [\n    {\n      \"recipe\": {\n        \"uri\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_abc123\",\n        \"label\": \"Chicken Vesuvio\",\n        \"image\": \"https://edamam-product-images.s3.amazonaws.com/web-img/chicken-vesuvio.jpg\",\n        \"source\": \"Serious Eats\",\n        \"url\": \"https://www.seriouseats.com/recipes/chicken-vesuvio.html\",\n        \"yield\": 4,\n        \"dietLabels\": [\n          \"Low-Carb\"\n        ],\n        \"healthLabels\": [\n          \"Sugar-Conscious\",\n          \"Dairy-Free\"\n        ],\n        \"cautions\": [\n          \"Sulfites\"\n        ],\n        \"ingredientLines\": [\n          \"1 whole chicken cut into pieces\",\n          \"4 russet potatoes\",\n          \"1 cup white wine\"\n        ],\n        \"calories\": 4228.79,\n        \"totalWeight\": 2249.6,\n        \"totalTime\": 60,\n        \"cuisineType\": [\n          \"italian\"\n        ],\n        \"mealType\": [\n          \"lunch/dinner\"\n        ],\n        \"dishType\": [\n          \"main course\"\n        ]\n      },\n      \"_links\": {\n        \"self\": {\n          \"href\": \"https://api.edamam.com/api/recipes/v2/abc123?type=public\",\n          \"title\": \"Self\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1df5c06d-e6d8-47a0-bdf7-2efcc8846d67",
+              "name": "Invalid or missing app_id / app_key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "public"
+                    },
+                    {
+                      "key": "app_id",
+                      "value": "1234abcd"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "0123456789abcdef0123456789abcdef"
+                    },
+                    {
+                      "key": "q",
+                      "value": "chicken"
+                    },
+                    {
+                      "key": "diet",
+                      "value": "high-protein"
+                    },
+                    {
+                      "key": "health",
+                      "value": "gluten-free"
+                    },
+                    {
+                      "key": "cuisineType",
+                      "value": "Italian"
+                    },
+                    {
+                      "key": "mealType",
+                      "value": "Dinner"
+                    },
+                    {
+                      "key": "dishType",
+                      "value": "Main course"
+                    },
+                    {
+                      "key": "calories",
+                      "value": "100-300"
+                    },
+                    {
+                      "key": "time",
+                      "value": "1-60"
+                    },
+                    {
+                      "key": "imageSize",
+                      "value": "REGULAR"
+                    },
+                    {
+                      "key": "co2EmissionsClass",
+                      "value": "A"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "false"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Active user identifier for tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "user-12345"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid app_id or app_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "64049cab-8c97-491f-92c7-4bbbc9ab6a65",
+          "name": "Edamam Get Recipe by ID",
+          "request": {
+            "name": "Edamam Get Recipe by ID",
+            "description": {
+              "content": "Retrieve a single recipe record by its Edamam recipe identifier, returning the full recipe object including nutrition, labels, and ingredients.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "recipes",
+                "v2",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "public",
+                  "description": "(Required) Recipe access type."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_id",
+                  "value": "<string>",
+                  "description": "(Required) Application identifier from the Edamam developer dashboard."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_key",
+                  "value": "<string>",
+                  "description": "(Required) Application key from the Edamam developer dashboard."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Edamam recipe identifier."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b82d8e19-7bec-4918-a51a-21a25a52ab82",
+              "name": "Single recipe record",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "public"
+                    },
+                    {
+                      "key": "app_id",
+                      "value": "1234abcd"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "0123456789abcdef0123456789abcdef"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Edamam recipe identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"recipe\": {\n    \"uri\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_abc123\",\n    \"label\": \"Chicken Vesuvio\",\n    \"image\": \"https://edamam-product-images.s3.amazonaws.com/web-img/chicken-vesuvio.jpg\",\n    \"source\": \"Serious Eats\",\n    \"url\": \"https://www.seriouseats.com/recipes/chicken-vesuvio.html\",\n    \"yield\": 4,\n    \"dietLabels\": [\n      \"Low-Carb\"\n    ],\n    \"healthLabels\": [\n      \"Sugar-Conscious\",\n      \"Dairy-Free\"\n    ],\n    \"cautions\": [\n      \"Sulfites\"\n    ],\n    \"ingredientLines\": [\n      \"1 whole chicken cut into pieces\",\n      \"4 russet potatoes\"\n    ],\n    \"calories\": 4228.79,\n    \"totalWeight\": 2249.6,\n    \"totalTime\": 60,\n    \"cuisineType\": [\n      \"italian\"\n    ],\n    \"mealType\": [\n      \"lunch/dinner\"\n    ],\n    \"dishType\": [\n      \"main course\"\n    ]\n  },\n  \"_links\": {\n    \"self\": {\n      \"href\": \"https://api.edamam.com/api/recipes/v2/abc123?type=public\",\n      \"title\": \"Self\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b4ff015b-5c5d-4472-8761-c2af139d867b",
+              "name": "Invalid or missing app_id / app_key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "public"
+                    },
+                    {
+                      "key": "app_id",
+                      "value": "1234abcd"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "0123456789abcdef0123456789abcdef"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Edamam recipe identifier."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid app_id or app_key\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14563c83-7172-4fc8-8d43-8e37fd132112",
+              "name": "Recipe not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "public"
+                    },
+                    {
+                      "key": "app_id",
+                      "value": "1234abcd"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "0123456789abcdef0123456789abcdef"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Edamam recipe identifier."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edamam.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "app_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e247941a-cf2f-4ff0-9220-a29c8e107071",
+    "name": "Edamam Recipe Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for Edamam Recipe Search v2. Search over 2 million recipes by\nkeyword with rich filtering on diet, health, cuisine type, meal type,\ndish type, calories, and preparation time, and retrieve full recipes by\nURI. Each recipe includes nutrition analysis, diet and health labels,\ningredient details, and source attribution. Requests are authenticated\nwith `app_id` and `app_key` query parameters issued from the Edamam\ndeveloper dashboard. This specification is a best-effort,\ndocumentation-derived description and may omit fields.\n\n\nContact Support:\n Name: Edamam",
+      "type": "text/plain"
+    }
+  }
+}

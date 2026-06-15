@@ -1,0 +1,54 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Edamam Meal Planner API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Meal Planner",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Edamam Generate Meal Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.edamam.com/api/meal-planner/v1/:app_id/select",
+            "headers": [
+              {
+                "name": "Edamam-Account-User",
+                "value": "user-12345"
+              }
+            ],
+            "params": [
+              {
+                "name": "app_id",
+                "value": "1234abcd",
+                "type": "path",
+                "description": "Application identifier from the Edamam developer dashboard."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a meal plan for a given number of days and meal sections (for example Breakfast, Lunch, Dinner), constrained by health labels, diet labels, and nutrient ranges supplied in the request body at the plan level and per section. Returns a selection of recipes that satisfy the constraints."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
