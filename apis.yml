@@ -95,6 +95,10 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: DomainSecurity
+    url: security/edamam-domain-security.yml
+  - type: Authentication
+    url: authentication/edamam-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/edamam
   - type: LinkedIn

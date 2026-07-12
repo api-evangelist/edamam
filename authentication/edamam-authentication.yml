@@ -1,0 +1,27 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/edamam-food-and-grocery-database-api-openapi.yml, openapi/edamam-meal-planner-api-openapi.yml,
+  openapi/edamam-nutrition-analysis-api-openapi.yml, openapi/edamam-recipe-search-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - query
+schemes:
+- name: AppCreds
+  type: apiKey
+  in: query
+  parameter: app_key
+  description: App key issued by Edamam. Must be sent with the matching `app_id` query parameter.
+  sources:
+  - openapi/edamam-food-and-grocery-database-api-openapi.yml
+  - openapi/edamam-nutrition-analysis-api-openapi.yml
+  - openapi/edamam-recipe-search-api-openapi.yml
+- name: BasicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic authentication using your Edamam app_id as username and app_key as
+    password.
+  sources:
+  - openapi/edamam-meal-planner-api-openapi.yml
