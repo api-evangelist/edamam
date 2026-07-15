@@ -1,0 +1,105 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/edamam-food-and-grocery-database-api-openapi.yml, openapi/edamam-meal-planner-api-openapi.yml,
+  openapi/edamam-nutrition-analysis-api-openapi.yml, openapi/edamam-recipe-search-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 7
+  by_action_class:
+    connected: 4
+    acting: 3
+  by_consequence:
+    read: 4
+    write: 3
+  human_in_the_loop_required: 0
+operations:
+- path: /api/food-database/v2/parser
+  method: get
+  operationId: parseFood
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/food-database/v2/nutrients
+  method: post
+  operationId: foodNutrients
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/meal-planner/v1/{app_id}/select
+  method: post
+  operationId: selectMealPlan
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/nutrition-details
+  method: post
+  operationId: analyzeRecipe
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/nutrition-data
+  method: get
+  operationId: analyzeIngredient
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/recipes/v2
+  method: get
+  operationId: searchRecipes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/recipes/v2/{id}
+  method: get
+  operationId: getRecipeById
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

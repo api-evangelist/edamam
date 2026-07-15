@@ -95,6 +95,8 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 common:
+  - type: AgenticAccess
+    url: agentic-access/edamam-agentic-access.yml
   - type: DomainSecurity
     url: security/edamam-domain-security.yml
   - type: Authentication
