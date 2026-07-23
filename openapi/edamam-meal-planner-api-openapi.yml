@@ -1,55 +1,58 @@
 openapi: 3.1.0
 info:
-  title: Edamam Meal Planner API
-  description: |
-    REST API for the Edamam Meal Planner. Generate multi-day, multi-section
-    meal plans constrained by health labels, diet labels, and nutrient ranges
-    at both the plan and per-section level. The Meal Planner is authenticated
-    with HTTP Basic credentials (app_id / app_key) and requires the
-    `Edamam-Account-User` header. This specification is a best-effort,
+  title: Edamam Food and Grocery Database Food Database Meal Planner API
+  description: 'REST API for the Edamam Food and Grocery Database. Search a database of
+
+    close to 900,000 generic foods, branded packaged foods, and over 680,000
+
+    unique UPC/barcode entries by keyword, food name, or barcode, then resolve
+
+    full nutrition for a given food, quantity, and measure. Requests are
+
+    authenticated with `app_id` and `app_key` query parameters issued from the
+
+    Edamam developer dashboard. This specification is a best-effort,
+
     documentation-derived description and may omit fields.
-  version: 1.0.0
+
+    '
+  version: 2.0.0
   contact:
     name: Edamam
-    url: https://developer.edamam.com/edamam-docs-meal-planner-api
+    url: https://developer.edamam.com/food-database-api-docs
   x-generated-from: documentation
   x-last-validated: '2026-06-02'
 servers:
-  - url: https://api.edamam.com
-    description: Production
+- url: https://api.edamam.com
+  description: Production
 security:
-  - BasicAuth: []
+- AppCreds: []
 tags:
-  - name: Meal Planner
-    description: Generate constraint-based multi-day meal plans.
+- name: Meal Planner
+  description: Generate constraint-based multi-day meal plans.
 paths:
   /api/meal-planner/v1/{app_id}/select:
     post:
       summary: Edamam Generate Meal Plan
-      description: >-
-        Generate a meal plan for a given number of days and meal sections
-        (for example Breakfast, Lunch, Dinner), constrained by health labels,
-        diet labels, and nutrient ranges supplied in the request body at the
-        plan level and per section. Returns a selection of recipes that satisfy
-        the constraints.
+      description: Generate a meal plan for a given number of days and meal sections (for example Breakfast, Lunch, Dinner), constrained by health labels, diet labels, and nutrient ranges supplied in the request body at the plan level and per section. Returns a selection of recipes that satisfy the constraints.
       operationId: selectMealPlan
       tags:
-        - Meal Planner
+      - Meal Planner
       parameters:
-        - in: path
-          name: app_id
-          required: true
-          description: Application identifier from the Edamam developer dashboard.
-          schema:
-            type: string
-          example: 1234abcd
-        - in: header
-          name: Edamam-Account-User
-          required: true
-          description: Active user identifier for the meal plan request.
-          schema:
-            type: string
-          example: user-12345
+      - in: path
+        name: app_id
+        required: true
+        description: Application identifier from the Edamam developer dashboard.
+        schema:
+          type: string
+        example: 1234abcd
+      - in: header
+        name: Edamam-Account-User
+        required: true
+        description: Active user identifier for the meal plan request.
+        schema:
+          type: string
+        example: user-12345
       requestBody:
         required: true
         content:
@@ -65,7 +68,9 @@ paths:
                   plan:
                     accept:
                       all:
-                        - health: [SOY_FREE, FISH_FREE]
+                      - health:
+                        - SOY_FREE
+                        - FISH_FREE
                     fit:
                       ENERC_KCAL:
                         min: 1000
@@ -74,7 +79,8 @@ paths:
                       Breakfast:
                         accept:
                           all:
-                            - meal: [breakfast]
+                          - meal:
+                            - breakfast
                         fit:
                           ENERC_KCAL:
                             min: 100
@@ -82,8 +88,11 @@ paths:
                       Lunch:
                         accept:
                           all:
-                            - meal: [lunch/dinner]
-                              dish: [main course, salad]
+                          - meal:
+                            - lunch/dinner
+                            dish:
+                            - main course
+                            - salad
                         fit:
                           ENERC_KCAL:
                             min: 300
@@ -102,28 +111,23 @@ paths:
                   value:
                     status: OK
                     selection:
-                      - sections:
-                          Breakfast:
-                            _links:
-                              self:
-                                href: https://api.edamam.com/api/recipes/v2/abc123?type=public
-                                title: Self
-                          Lunch:
-                            _links:
-                              self:
-                                href: https://api.edamam.com/api/recipes/v2/def456?type=public
-                                title: Self
+                    - sections:
+                        Breakfast:
+                          _links:
+                            self:
+                              href: https://api.edamam.com/api/recipes/v2/abc123?type=public
+                              title: Self
+                        Lunch:
+                          _links:
+                            self:
+                              href: https://api.edamam.com/api/recipes/v2/def456?type=public
+                              title: Self
         '401':
           $ref: '#/components/responses/Unauthorized'
       x-microcks-operation:
         delay: 0
         dispatcher: FALLBACK
 components:
-  securitySchemes:
-    BasicAuth:
-      type: http
-      scheme: basic
-      description: HTTP Basic authentication using your Edamam app_id as username and app_key as password.
   responses:
     Unauthorized:
       description: Invalid or missing credentials
@@ -139,6 +143,16 @@ components:
                 status: error
                 message: Invalid credentials
   schemas:
+    Section:
+      type: object
+      properties:
+        accept:
+          $ref: '#/components/schemas/Constraint'
+        fit:
+          type: object
+          description: Per-section nutrient ranges keyed by nutrient code.
+          additionalProperties:
+            $ref: '#/components/schemas/NutrientRange'
     NutrientRange:
       type: object
       description: Minimum and/or maximum bound for a nutrient code (e.g. ENERC_KCAL).
@@ -161,57 +175,28 @@ components:
                 type: array
                 items:
                   type: string
-                example: [SOY_FREE, FISH_FREE]
+                example:
+                - SOY_FREE
+                - FISH_FREE
               diet:
                 type: array
                 items:
                   type: string
-                example: [balanced]
+                example:
+                - balanced
               dish:
                 type: array
                 items:
                   type: string
-                example: [main course, salad]
+                example:
+                - main course
+                - salad
               meal:
                 type: array
                 items:
                   type: string
-                example: [lunch/dinner]
-    Section:
-      type: object
-      properties:
-        accept:
-          $ref: '#/components/schemas/Constraint'
-        fit:
-          type: object
-          description: Per-section nutrient ranges keyed by nutrient code.
-          additionalProperties:
-            $ref: '#/components/schemas/NutrientRange'
-    MealPlanRequest:
-      type: object
-      required:
-        - size
-        - plan
-      properties:
-        size:
-          type: integer
-          description: Number of days in the meal plan.
-          example: 7
-        plan:
-          type: object
-          properties:
-            accept:
-              $ref: '#/components/schemas/Constraint'
-            fit:
-              type: object
-              description: Plan-level nutrient ranges keyed by nutrient code.
-              additionalProperties:
-                $ref: '#/components/schemas/NutrientRange'
-            sections:
-              type: object
-              description: Meal sections such as Breakfast, Lunch, and Dinner.
-              additionalProperties:
-                $ref: '#/components/schemas/Section'
+                example:
+                - lunch/dinner
     MealPlanResponse:
       type: object
       properties:
@@ -232,6 +217,31 @@ components:
                     _links:
                       type: object
                       additionalProperties: true
+    MealPlanRequest:
+      type: object
+      required:
+      - size
+      - plan
+      properties:
+        size:
+          type: integer
+          description: Number of days in the meal plan.
+          example: 7
+        plan:
+          type: object
+          properties:
+            accept:
+              $ref: '#/components/schemas/Constraint'
+            fit:
+              type: object
+              description: Plan-level nutrient ranges keyed by nutrient code.
+              additionalProperties:
+                $ref: '#/components/schemas/NutrientRange'
+            sections:
+              type: object
+              description: Meal sections such as Breakfast, Lunch, and Dinner.
+              additionalProperties:
+                $ref: '#/components/schemas/Section'
     Error:
       type: object
       properties:
@@ -241,3 +251,9 @@ components:
         message:
           type: string
           example: Invalid credentials
+  securitySchemes:
+    AppCreds:
+      type: apiKey
+      in: query
+      name: app_key
+      description: App key issued by Edamam. Must be sent with the matching `app_id` query parameter.
