@@ -1,79 +1,78 @@
 aid: edamam
 url: https://raw.githubusercontent.com/api-search/edamam/refs/heads/main/apis.yml
 apis:
-  - aid: edamam:edamam-nutrition-analysis-api
-    name: Edamam Nutrition Analysis API
-    description: >-
-      The Edamam Nutrition Analysis API provides detailed nutrition data for recipes and food items. Send a recipe or
-      food description and receive comprehensive nutritional information including calories, macros, and micronutrients.
-    humanURL: https://developer.edamam.com/edamam-docs-nutrition-api
-    baseURL: https://api.edamam.com
-    tags:
-      - Food
-      - Health
-      - Nutrition
-    properties:
-      - url: https://developer.edamam.com/edamam-docs-nutrition-api
-        type: Documentation
-      - url: https://developer.edamam.com/edamam-nutrition-api
-        type: Pricing
-      - url: https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-nutrition-analysis-api-openapi.yml
-        type: OpenAPI
-  - aid: edamam:edamam-food-and-grocery-database-api
-    name: Edamam Food and Grocery Database API
-    description: >-
-      The Edamam Food and Grocery Database API provides access to a database of close to 900,000 foods and over 680,000
-      unique UPC codes with full nutritional information.
-    humanURL: https://developer.edamam.com/food-database-api-docs
-    baseURL: https://api.edamam.com
-    tags:
-      - Food
-      - Grocery
-      - Nutrition
-    properties:
-      - url: https://developer.edamam.com/food-database-api-docs
-        type: Documentation
-      - url: https://developer.edamam.com/food-database-api
-        type: Pricing
-      - url: >-
-          https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-food-and-grocery-database-api-openapi.yml
-        type: OpenAPI
-  - aid: edamam:edamam-recipe-search-api
-    name: Edamam Recipe Search API
-    description: >-
-      The Edamam Recipe Search API provides access to over 2 million recipes with full nutritional analysis, diet and
-      health labels, ingredient details, and cuisine type.
-    humanURL: https://developer.edamam.com/edamam-docs-recipe-api
-    baseURL: https://api.edamam.com
-    tags:
-      - Food
-      - Nutrition
-      - Recipes
-    properties:
-      - url: https://developer.edamam.com/edamam-docs-recipe-api
-        type: Documentation
-      - url: https://developer.edamam.com/edamam-recipe-api
-        type: Pricing
-      - url: https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-recipe-search-api-openapi.yml
-        type: OpenAPI
-  - aid: edamam:edamam-meal-planner-api
-    name: Edamam Meal Planner API
-    description: >-
-      The Edamam Meal Planner API provides personalized meal planning capabilities based on dietary preferences,
-      nutrition goals, and available ingredients.
-    humanURL: https://developer.edamam.com/edamam-docs-meal-planner-api
-    baseURL: https://api.edamam.com
-    tags:
-      - Food
-      - Meal Planning
-      - Nutrition
-    properties:
-      - url: https://developer.edamam.com/edamam-docs-meal-planner-api
-        type: Documentation
-      - url: https://developer.edamam.com/meal-planner-api
-        type: Pricing
-      - url: https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-meal-planner-api-openapi.yml
-        type: OpenAPI
+- aid: edamam:edamam-nutrition-analysis-api
+  name: Edamam Nutrition Analysis API
+  description: >-
+    The Edamam Nutrition Analysis API provides detailed nutrition data for recipes and food items. Send
+    a recipe or food description and receive comprehensive nutritional information including calories,
+    macros, and micronutrients.
+  humanURL: https://developer.edamam.com/edamam-docs-nutrition-api
+  baseURL: https://api.edamam.com
+  tags:
+  - Food
+  - Health
+  - Nutrition
+  properties:
+  - url: https://developer.edamam.com/edamam-docs-nutrition-api
+    type: Documentation
+  - url: https://developer.edamam.com/edamam-nutrition-api
+    type: Pricing
+  - url: >-
+      https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-nutrition-analysis-api-openapi.yml
+    type: OpenAPI
+- aid: edamam:edamam-recipe-search-api
+  name: Edamam Recipe Search API
+  description: >-
+    The Edamam Recipe Search API provides access to over 2 million recipes with full nutritional analysis,
+    diet and health labels, ingredient details, and cuisine type.
+  humanURL: https://developer.edamam.com/edamam-docs-recipe-api
+  baseURL: https://api.edamam.com
+  tags:
+  - Food
+  - Nutrition
+  - Recipes
+  properties:
+  - url: https://developer.edamam.com/edamam-docs-recipe-api
+    type: Documentation
+  - url: https://developer.edamam.com/edamam-recipe-api
+    type: Pricing
+  - url: >-
+      https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-recipe-search-api-openapi.yml
+    type: OpenAPI
+- aid: edamam:edamam-meal-planner-api
+  name: Edamam Meal Planner API
+  description: >-
+    The Edamam Meal Planner API provides personalized meal planning capabilities based on dietary preferences,
+    nutrition goals, and available ingredients.
+  humanURL: https://developer.edamam.com/edamam-docs-meal-planner-api
+  baseURL: https://api.edamam.com
+  tags:
+  - Food
+  - Meal Planning
+  - Nutrition
+  properties:
+  - url: https://developer.edamam.com/edamam-docs-meal-planner-api
+    type: Documentation
+  - url: https://developer.edamam.com/meal-planner-api
+    type: Pricing
+  - url: >-
+      https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-meal-planner-api-openapi.yml
+    type: OpenAPI
+- aid: edamam:edamam-food-database-api
+  name: Edamam Food Database API
+  description: Search foods by keyword or barcode and resolve nutrition.
+  humanURL: https://developer.edamam.com/edamam-docs-nutrition-api
+  baseURL: https://api.edamam.com
+  tags:
+  - Food Database
+  properties:
+  - type: OpenAPI
+    url: openapi/edamam-food-database-api-openapi.yml
+  - type: Documentation
+    url: https://developer.edamam.com/food-database-api-docs
+  - type: Pricing
+    url: https://developer.edamam.com/food-database-api
 name: Edamam
 tags:
   - Restaurant
@@ -81,7 +80,20 @@ tags:
   - Nutrition
   - UPC
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Paid (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/edamam.png
 access: 3rd-Party
 created: '2024-11-13'
 modified: '2026-06-02'
