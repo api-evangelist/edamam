@@ -1,0 +1,20 @@
+{
+  "provider": "edamam",
+  "sources": [
+    "edamam-food-database-api-openapi.yml",
+    "edamam-meal-planner-api-openapi.yml",
+    "edamam-nutrition-analysis-api-openapi.yml",
+    "edamam-recipe-search-api-openapi.yml"
+  ],
+  "outputs": [
+    "edamam-food-database-api-openapi.yml",
+    "edamam-meal-planner-api-openapi.yml",
+    "edamam-nutrition-analysis-api-openapi.yml",
+    "edamam-recipe-search-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

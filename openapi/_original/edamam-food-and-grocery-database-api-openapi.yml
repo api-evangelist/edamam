@@ -1,0 +1,381 @@
+openapi: 3.1.0
+info:
+  title: Edamam Food and Grocery Database API
+  description: |
+    REST API for the Edamam Food and Grocery Database. Search a database of
+    close to 900,000 generic foods, branded packaged foods, and over 680,000
+    unique UPC/barcode entries by keyword, food name, or barcode, then resolve
+    full nutrition for a given food, quantity, and measure. Requests are
+    authenticated with `app_id` and `app_key` query parameters issued from the
+    Edamam developer dashboard. This specification is a best-effort,
+    documentation-derived description and may omit fields.
+  version: 2.0.0
+  contact:
+    name: Edamam
+    url: https://developer.edamam.com/food-database-api-docs
+  x-generated-from: documentation
+  x-last-validated: '2026-06-02'
+servers:
+  - url: https://api.edamam.com
+    description: Production
+security:
+  - AppCreds: []
+tags:
+  - name: Food Database
+    description: Search foods by keyword or barcode and resolve nutrition.
+paths:
+  /api/food-database/v2/parser:
+    get:
+      summary: Edamam Search Foods by Keyword or Barcode
+      description: >-
+        Search the food and grocery database by keyword, food name, or
+        UPC/EAN barcode. Returns a parsed top match plus a ranked list of
+        hints, each including the food record and its available measures and
+        qualifiers.
+      operationId: parseFood
+      tags:
+        - Food Database
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/AppKey'
+        - in: query
+          name: ingr
+          description: Food keyword or name to search for.
+          schema:
+            type: string
+          example: apple
+        - in: query
+          name: upc
+          description: UPC/EAN barcode to look up.
+          schema:
+            type: string
+          example: '038000138416'
+        - in: query
+          name: category
+          description: Filter results by food category.
+          schema:
+            type: string
+            enum: [generic-foods, packaged-foods, generic-meals, fast-foods]
+          example: generic-foods
+        - in: query
+          name: categoryLabel
+          description: Broader category filter.
+          schema:
+            type: string
+            enum: [food, meal]
+          example: food
+        - in: query
+          name: nutrition-type
+          description: Nutrient profile to apply to returned foods.
+          schema:
+            type: string
+            enum: [cooking, logging]
+          example: cooking
+        - in: query
+          name: health
+          description: Health label filter (repeatable).
+          schema:
+            type: string
+          example: vegan
+        - in: header
+          name: Edamam-Account-User
+          description: Active user identifier for tracking (required when account tracking is enabled).
+          schema:
+            type: string
+          example: user-12345
+      responses:
+        '200':
+          description: Parsed match and ranked hints
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParserResponse'
+              examples:
+                ParseFood200Example:
+                  summary: Default parseFood 200 response
+                  x-microcks-default: true
+                  value:
+                    text: apple
+                    parsed:
+                      - food:
+                          foodId: food_bpdj2labtmnvf2a8tk4nqa1y9pty
+                          label: Apple
+                          knownAs: apple
+                          nutrients:
+                            ENERC_KCAL: 52
+                            PROCNT: 0.26
+                            FAT: 0.17
+                            CHOCDF: 13.81
+                          category: Generic foods
+                          categoryLabel: food
+                          image: https://www.edamam.com/food-img/apple.jpg
+                    hints:
+                      - food:
+                          foodId: food_bpdj2labtmnvf2a8tk4nqa1y9pty
+                          label: Apple
+                          knownAs: apple
+                          nutrients:
+                            ENERC_KCAL: 52
+                          category: Generic foods
+                          categoryLabel: food
+                          image: https://www.edamam.com/food-img/apple.jpg
+                        measures:
+                          - uri: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
+                            label: Whole
+                            weight: 182
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/food-database/v2/nutrients:
+    post:
+      summary: Edamam Resolve Nutrients for Selected Foods
+      description: >-
+        Retrieve the full nutrient breakdown for one or more foods at specific
+        quantities and measures, using the `foodId` and `measureURI` values
+        returned by the parser endpoint.
+      operationId: foodNutrients
+      tags:
+        - Food Database
+      parameters:
+        - $ref: '#/components/parameters/AppId'
+        - $ref: '#/components/parameters/AppKey'
+        - in: header
+          name: Edamam-Account-User
+          description: Active user identifier for tracking.
+          schema:
+            type: string
+          example: user-12345
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NutrientsRequest'
+            examples:
+              FoodNutrientsRequestExample:
+                summary: Default foodNutrients request
+                x-microcks-default: true
+                value:
+                  ingredients:
+                    - quantity: 1
+                      measureURI: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
+                      foodId: food_bpdj2labtmnvf2a8tk4nqa1y9pty
+      responses:
+        '200':
+          description: Full nutrient breakdown for the requested foods
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NutrientsResponse'
+              examples:
+                FoodNutrients200Example:
+                  summary: Default foodNutrients 200 response
+                  x-microcks-default: true
+                  value:
+                    uri: http://www.edamam.com/ontologies/edamam.owl#recipe_xyz789
+                    calories: 95
+                    totalWeight: 182
+                    dietLabels: [Low-Fat, Low-Sodium]
+                    healthLabels: [Vegan, Vegetarian]
+                    totalNutrients:
+                      ENERC_KCAL:
+                        label: Energy
+                        quantity: 95
+                        unit: kcal
+                    totalDaily:
+                      ENERC_KCAL:
+                        label: Energy
+                        quantity: 4.75
+                        unit: '%'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    AppCreds:
+      type: apiKey
+      in: query
+      name: app_key
+      description: App key issued by Edamam. Must be sent with the matching `app_id` query parameter.
+  parameters:
+    AppId:
+      in: query
+      name: app_id
+      required: true
+      description: Application identifier from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 1234abcd
+    AppKey:
+      in: query
+      name: app_key
+      required: true
+      description: Application key from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 0123456789abcdef0123456789abcdef
+  responses:
+    Unauthorized:
+      description: Invalid or missing app_id / app_key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Unauthorized401Example:
+              summary: Default unauthorized response
+              x-microcks-default: true
+              value:
+                error: unauthorized
+                message: Invalid app_id or app_key
+  schemas:
+    Food:
+      type: object
+      properties:
+        foodId:
+          type: string
+          example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
+        label:
+          type: string
+          example: Apple
+        knownAs:
+          type: string
+          example: apple
+        nutrients:
+          type: object
+          additionalProperties:
+            type: number
+          example:
+            ENERC_KCAL: 52
+            PROCNT: 0.26
+            FAT: 0.17
+            CHOCDF: 13.81
+        category:
+          type: string
+          example: Generic foods
+        categoryLabel:
+          type: string
+          example: food
+        image:
+          type: string
+          format: uri
+          example: https://www.edamam.com/food-img/apple.jpg
+    Measure:
+      type: object
+      properties:
+        uri:
+          type: string
+          example: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
+        label:
+          type: string
+          example: Whole
+        weight:
+          type: number
+          example: 182
+    FoodHint:
+      type: object
+      properties:
+        food:
+          $ref: '#/components/schemas/Food'
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+    ParserResponse:
+      type: object
+      properties:
+        text:
+          type: string
+          example: apple
+        parsed:
+          type: array
+          items:
+            type: object
+            properties:
+              food:
+                $ref: '#/components/schemas/Food'
+        hints:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoodHint'
+        _links:
+          type: object
+          additionalProperties: true
+    NutrientsRequest:
+      type: object
+      required:
+        - ingredients
+      properties:
+        ingredients:
+          type: array
+          items:
+            type: object
+            required:
+              - quantity
+              - measureURI
+              - foodId
+            properties:
+              quantity:
+                type: number
+                example: 1
+              measureURI:
+                type: string
+                example: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
+              foodId:
+                type: string
+                example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
+    NutrientsResponse:
+      type: object
+      properties:
+        uri:
+          type: string
+          example: http://www.edamam.com/ontologies/edamam.owl#recipe_xyz789
+        calories:
+          type: integer
+          example: 95
+        totalWeight:
+          type: number
+          example: 182
+        dietLabels:
+          type: array
+          items:
+            type: string
+          example: [Low-Fat, Low-Sodium]
+        healthLabels:
+          type: array
+          items:
+            type: string
+          example: [Vegan, Vegetarian]
+        totalNutrients:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Nutrient'
+        totalDaily:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Nutrient'
+    Nutrient:
+      type: object
+      properties:
+        label:
+          type: string
+          example: Energy
+        quantity:
+          type: number
+          example: 95
+        unit:
+          type: string
+          example: kcal
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: unauthorized
+        message:
+          type: string
+          example: Invalid app_id or app_key
