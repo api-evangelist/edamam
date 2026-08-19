@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "1cf9242a-2f6f-4977-a308-6cd14a2fb651",
+      "id": "39c67771-eab4-4e6f-a40a-652a31d43e4f",
       "name": "Recipe Search",
       "description": {
         "content": "Search recipes and retrieve recipe records by URI.",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "44bd3af4-000e-47ec-b0c1-fa6f08b270e0",
+          "id": "321e60cf-bd27-449e-9612-1c0d9d960440",
           "name": "Edamam Search Recipes",
           "request": {
             "name": "Edamam Search Recipes",
@@ -131,7 +131,7 @@
           },
           "response": [
             {
-              "id": "afa2ab9f-6efb-46ce-b824-ba58f9626c97",
+              "id": "847127fc-ce69-4709-9b78-780a5f72ac0f",
               "name": "Paginated recipe search results",
               "originalRequest": {
                 "url": {
@@ -235,7 +235,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "1df5c06d-e6d8-47a0-bdf7-2efcc8846d67",
+              "id": "95cad317-6209-4b56-8de1-b5e5e9f48938",
               "name": "Invalid or missing app_id / app_key",
               "originalRequest": {
                 "url": {
@@ -345,7 +345,7 @@
           }
         },
         {
-          "id": "64049cab-8c97-491f-92c7-4bbbc9ab6a65",
+          "id": "62be5986-aef1-496f-aed0-b345a8917d09",
           "name": "Edamam Get Recipe by ID",
           "request": {
             "name": "Edamam Get Recipe by ID",
@@ -404,7 +404,7 @@
           },
           "response": [
             {
-              "id": "b82d8e19-7bec-4918-a51a-21a25a52ab82",
+              "id": "d8bdb763-25b4-4c40-98e9-34b63965ea96",
               "name": "Single recipe record",
               "originalRequest": {
                 "url": {
@@ -467,7 +467,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "b4ff015b-5c5d-4472-8761-c2af139d867b",
+              "id": "669ecbb1-8328-483f-88ba-14106242dd5a",
               "name": "Invalid or missing app_id / app_key",
               "originalRequest": {
                 "url": {
@@ -530,7 +530,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "14563c83-7172-4fc8-8d43-8e37fd132112",
+              "id": "fed3f2ab-20ee-4b9d-ad70-6cdfa3d89916",
               "name": "Recipe not found",
               "originalRequest": {
                 "url": {
@@ -622,11 +622,11 @@
     ]
   },
   "info": {
-    "_postman_id": "e247941a-cf2f-4ff0-9220-a29c8e107071",
-    "name": "Edamam Recipe Search API",
+    "_postman_id": "b4380c0b-e875-4852-82e9-2e99c6937560",
+    "name": "Edamam Food and Grocery Database Food Database Recipe Search API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
-      "content": "REST API for Edamam Recipe Search v2. Search over 2 million recipes by\nkeyword with rich filtering on diet, health, cuisine type, meal type,\ndish type, calories, and preparation time, and retrieve full recipes by\nURI. Each recipe includes nutrition analysis, diet and health labels,\ningredient details, and source attribution. Requests are authenticated\nwith `app_id` and `app_key` query parameters issued from the Edamam\ndeveloper dashboard. This specification is a best-effort,\ndocumentation-derived description and may omit fields.\n\n\nContact Support:\n Name: Edamam",
+      "content": "REST API for the Edamam Food and Grocery Database. Search a database of\nclose to 900,000 generic foods, branded packaged foods, and over 680,000\nunique UPC/barcode entries by keyword, food name, or barcode, then resolve\nfull nutrition for a given food, quantity, and measure. Requests are\nauthenticated with `app_id` and `app_key` query parameters issued from the\nEdamam developer dashboard. This specification is a best-effort,\ndocumentation-derived description and may omit fields.\n\n\nContact Support:\n Name: Edamam",
       "type": "text/plain"
     }
   }

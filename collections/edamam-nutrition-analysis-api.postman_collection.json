@@ -1,7 +1,7 @@
 {
   "item": [
     {
-      "id": "8ab0e229-d0d1-47be-af22-622e186872f9",
+      "id": "e7f022f6-3868-4939-ba9c-c987b5b50720",
       "name": "Nutrition Analysis",
       "description": {
         "content": "Analyze recipes and ingredient lines for nutrition content.",
@@ -9,7 +9,7 @@
       },
       "item": [
         {
-          "id": "451fe746-a9f2-4f81-9d90-5b51e140499a",
+          "id": "1a346f28-77c2-4224-91b1-c90f06aa130a",
           "name": "Edamam Analyze Full Recipe Nutrition",
           "request": {
             "name": "Edamam Analyze Full Recipe Nutrition",
@@ -95,7 +95,7 @@
           },
           "response": [
             {
-              "id": "9d997d85-c841-4811-8347-61a3c04ed94d",
+              "id": "ed218879-96c2-4649-b7c7-79e9788f9333",
               "name": "Full nutrition analysis",
               "originalRequest": {
                 "url": {
@@ -178,7 +178,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "6e35415e-169a-4f50-8781-105996540511",
+              "id": "b7bec42e-558d-462c-9243-66e542e88ed6",
               "name": "Invalid or missing app_id / app_key",
               "originalRequest": {
                 "url": {
@@ -261,7 +261,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "67834127-d23e-42fb-b8f8-f0152cc64864",
+              "id": "824def9b-0172-49c4-a3ed-4ec64e9fef90",
               "name": "Could not parse one or more ingredients",
               "originalRequest": {
                 "url": {
@@ -346,7 +346,7 @@
           }
         },
         {
-          "id": "ec60f555-2130-4b82-adc2-1a01531c936b",
+          "id": "a4970920-717a-4166-8d68-06dd391e6769",
           "name": "Edamam Analyze Single Ingredient Line",
           "request": {
             "name": "Edamam Analyze Single Ingredient Line",
@@ -407,7 +407,7 @@
           },
           "response": [
             {
-              "id": "4977c643-3ecf-41ba-a7b2-c5048787fa2b",
+              "id": "8e97c1d6-2923-4405-b573-4c89478e8af4",
               "name": "Per-ingredient nutrition data",
               "originalRequest": {
                 "url": {
@@ -470,7 +470,7 @@
               "_postman_previewlanguage": "json"
             },
             {
-              "id": "25686823-dda9-416e-bcd8-d511495e6d64",
+              "id": "36a785ee-7844-4516-9619-93d96bbb2687",
               "name": "Invalid or missing app_id / app_key",
               "originalRequest": {
                 "url": {
@@ -568,11 +568,11 @@
     ]
   },
   "info": {
-    "_postman_id": "47037a87-90a3-4a68-ad4e-daf7f72235bf",
-    "name": "Edamam Nutrition Analysis API",
+    "_postman_id": "77a7f791-8900-4383-84f4-2115eb7562a7",
+    "name": "Edamam Food and Grocery Database Food Database Nutrition Analysis API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "description": {
-      "content": "REST API for Edamam Nutrition Analysis. Submit a full recipe for nutrition\nanalysis or a single ingredient line and receive comprehensive nutritional\ninformation including calories, macronutrients, and micronutrients.\nRequests are authenticated with `app_id` and `app_key` query parameters\nissued from the Edamam developer dashboard. This specification is a\nbest-effort, documentation-derived description and may omit fields.\n\n\nContact Support:\n Name: Edamam",
+      "content": "REST API for the Edamam Food and Grocery Database. Search a database of\nclose to 900,000 generic foods, branded packaged foods, and over 680,000\nunique UPC/barcode entries by keyword, food name, or barcode, then resolve\nfull nutrition for a given food, quantity, and measure. Requests are\nauthenticated with `app_id` and `app_key` query parameters issued from the\nEdamam developer dashboard. This specification is a best-effort,\ndocumentation-derived description and may omit fields.\n\n\nContact Support:\n Name: Edamam",
       "type": "text/plain"
     }
   }

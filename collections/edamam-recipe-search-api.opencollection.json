@@ -1,7 +1,7 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Edamam Recipe Search API",
+    "name": "Edamam Food and Grocery Database Food Database Recipe Search API",
     "version": "2.0.0"
   },
   "request": {

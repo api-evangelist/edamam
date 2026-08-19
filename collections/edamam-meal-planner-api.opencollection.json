@@ -1,14 +1,15 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Edamam Meal Planner API",
-    "version": "1.0.0"
+    "name": "Edamam Food and Grocery Database Food Database Meal Planner API",
+    "version": "2.0.0"
   },
   "request": {
     "auth": {
-      "type": "basic",
-      "username": "{{username}}",
-      "password": "{{password}}"
+      "type": "apikey",
+      "key": "app_key",
+      "value": "{{app_key}}",
+      "placement": "query"
     }
   },
   "items": [

@@ -1,8 +1,8 @@
 {
   "opencollection": "1.0.0",
   "info": {
-    "name": "Edamam Nutrition Analysis API",
-    "version": "1.0.0"
+    "name": "Edamam Food and Grocery Database Food Database Nutrition Analysis API",
+    "version": "2.0.0"
   },
   "request": {
     "auth": {
