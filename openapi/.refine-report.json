@@ -15,6 +15,12 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "edamam-food-database-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "edamam-meal-planner-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "edamam-nutrition-analysis-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "edamam-recipe-search-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

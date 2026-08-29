@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   title: Edamam Food and Grocery Database Food Database API
   description: 'REST API for the Edamam Food and Grocery Database. Search a database of
@@ -208,49 +208,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Food:
-      type: object
-      properties:
-        foodId:
-          type: string
-          example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
-        label:
-          type: string
-          example: Apple
-        knownAs:
-          type: string
-          example: apple
-        nutrients:
-          type: object
-          additionalProperties:
-            type: number
-          example:
-            ENERC_KCAL: 52
-            PROCNT: 0.26
-            FAT: 0.17
-            CHOCDF: 13.81
-        category:
-          type: string
-          example: Generic foods
-        categoryLabel:
-          type: string
-          example: food
-        image:
-          type: string
-          format: uri
-          example: https://www.edamam.com/food-img/apple.jpg
-    Nutrient:
-      type: object
-      properties:
-        label:
-          type: string
-          example: Energy
-        quantity:
-          type: number
-          example: 95
-        unit:
-          type: string
-          example: kcal
     Measure:
       type: object
       properties:
@@ -263,58 +220,6 @@ components:
         weight:
           type: number
           example: 182
-    FoodHint:
-      type: object
-      properties:
-        food:
-          $ref: '#/components/schemas/Food'
-        measures:
-          type: array
-          items:
-            $ref: '#/components/schemas/Measure'
-    ParserResponse:
-      type: object
-      properties:
-        text:
-          type: string
-          example: apple
-        parsed:
-          type: array
-          items:
-            type: object
-            properties:
-              food:
-                $ref: '#/components/schemas/Food'
-        hints:
-          type: array
-          items:
-            $ref: '#/components/schemas/FoodHint'
-        _links:
-          type: object
-          additionalProperties: true
-    NutrientsRequest:
-      type: object
-      required:
-      - ingredients
-      properties:
-        ingredients:
-          type: array
-          items:
-            type: object
-            required:
-            - quantity
-            - measureURI
-            - foodId
-            properties:
-              quantity:
-                type: number
-                example: 1
-              measureURI:
-                type: string
-                example: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
-              foodId:
-                type: string
-                example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
     NutrientsResponse:
       type: object
       properties:
@@ -349,6 +254,70 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/Nutrient'
+    FoodHint:
+      type: object
+      properties:
+        food:
+          $ref: '#/components/schemas/Food'
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+    NutrientsRequest:
+      type: object
+      required:
+      - ingredients
+      properties:
+        ingredients:
+          type: array
+          items:
+            type: object
+            required:
+            - quantity
+            - measureURI
+            - foodId
+            properties:
+              quantity:
+                type: number
+                example: 1
+              measureURI:
+                type: string
+                example: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
+              foodId:
+                type: string
+                example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
+    ParserResponse:
+      type: object
+      properties:
+        text:
+          type: string
+          example: apple
+        parsed:
+          type: array
+          items:
+            type: object
+            properties:
+              food:
+                $ref: '#/components/schemas/Food'
+        hints:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoodHint'
+        _links:
+          type: object
+          additionalProperties: true
+    Nutrient:
+      type: object
+      properties:
+        label:
+          type: string
+          example: Energy
+        quantity:
+          type: number
+          example: 95
+        unit:
+          type: string
+          example: kcal
     Error:
       type: object
       properties:
@@ -358,15 +327,38 @@ components:
         message:
           type: string
           example: Invalid app_id or app_key
+    Food:
+      type: object
+      properties:
+        foodId:
+          type: string
+          example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
+        label:
+          type: string
+          example: Apple
+        knownAs:
+          type: string
+          example: apple
+        nutrients:
+          type: object
+          additionalProperties:
+            type: number
+          example:
+            ENERC_KCAL: 52
+            PROCNT: 0.26
+            FAT: 0.17
+            CHOCDF: 13.81
+        category:
+          type: string
+          example: Generic foods
+        categoryLabel:
+          type: string
+          example: food
+        image:
+          type: string
+          format: uri
+          example: https://www.edamam.com/food-img/apple.jpg
   parameters:
-    AppKey:
-      in: query
-      name: app_key
-      required: true
-      description: Application key from the Edamam developer dashboard.
-      schema:
-        type: string
-      example: 0123456789abcdef0123456789abcdef
     AppId:
       in: query
       name: app_id
@@ -375,6 +367,14 @@ components:
       schema:
         type: string
       example: 1234abcd
+    AppKey:
+      in: query
+      name: app_key
+      required: true
+      description: Application key from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 0123456789abcdef0123456789abcdef
   responses:
     Unauthorized:
       description: Invalid or missing app_id / app_key
