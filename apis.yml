@@ -99,17 +99,18 @@ accessModel:
   try_now: true
   public: false
   label: Paid (free trial) · Self-serve signup
-  confidence: high
+  confidence: medium
   source:
   - plans
   - authentication
-  generated: '2026-07-22'
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/edamam.png
 access: 3rd-Party
 created: '2024-11-13'
 modified: '2026-06-02'
-position: Consumer
+position: Consuming
 description: >-
   Edamam is a leading provider of nutrition data and analytics. They offer nutrition analysis, food database, recipe
   search, and meal planning APIs that power thousands of health, fitness, and food apps. Their databases contain close
