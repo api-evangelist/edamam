@@ -120,6 +120,8 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.23'
 common:
+  - type: Website
+    url: https://www.edamam.com/
   - type: AgenticAccess
     url: agentic-access/edamam-agentic-access.yml
   - type: DomainSecurity
