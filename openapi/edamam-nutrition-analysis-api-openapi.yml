@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Edamam Food and Grocery Database Food Database Nutrition Analysis API
+  title: Edamam Food and Grocery Database Food Database Nutrition……
   description: 'REST API for the Edamam Food and Grocery Database. Search a database of
 
     close to 900,000 generic foods, branded packaged foods, and over 680,000
@@ -13,9 +13,7 @@ info:
 
     Edamam developer dashboard. This specification is a best-effort,
 
-    documentation-derived description and may omit fields.
-
-    '
+    documentation-derived description and may omit fields.'
   version: 2.0.0
   contact:
     name: Edamam
@@ -213,35 +211,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RecipeRequest:
+    Nutrient:
       type: object
-      required:
-      - ingr
       properties:
-        title:
+        label:
           type: string
-          example: Quinoa Salad
-        prep:
+          example: Protein
+        quantity:
+          type: number
+          example: 24.5
+        unit:
           type: string
-          example: 15 minutes
-        yield:
-          type: string
-          example: 4 servings
-        ingr:
-          type: array
-          items:
-            type: string
-          example:
-          - 1 cup quinoa
-          - 2 cups water
-          - 1 cucumber diced
-        url:
-          type: string
-          format: uri
-          example: https://example.com/recipes/quinoa-salad
-        summary:
-          type: string
-          example: A light quinoa salad
+          example: g
     NutritionResponse:
       type: object
       properties:
@@ -289,18 +270,6 @@ components:
           items:
             type: object
             additionalProperties: true
-    Nutrient:
-      type: object
-      properties:
-        label:
-          type: string
-          example: Protein
-        quantity:
-          type: number
-          example: 24.5
-        unit:
-          type: string
-          example: g
     Error:
       type: object
       properties:
@@ -310,15 +279,36 @@ components:
         message:
           type: string
           example: Invalid app_id or app_key
+    RecipeRequest:
+      type: object
+      required:
+      - ingr
+      properties:
+        title:
+          type: string
+          example: Quinoa Salad
+        prep:
+          type: string
+          example: 15 minutes
+        yield:
+          type: string
+          example: 4 servings
+        ingr:
+          type: array
+          items:
+            type: string
+          example:
+          - 1 cup quinoa
+          - 2 cups water
+          - 1 cucumber diced
+        url:
+          type: string
+          format: uri
+          example: https://example.com/recipes/quinoa-salad
+        summary:
+          type: string
+          example: A light quinoa salad
   parameters:
-    AppId:
-      in: query
-      name: app_id
-      required: true
-      description: Application identifier from the Edamam developer dashboard.
-      schema:
-        type: string
-      example: 1234abcd
     AppKey:
       in: query
       name: app_key
@@ -327,6 +317,14 @@ components:
       schema:
         type: string
       example: 0123456789abcdef0123456789abcdef
+    AppId:
+      in: query
+      name: app_id
+      required: true
+      description: Application identifier from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 1234abcd
   responses:
     Unauthorized:
       description: Invalid or missing app_id / app_key

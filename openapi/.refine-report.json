@@ -1,7 +1,7 @@
 {
   "provider": "edamam",
   "sources": [
-    "edamam-food-database-api-openapi.yml",
+    "_ae-authored/edamam-food-and-grocery-database-api-openapi.yml",
     "edamam-meal-planner-api-openapi.yml",
     "edamam-nutrition-analysis-api-openapi.yml",
     "edamam-recipe-search-api-openapi.yml"
@@ -14,13 +14,17 @@
   ],
   "archived": [],
   "errors": [],
-  "warnings": [],
+  "warnings": [
+    "edamam-meal-planner-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /api/meal-planner/v1/{app_id}/select post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "edamam-nutrition-analysis-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /api/nutrition-data get, /api/nutrition-details post); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "edamam-recipe-search-api-openapi.yml: previously refined output kept for 2 operation(s) no archived document covers (e.g. /api/recipes/v2 get, /api/recipes/v2/{id} get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
   "notes": [
-    "edamam-food-database-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "edamam-meal-planner-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "edamam-nutrition-analysis-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "edamam-recipe-search-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "edamam-food-and-grocery-database-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "edamam-food-database-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Edamam Food and Grocery Database Food Database Recipe Search API
+  title: Edamam Food and Grocery Database Food Database Recipe……
   description: 'REST API for the Edamam Food and Grocery Database. Search a database of
 
     close to 900,000 generic foods, branded packaged foods, and over 680,000
@@ -13,9 +13,7 @@ info:
 
     Edamam developer dashboard. This specification is a best-effort,
 
-    documentation-derived description and may omit fields.
-
-    '
+    documentation-derived description and may omit fields.'
   version: 2.0.0
   contact:
     name: Edamam
@@ -281,24 +279,19 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  parameters:
-    AppId:
-      in: query
-      name: app_id
-      required: true
-      description: Application identifier from the Edamam developer dashboard.
-      schema:
-        type: string
-      example: 1234abcd
-    AppKey:
-      in: query
-      name: app_key
-      required: true
-      description: Application key from the Edamam developer dashboard.
-      schema:
-        type: string
-      example: 0123456789abcdef0123456789abcdef
   schemas:
+    Nutrient:
+      type: object
+      properties:
+        label:
+          type: string
+          example: Energy
+        quantity:
+          type: number
+          example: 4228.79
+        unit:
+          type: string
+          example: kcal
     Recipe:
       type: object
       properties:
@@ -389,6 +382,15 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/Nutrient'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: unauthorized
+        message:
+          type: string
+          example: Invalid app_id or app_key
     RecipeHit:
       type: object
       properties:
@@ -397,18 +399,6 @@ components:
         _links:
           type: object
           additionalProperties: true
-    Nutrient:
-      type: object
-      properties:
-        label:
-          type: string
-          example: Energy
-        quantity:
-          type: number
-          example: 4228.79
-        unit:
-          type: string
-          example: kcal
     RecipeSearchResponse:
       type: object
       properties:
@@ -428,15 +418,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RecipeHit'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          example: unauthorized
-        message:
-          type: string
-          example: Invalid app_id or app_key
+  parameters:
+    AppKey:
+      in: query
+      name: app_key
+      required: true
+      description: Application key from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 0123456789abcdef0123456789abcdef
+    AppId:
+      in: query
+      name: app_id
+      required: true
+      description: Application identifier from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 1234abcd
   responses:
     Unauthorized:
       description: Invalid or missing app_id / app_key

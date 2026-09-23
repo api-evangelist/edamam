@@ -13,9 +13,7 @@ info:
 
     Edamam developer dashboard. This specification is a best-effort,
 
-    documentation-derived description and may omit fields.
-
-    '
+    documentation-derived description and may omit fields.'
   version: 2.0.0
   contact:
     name: Edamam
@@ -208,6 +206,101 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Nutrient:
+      type: object
+      properties:
+        label:
+          type: string
+          example: Energy
+        quantity:
+          type: number
+          example: 95
+        unit:
+          type: string
+          example: kcal
+    ParserResponse:
+      type: object
+      properties:
+        text:
+          type: string
+          example: apple
+        parsed:
+          type: array
+          items:
+            type: object
+            properties:
+              food:
+                $ref: '#/components/schemas/Food'
+        hints:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoodHint'
+        _links:
+          type: object
+          additionalProperties: true
+    Food:
+      type: object
+      properties:
+        foodId:
+          type: string
+          example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
+        label:
+          type: string
+          example: Apple
+        knownAs:
+          type: string
+          example: apple
+        nutrients:
+          type: object
+          additionalProperties:
+            type: number
+          example:
+            ENERC_KCAL: 52
+            PROCNT: 0.26
+            FAT: 0.17
+            CHOCDF: 13.81
+        category:
+          type: string
+          example: Generic foods
+        categoryLabel:
+          type: string
+          example: food
+        image:
+          type: string
+          format: uri
+          example: https://www.edamam.com/food-img/apple.jpg
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: unauthorized
+        message:
+          type: string
+          example: Invalid app_id or app_key
+    NutrientsRequest:
+      type: object
+      required:
+      - ingredients
+      properties:
+        ingredients:
+          type: array
+          items:
+            type: object
+            required:
+            - quantity
+            - measureURI
+            - foodId
+            properties:
+              quantity:
+                type: number
+                example: 1
+              measureURI:
+                type: string
+                example: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
+              foodId:
+                type: string
+                example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
     Measure:
       type: object
       properties:
@@ -220,6 +313,15 @@ components:
         weight:
           type: number
           example: 182
+    FoodHint:
+      type: object
+      properties:
+        food:
+          $ref: '#/components/schemas/Food'
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
     NutrientsResponse:
       type: object
       properties:
@@ -254,119 +356,7 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/Nutrient'
-    FoodHint:
-      type: object
-      properties:
-        food:
-          $ref: '#/components/schemas/Food'
-        measures:
-          type: array
-          items:
-            $ref: '#/components/schemas/Measure'
-    NutrientsRequest:
-      type: object
-      required:
-      - ingredients
-      properties:
-        ingredients:
-          type: array
-          items:
-            type: object
-            required:
-            - quantity
-            - measureURI
-            - foodId
-            properties:
-              quantity:
-                type: number
-                example: 1
-              measureURI:
-                type: string
-                example: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
-              foodId:
-                type: string
-                example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
-    ParserResponse:
-      type: object
-      properties:
-        text:
-          type: string
-          example: apple
-        parsed:
-          type: array
-          items:
-            type: object
-            properties:
-              food:
-                $ref: '#/components/schemas/Food'
-        hints:
-          type: array
-          items:
-            $ref: '#/components/schemas/FoodHint'
-        _links:
-          type: object
-          additionalProperties: true
-    Nutrient:
-      type: object
-      properties:
-        label:
-          type: string
-          example: Energy
-        quantity:
-          type: number
-          example: 95
-        unit:
-          type: string
-          example: kcal
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          example: unauthorized
-        message:
-          type: string
-          example: Invalid app_id or app_key
-    Food:
-      type: object
-      properties:
-        foodId:
-          type: string
-          example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
-        label:
-          type: string
-          example: Apple
-        knownAs:
-          type: string
-          example: apple
-        nutrients:
-          type: object
-          additionalProperties:
-            type: number
-          example:
-            ENERC_KCAL: 52
-            PROCNT: 0.26
-            FAT: 0.17
-            CHOCDF: 13.81
-        category:
-          type: string
-          example: Generic foods
-        categoryLabel:
-          type: string
-          example: food
-        image:
-          type: string
-          format: uri
-          example: https://www.edamam.com/food-img/apple.jpg
   parameters:
-    AppId:
-      in: query
-      name: app_id
-      required: true
-      description: Application identifier from the Edamam developer dashboard.
-      schema:
-        type: string
-      example: 1234abcd
     AppKey:
       in: query
       name: app_key
@@ -375,6 +365,14 @@ components:
       schema:
         type: string
       example: 0123456789abcdef0123456789abcdef
+    AppId:
+      in: query
+      name: app_id
+      required: true
+      description: Application identifier from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 1234abcd
   responses:
     Unauthorized:
       description: Invalid or missing app_id / app_key
