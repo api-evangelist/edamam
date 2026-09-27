@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Edamam Food and Grocery Database Food Database … Meal…
+  title: Edamam Food and Grocery Database Food Database … Meal… Meal…
   description: 'REST API for the Edamam Food and Grocery Database. Search a database of
 
     close to 900,000 generic foods, branded packaged foods, and over 680,000
@@ -141,16 +141,41 @@ components:
                 status: error
                 message: Invalid credentials
   schemas:
-    Section:
+    NutrientRange:
       type: object
+      description: Minimum and/or maximum bound for a nutrient code (e.g. ENERC_KCAL).
       properties:
-        accept:
-          $ref: '#/components/schemas/Constraint'
-        fit:
+        min:
+          type: number
+          example: 100
+        max:
+          type: number
+          example: 600
+    MealPlanRequest:
+      type: object
+      required:
+      - size
+      - plan
+      properties:
+        size:
+          type: integer
+          description: Number of days in the meal plan.
+          example: 7
+        plan:
           type: object
-          description: Per-section nutrient ranges keyed by nutrient code.
-          additionalProperties:
-            $ref: '#/components/schemas/NutrientRange'
+          properties:
+            accept:
+              $ref: '#/components/schemas/Constraint'
+            fit:
+              type: object
+              description: Plan-level nutrient ranges keyed by nutrient code.
+              additionalProperties:
+                $ref: '#/components/schemas/NutrientRange'
+            sections:
+              type: object
+              description: Meal sections such as Breakfast, Lunch, and Dinner.
+              additionalProperties:
+                $ref: '#/components/schemas/Section'
     Constraint:
       type: object
       properties:
@@ -185,16 +210,6 @@ components:
                   type: string
                 example:
                 - lunch/dinner
-    NutrientRange:
-      type: object
-      description: Minimum and/or maximum bound for a nutrient code (e.g. ENERC_KCAL).
-      properties:
-        min:
-          type: number
-          example: 100
-        max:
-          type: number
-          example: 600
     Error:
       type: object
       properties:
@@ -204,31 +219,6 @@ components:
         message:
           type: string
           example: Invalid credentials
-    MealPlanRequest:
-      type: object
-      required:
-      - size
-      - plan
-      properties:
-        size:
-          type: integer
-          description: Number of days in the meal plan.
-          example: 7
-        plan:
-          type: object
-          properties:
-            accept:
-              $ref: '#/components/schemas/Constraint'
-            fit:
-              type: object
-              description: Plan-level nutrient ranges keyed by nutrient code.
-              additionalProperties:
-                $ref: '#/components/schemas/NutrientRange'
-            sections:
-              type: object
-              description: Meal sections such as Breakfast, Lunch, and Dinner.
-              additionalProperties:
-                $ref: '#/components/schemas/Section'
     MealPlanResponse:
       type: object
       properties:
@@ -249,6 +239,16 @@ components:
                     _links:
                       type: object
                       additionalProperties: true
+    Section:
+      type: object
+      properties:
+        accept:
+          $ref: '#/components/schemas/Constraint'
+        fit:
+          type: object
+          description: Per-section nutrient ranges keyed by nutrient code.
+          additionalProperties:
+            $ref: '#/components/schemas/NutrientRange'
   securitySchemes:
     AppCreds:
       type: apiKey

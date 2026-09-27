@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Edamam Food and Grocery Database Food Database Nutrition……
+  title: Edamam Food and Grocery Database Food Database Nutrition………
   description: 'REST API for the Edamam Food and Grocery Database. Search a database of
 
     close to 900,000 generic foods, branded packaged foods, and over 680,000
@@ -210,7 +210,67 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
+  responses:
+    Unauthorized:
+      description: Invalid or missing app_id / app_key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Unauthorized401Example:
+              summary: Default unauthorized response
+              x-microcks-default: true
+              value:
+                error: unauthorized
+                message: Invalid app_id or app_key
+  parameters:
+    AppKey:
+      in: query
+      name: app_key
+      required: true
+      description: Application key from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 0123456789abcdef0123456789abcdef
+    AppId:
+      in: query
+      name: app_id
+      required: true
+      description: Application identifier from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 1234abcd
   schemas:
+    RecipeRequest:
+      type: object
+      required:
+      - ingr
+      properties:
+        title:
+          type: string
+          example: Quinoa Salad
+        prep:
+          type: string
+          example: 15 minutes
+        yield:
+          type: string
+          example: 4 servings
+        ingr:
+          type: array
+          items:
+            type: string
+          example:
+          - 1 cup quinoa
+          - 2 cups water
+          - 1 cucumber diced
+        url:
+          type: string
+          format: uri
+          example: https://example.com/recipes/quinoa-salad
+        summary:
+          type: string
+          example: A light quinoa salad
     Nutrient:
       type: object
       properties:
@@ -223,6 +283,15 @@ components:
         unit:
           type: string
           example: g
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: unauthorized
+        message:
+          type: string
+          example: Invalid app_id or app_key
     NutritionResponse:
       type: object
       properties:
@@ -270,75 +339,6 @@ components:
           items:
             type: object
             additionalProperties: true
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          example: unauthorized
-        message:
-          type: string
-          example: Invalid app_id or app_key
-    RecipeRequest:
-      type: object
-      required:
-      - ingr
-      properties:
-        title:
-          type: string
-          example: Quinoa Salad
-        prep:
-          type: string
-          example: 15 minutes
-        yield:
-          type: string
-          example: 4 servings
-        ingr:
-          type: array
-          items:
-            type: string
-          example:
-          - 1 cup quinoa
-          - 2 cups water
-          - 1 cucumber diced
-        url:
-          type: string
-          format: uri
-          example: https://example.com/recipes/quinoa-salad
-        summary:
-          type: string
-          example: A light quinoa salad
-  parameters:
-    AppKey:
-      in: query
-      name: app_key
-      required: true
-      description: Application key from the Edamam developer dashboard.
-      schema:
-        type: string
-      example: 0123456789abcdef0123456789abcdef
-    AppId:
-      in: query
-      name: app_id
-      required: true
-      description: Application identifier from the Edamam developer dashboard.
-      schema:
-        type: string
-      example: 1234abcd
-  responses:
-    Unauthorized:
-      description: Invalid or missing app_id / app_key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            Unauthorized401Example:
-              summary: Default unauthorized response
-              x-microcks-default: true
-              value:
-                error: unauthorized
-                message: Invalid app_id or app_key
   securitySchemes:
     AppCreds:
       type: apiKey
