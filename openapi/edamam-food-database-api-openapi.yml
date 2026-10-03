@@ -206,6 +206,113 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Nutrient:
+      type: object
+      properties:
+        label:
+          type: string
+          example: Energy
+        quantity:
+          type: number
+          example: 95
+        unit:
+          type: string
+          example: kcal
+    ParserResponse:
+      type: object
+      properties:
+        text:
+          type: string
+          example: apple
+        parsed:
+          type: array
+          items:
+            type: object
+            properties:
+              food:
+                $ref: '#/components/schemas/Food'
+        hints:
+          type: array
+          items:
+            $ref: '#/components/schemas/FoodHint'
+        _links:
+          type: object
+          additionalProperties: true
+    FoodHint:
+      type: object
+      properties:
+        food:
+          $ref: '#/components/schemas/Food'
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: unauthorized
+        message:
+          type: string
+          example: Invalid app_id or app_key
+    NutrientsRequest:
+      type: object
+      required:
+      - ingredients
+      properties:
+        ingredients:
+          type: array
+          items:
+            type: object
+            required:
+            - quantity
+            - measureURI
+            - foodId
+            properties:
+              quantity:
+                type: number
+                example: 1
+              measureURI:
+                type: string
+                example: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
+              foodId:
+                type: string
+                example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
+    NutrientsResponse:
+      type: object
+      properties:
+        uri:
+          type: string
+          example: http://www.edamam.com/ontologies/edamam.owl#recipe_xyz789
+        calories:
+          type: integer
+          example: 95
+        totalWeight:
+          type: number
+          example: 182
+        dietLabels:
+          type: array
+          items:
+            type: string
+          example:
+          - Low-Fat
+          - Low-Sodium
+        healthLabels:
+          type: array
+          items:
+            type: string
+          example:
+          - Vegan
+          - Vegetarian
+        totalNutrients:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Nutrient'
+        totalDaily:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Nutrient'
     Measure:
       type: object
       properties:
@@ -249,127 +356,6 @@ components:
           type: string
           format: uri
           example: https://www.edamam.com/food-img/apple.jpg
-    Nutrient:
-      type: object
-      properties:
-        label:
-          type: string
-          example: Energy
-        quantity:
-          type: number
-          example: 95
-        unit:
-          type: string
-          example: kcal
-    FoodHint:
-      type: object
-      properties:
-        food:
-          $ref: '#/components/schemas/Food'
-        measures:
-          type: array
-          items:
-            $ref: '#/components/schemas/Measure'
-    NutrientsRequest:
-      type: object
-      required:
-      - ingredients
-      properties:
-        ingredients:
-          type: array
-          items:
-            type: object
-            required:
-            - quantity
-            - measureURI
-            - foodId
-            properties:
-              quantity:
-                type: number
-                example: 1
-              measureURI:
-                type: string
-                example: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
-              foodId:
-                type: string
-                example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          example: unauthorized
-        message:
-          type: string
-          example: Invalid app_id or app_key
-    ParserResponse:
-      type: object
-      properties:
-        text:
-          type: string
-          example: apple
-        parsed:
-          type: array
-          items:
-            type: object
-            properties:
-              food:
-                $ref: '#/components/schemas/Food'
-        hints:
-          type: array
-          items:
-            $ref: '#/components/schemas/FoodHint'
-        _links:
-          type: object
-          additionalProperties: true
-    NutrientsResponse:
-      type: object
-      properties:
-        uri:
-          type: string
-          example: http://www.edamam.com/ontologies/edamam.owl#recipe_xyz789
-        calories:
-          type: integer
-          example: 95
-        totalWeight:
-          type: number
-          example: 182
-        dietLabels:
-          type: array
-          items:
-            type: string
-          example:
-          - Low-Fat
-          - Low-Sodium
-        healthLabels:
-          type: array
-          items:
-            type: string
-          example:
-          - Vegan
-          - Vegetarian
-        totalNutrients:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Nutrient'
-        totalDaily:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Nutrient'
-  responses:
-    Unauthorized:
-      description: Invalid or missing app_id / app_key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            Unauthorized401Example:
-              summary: Default unauthorized response
-              x-microcks-default: true
-              value:
-                error: unauthorized
-                message: Invalid app_id or app_key
   parameters:
     AppKey:
       in: query
@@ -387,6 +373,20 @@ components:
       schema:
         type: string
       example: 1234abcd
+  responses:
+    Unauthorized:
+      description: Invalid or missing app_id / app_key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Unauthorized401Example:
+              summary: Default unauthorized response
+              x-microcks-default: true
+              value:
+                error: unauthorized
+                message: Invalid app_id or app_key
   securitySchemes:
     AppCreds:
       type: apiKey

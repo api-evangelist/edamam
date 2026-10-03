@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Edamam Food and Grocery Database Food Database … Meal… Meal…
+  title: Edamam Food and Grocery Database Food Database … Meal……
   description: 'REST API for the Edamam Food and Grocery Database. Search a database of
 
     close to 900,000 generic foods, branded packaged foods, and over 680,000
@@ -126,31 +126,16 @@ paths:
         delay: 0
         dispatcher: FALLBACK
 components:
-  responses:
-    Unauthorized:
-      description: Invalid or missing credentials
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            Unauthorized401Example:
-              summary: Default unauthorized response
-              x-microcks-default: true
-              value:
-                status: error
-                message: Invalid credentials
   schemas:
-    NutrientRange:
+    Error:
       type: object
-      description: Minimum and/or maximum bound for a nutrient code (e.g. ENERC_KCAL).
       properties:
-        min:
-          type: number
-          example: 100
-        max:
-          type: number
-          example: 600
+        status:
+          type: string
+          example: error
+        message:
+          type: string
+          example: Invalid credentials
     MealPlanRequest:
       type: object
       required:
@@ -176,6 +161,46 @@ components:
               description: Meal sections such as Breakfast, Lunch, and Dinner.
               additionalProperties:
                 $ref: '#/components/schemas/Section'
+    NutrientRange:
+      type: object
+      description: Minimum and/or maximum bound for a nutrient code (e.g. ENERC_KCAL).
+      properties:
+        min:
+          type: number
+          example: 100
+        max:
+          type: number
+          example: 600
+    MealPlanResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: OK
+        selection:
+          type: array
+          description: One entry per day, each containing selected sections.
+          items:
+            type: object
+            properties:
+              sections:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    _links:
+                      type: object
+                      additionalProperties: true
+    Section:
+      type: object
+      properties:
+        accept:
+          $ref: '#/components/schemas/Constraint'
+        fit:
+          type: object
+          description: Per-section nutrient ranges keyed by nutrient code.
+          additionalProperties:
+            $ref: '#/components/schemas/NutrientRange'
     Constraint:
       type: object
       properties:
@@ -210,45 +235,20 @@ components:
                   type: string
                 example:
                 - lunch/dinner
-    Error:
-      type: object
-      properties:
-        status:
-          type: string
-          example: error
-        message:
-          type: string
-          example: Invalid credentials
-    MealPlanResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: OK
-        selection:
-          type: array
-          description: One entry per day, each containing selected sections.
-          items:
-            type: object
-            properties:
-              sections:
-                type: object
-                additionalProperties:
-                  type: object
-                  properties:
-                    _links:
-                      type: object
-                      additionalProperties: true
-    Section:
-      type: object
-      properties:
-        accept:
-          $ref: '#/components/schemas/Constraint'
-        fit:
-          type: object
-          description: Per-section nutrient ranges keyed by nutrient code.
-          additionalProperties:
-            $ref: '#/components/schemas/NutrientRange'
+  responses:
+    Unauthorized:
+      description: Invalid or missing credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Unauthorized401Example:
+              summary: Default unauthorized response
+              x-microcks-default: true
+              value:
+                status: error
+                message: Invalid credentials
   securitySchemes:
     AppCreds:
       type: apiKey
