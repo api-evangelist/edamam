@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Edamam Food and Grocery Database Food Database Nutrition…………
+  title: Edamam Food and Grocery Database Food Database…
   description: 'REST API for the Edamam Food and Grocery Database. Search a database of
 
     close to 900,000 generic foods, branded packaged foods, and over 680,000
@@ -211,6 +211,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Nutrient:
+      type: object
+      properties:
+        label:
+          type: string
+          example: Protein
+        quantity:
+          type: number
+          example: 24.5
+        unit:
+          type: string
+          example: g
     NutritionResponse:
       type: object
       properties:
@@ -258,18 +270,6 @@ components:
           items:
             type: object
             additionalProperties: true
-    Nutrient:
-      type: object
-      properties:
-        label:
-          type: string
-          example: Protein
-        quantity:
-          type: number
-          example: 24.5
-        unit:
-          type: string
-          example: g
     RecipeRequest:
       type: object
       required:
@@ -308,6 +308,20 @@ components:
         message:
           type: string
           example: Invalid app_id or app_key
+  responses:
+    Unauthorized:
+      description: Invalid or missing app_id / app_key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Unauthorized401Example:
+              summary: Default unauthorized response
+              x-microcks-default: true
+              value:
+                error: unauthorized
+                message: Invalid app_id or app_key
   parameters:
     AppKey:
       in: query
@@ -325,20 +339,6 @@ components:
       schema:
         type: string
       example: 1234abcd
-  responses:
-    Unauthorized:
-      description: Invalid or missing app_id / app_key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            Unauthorized401Example:
-              summary: Default unauthorized response
-              x-microcks-default: true
-              value:
-                error: unauthorized
-                message: Invalid app_id or app_key
   securitySchemes:
     AppCreds:
       type: apiKey

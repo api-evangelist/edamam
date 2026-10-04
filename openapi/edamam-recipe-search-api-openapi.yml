@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Edamam Food and Grocery Database Food Database Recipe…………
+  title: Edamam Food and Grocery Database Food Database Recipe……………
   description: 'REST API for the Edamam Food and Grocery Database. Search a database of
 
     close to 900,000 generic foods, branded packaged foods, and over 680,000
@@ -280,14 +280,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    RecipeHit:
-      type: object
-      properties:
-        recipe:
-          $ref: '#/components/schemas/Recipe'
-        _links:
-          type: object
-          additionalProperties: true
     Nutrient:
       type: object
       properties:
@@ -300,6 +292,42 @@ components:
         unit:
           type: string
           example: kcal
+    RecipeSearchResponse:
+      type: object
+      properties:
+        from:
+          type: integer
+          example: 1
+        to:
+          type: integer
+          example: 20
+        count:
+          type: integer
+          example: 10000
+        _links:
+          type: object
+          additionalProperties: true
+        hits:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecipeHit'
+    RecipeHit:
+      type: object
+      properties:
+        recipe:
+          $ref: '#/components/schemas/Recipe'
+        _links:
+          type: object
+          additionalProperties: true
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: unauthorized
+        message:
+          type: string
+          example: Invalid app_id or app_key
     Recipe:
       type: object
       properties:
@@ -390,34 +418,20 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/Nutrient'
-    RecipeSearchResponse:
-      type: object
-      properties:
-        from:
-          type: integer
-          example: 1
-        to:
-          type: integer
-          example: 20
-        count:
-          type: integer
-          example: 10000
-        _links:
-          type: object
-          additionalProperties: true
-        hits:
-          type: array
-          items:
-            $ref: '#/components/schemas/RecipeHit'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          example: unauthorized
-        message:
-          type: string
-          example: Invalid app_id or app_key
+  responses:
+    Unauthorized:
+      description: Invalid or missing app_id / app_key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            Unauthorized401Example:
+              summary: Default unauthorized response
+              x-microcks-default: true
+              value:
+                error: unauthorized
+                message: Invalid app_id or app_key
   parameters:
     AppKey:
       in: query
@@ -435,20 +449,6 @@ components:
       schema:
         type: string
       example: 1234abcd
-  responses:
-    Unauthorized:
-      description: Invalid or missing app_id / app_key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            Unauthorized401Example:
-              summary: Default unauthorized response
-              x-microcks-default: true
-              value:
-                error: unauthorized
-                message: Invalid app_id or app_key
   securitySchemes:
     AppCreds:
       type: apiKey
