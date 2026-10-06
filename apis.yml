@@ -110,7 +110,7 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/edamam.png
 access: 3rd-Party
 created: '2024-11-13'
-modified: '2026-06-02'
+modified: '2026-10-06'
 position: Consuming
 description: >-
   Edamam is a leading provider of nutrition data and analytics. They offer nutrition analysis, food database, recipe
@@ -121,6 +121,10 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.23'
 common:
+  - url: https://www.edamam.com/blog/
+    type: Blog
+  - url: https://www.edamam.com/blog/feed/
+    type: BlogRSS
   - type: Website
     url: https://www.edamam.com/
   - type: AgenticAccess
