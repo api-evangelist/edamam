@@ -136,10 +136,8 @@ apis:
 unitEconomics:
   - name: Cost per 1K Requests
     metric: billed_cost / (api_requests / 1000)
-    target: TBD
   - name: Cost per Active Consumer
     metric: billed_cost / active_consumers
-    target: TBD
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
