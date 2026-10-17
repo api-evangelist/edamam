@@ -206,6 +206,15 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: unauthorized
+        message:
+          type: string
+          example: Invalid app_id or app_key
     Nutrient:
       type: object
       properties:
@@ -238,59 +247,6 @@ components:
         _links:
           type: object
           additionalProperties: true
-    Measure:
-      type: object
-      properties:
-        uri:
-          type: string
-          example: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
-        label:
-          type: string
-          example: Whole
-        weight:
-          type: number
-          example: 182
-    NutrientsRequest:
-      type: object
-      required:
-      - ingredients
-      properties:
-        ingredients:
-          type: array
-          items:
-            type: object
-            required:
-            - quantity
-            - measureURI
-            - foodId
-            properties:
-              quantity:
-                type: number
-                example: 1
-              measureURI:
-                type: string
-                example: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
-              foodId:
-                type: string
-                example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
-    FoodHint:
-      type: object
-      properties:
-        food:
-          $ref: '#/components/schemas/Food'
-        measures:
-          type: array
-          items:
-            $ref: '#/components/schemas/Measure'
-    Error:
-      type: object
-      properties:
-        error:
-          type: string
-          example: unauthorized
-        message:
-          type: string
-          example: Invalid app_id or app_key
     Food:
       type: object
       properties:
@@ -356,6 +312,67 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/Nutrient'
+    NutrientsRequest:
+      type: object
+      required:
+      - ingredients
+      properties:
+        ingredients:
+          type: array
+          items:
+            type: object
+            required:
+            - quantity
+            - measureURI
+            - foodId
+            properties:
+              quantity:
+                type: number
+                example: 1
+              measureURI:
+                type: string
+                example: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
+              foodId:
+                type: string
+                example: food_bpdj2labtmnvf2a8tk4nqa1y9pty
+    Measure:
+      type: object
+      properties:
+        uri:
+          type: string
+          example: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
+        label:
+          type: string
+          example: Whole
+        weight:
+          type: number
+          example: 182
+    FoodHint:
+      type: object
+      properties:
+        food:
+          $ref: '#/components/schemas/Food'
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+  parameters:
+    AppId:
+      in: query
+      name: app_id
+      required: true
+      description: Application identifier from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 1234abcd
+    AppKey:
+      in: query
+      name: app_key
+      required: true
+      description: Application key from the Edamam developer dashboard.
+      schema:
+        type: string
+      example: 0123456789abcdef0123456789abcdef
   responses:
     Unauthorized:
       description: Invalid or missing app_id / app_key
@@ -370,23 +387,6 @@ components:
               value:
                 error: unauthorized
                 message: Invalid app_id or app_key
-  parameters:
-    AppKey:
-      in: query
-      name: app_key
-      required: true
-      description: Application key from the Edamam developer dashboard.
-      schema:
-        type: string
-      example: 0123456789abcdef0123456789abcdef
-    AppId:
-      in: query
-      name: app_id
-      required: true
-      description: Application identifier from the Edamam developer dashboard.
-      schema:
-        type: string
-      example: 1234abcd
   securitySchemes:
     AppCreds:
       type: apiKey

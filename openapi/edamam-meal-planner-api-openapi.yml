@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Edamam Food and Grocery Database Food Database … Meal………
+  title: Edamam Food and Grocery Database Food Database … Meal…………
   description: 'REST API for the Edamam Food and Grocery Database. Search a database of
 
     close to 900,000 generic foods, branded packaged foods, and over 680,000
@@ -127,40 +127,36 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Constraint:
+    NutrientRange:
+      type: object
+      description: Minimum and/or maximum bound for a nutrient code (e.g. ENERC_KCAL).
+      properties:
+        min:
+          type: number
+          example: 100
+        max:
+          type: number
+          example: 600
+    MealPlanResponse:
       type: object
       properties:
-        all:
+        status:
+          type: string
+          example: OK
+        selection:
           type: array
+          description: One entry per day, each containing selected sections.
           items:
             type: object
             properties:
-              health:
-                type: array
-                items:
-                  type: string
-                example:
-                - SOY_FREE
-                - FISH_FREE
-              diet:
-                type: array
-                items:
-                  type: string
-                example:
-                - balanced
-              dish:
-                type: array
-                items:
-                  type: string
-                example:
-                - main course
-                - salad
-              meal:
-                type: array
-                items:
-                  type: string
-                example:
-                - lunch/dinner
+              sections:
+                type: object
+                additionalProperties:
+                  type: object
+                  properties:
+                    _links:
+                      type: object
+                      additionalProperties: true
     MealPlanRequest:
       type: object
       required:
@@ -195,26 +191,6 @@ components:
         message:
           type: string
           example: Invalid credentials
-    MealPlanResponse:
-      type: object
-      properties:
-        status:
-          type: string
-          example: OK
-        selection:
-          type: array
-          description: One entry per day, each containing selected sections.
-          items:
-            type: object
-            properties:
-              sections:
-                type: object
-                additionalProperties:
-                  type: object
-                  properties:
-                    _links:
-                      type: object
-                      additionalProperties: true
     Section:
       type: object
       properties:
@@ -225,16 +201,40 @@ components:
           description: Per-section nutrient ranges keyed by nutrient code.
           additionalProperties:
             $ref: '#/components/schemas/NutrientRange'
-    NutrientRange:
+    Constraint:
       type: object
-      description: Minimum and/or maximum bound for a nutrient code (e.g. ENERC_KCAL).
       properties:
-        min:
-          type: number
-          example: 100
-        max:
-          type: number
-          example: 600
+        all:
+          type: array
+          items:
+            type: object
+            properties:
+              health:
+                type: array
+                items:
+                  type: string
+                example:
+                - SOY_FREE
+                - FISH_FREE
+              diet:
+                type: array
+                items:
+                  type: string
+                example:
+                - balanced
+              dish:
+                type: array
+                items:
+                  type: string
+                example:
+                - main course
+                - salad
+              meal:
+                type: array
+                items:
+                  type: string
+                example:
+                - lunch/dinner
   responses:
     Unauthorized:
       description: Invalid or missing credentials
