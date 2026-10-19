@@ -73,6 +73,35 @@ apis:
     url: https://developer.edamam.com/food-database-api-docs
   - type: Pricing
     url: https://developer.edamam.com/food-database-api
+- aid: edamam:edamam-shopping-list-api
+  name: Edamam Shopping List API
+  description: >-
+    The *Shopping List API* provides aggregation of shopping item quantities over one or more ingredient
+    lists, and
+
+    optional referral to external shopping services.
+
+
+    A `shopping-list` call may be issued on a recipe preparation plan, e.g. for recipes assigned to a
+    meal plan's
+
+    slots, to obtain total shopping quantities for the products involved.  Each item in the plan may be
+    scaled
+
+    individually for the shopping list by indicating the planned consumption as a number of servings;
+    in the absence
+
+    of such indication, consumption (and therefore preparation) of the complete output of the recipe will
+    be assumed.
+
+    Both recipes and directly consumable foodstuffs are supported as items in the plan.
+  humanURL: https://developer.edamam.com/edamam-docs-nutrition-api
+  baseURL: https://api.edamam.com
+  tags:
+  - Shopping List
+  properties:
+  - type: OpenAPI
+    url: openapi/edamam-shopping-list-api-openapi.yml
 name: Edamam
 tags:
   - Restaurant

@@ -1,125 +1,738 @@
 openapi: 3.2.0
 info:
-  title: Edamam Food and Grocery Database Food Database Recipe………………
-  description: 'REST API for the Edamam Food and Grocery Database. Search a database of
-
-    close to 900,000 generic foods, branded packaged foods, and over 680,000
-
-    unique UPC/barcode entries by keyword, food name, or barcode, then resolve
-
-    full nutrition for a given food, quantity, and measure. Requests are
-
-    authenticated with `app_id` and `app_key` query parameters issued from the
-
-    Edamam developer dashboard. This specification is a best-effort,
-
-    documentation-derived description and may omit fields.'
-  version: 2.0.0
-  contact:
-    name: Edamam
-    url: https://developer.edamam.com/food-database-api-docs
-  x-generated-from: documentation
-  x-last-validated: '2026-06-02'
+  version: '2.9'
+  title: Shopping List Recipe Search API
+  description: Search or access individual recipes.
 servers:
 - url: https://api.edamam.com
-  description: Production
-security:
-- AppCreds: []
 tags:
 - name: Recipe Search
-  description: Search recipes and retrieve recipe records by URI.
+  description: Search or access individual recipes.
 paths:
   /api/recipes/v2:
     get:
-      summary: Edamam Search Recipes
-      description: Search the recipe database by keyword with rich filtering on diet, health, cuisine type, meal type, dish type, calorie range, and preparation time. Returns a paginated set of recipe hits with full nutrition analysis and source attribution.
-      operationId: searchRecipes
       tags:
       - Recipe Search
+      security:
+      - app_id: []
+        app_key: []
+        Edamam-Account-User: []
+      - basic: []
+        Edamam-Account-User: []
+      summary: Search for a Recipe
+      description: 'This endpoint returns a list of recipes matching the provided criteria. Get started by placing your search query
+
+        in the `q` parameter, fill in your 3scale credentials, and press the "Try it out!" button at the bottom.
+
+        Additionally, refine your search by using the optional parameters to specify what you are looking for.
+
+
+        __Note:__
+
+        - When mentioned, ''floating point values'' refers to values such as `50.0`, `50.`, `0.5`, and `.5`.
+
+        - When speaking of ranges, the API accepts values such as `1.0+`, `1.0-50.0`, or `50.0`, for floating point
+
+        ranges.
+
+
+        The parameters with __(required)__ in their value box are the required parameters and must be defined as part
+
+        of a request, all others can be left blank if you do not wish to define them.
+
+
+        __Access Point:__ https://api.edamam.com/api/recipes/v2'
       parameters:
-      - in: query
-        name: type
+      - name: type
+        in: query
+        description: Type of recipes to search for. For backward compatibility you can also specify `any` and it will be equivalent to specifying all enumerated values.
         required: true
-        description: Recipe access type. Use `public` for the public recipe pool.
+        explode: true
+        schema:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+            - public
+            - user
+            - edamam-generic
+      - name: beta
+        in: query
+        description: Allow beta features in the request and response
+        schema:
+          type: boolean
+      - name: q
+        in: query
+        description: Query text, for example "chicken".<br> __REQUIRED__ if no other parameter is specified. __NOT REQUIRED__ if any other parameter (other than application credentials) is specified.
         schema:
           type: string
-          enum:
-          - public
-          - user
-          - any
-          default: public
-        example: public
-      - $ref: '#/components/parameters/AppId'
-      - $ref: '#/components/parameters/AppKey'
-      - in: query
-        name: q
-        description: Free-text search query, e.g. `chicken`.
+      - name: ingr
+        in: query
+        description: 'Filter by number of ingredients (MIN+, MIN-MAX, MAX), where MIN and MAX are integer numbers.
+
+          Example: `ingr=5-8`
+
+          '
         schema:
+          pattern: (?:[+-]?\d+)|(?:(?:[+-]?\d+)-(?:[+-]?\d+))|(?:(?:[+-]?\d+)[+-])
           type: string
-        example: chicken
-      - in: query
-        name: diet
-        description: Diet label filter (repeatable).
+      - name: diet
+        in: query
+        description: Diet label. You can select multiple labels by holding shift and left-clicking all the labels needed.
+        explode: true
         schema:
-          type: string
-          enum:
-          - balanced
-          - high-fiber
-          - high-protein
-          - low-carb
-          - low-fat
-          - low-sodium
-        example: high-protein
-      - in: query
-        name: health
-        description: Health label filter (repeatable), e.g. `vegan`, `gluten-free`.
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+            - balanced
+            - high-fiber
+            - high-protein
+            - low-carb
+            - low-fat
+            - low-sodium
+      - name: health
+        in: query
+        description: Health label. You can select multiple labels by holding shift and left-clicking all the labels needed.
+        explode: true
         schema:
-          type: string
-        example: gluten-free
-      - in: query
-        name: cuisineType
-        description: Cuisine type filter (repeatable), e.g. `Italian`.
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+            - alcohol-cocktail
+            - alcohol-free
+            - celery-free
+            - crustacean-free
+            - dairy-free
+            - DASH
+            - egg-free
+            - fish-free
+            - fodmap-free
+            - gluten-free
+            - keto-friendly
+            - kidney-friendly
+            - kosher
+            - low-fat-abs
+            - low-potassium
+            - low-sugar
+            - lupine-free
+            - Mediterranean
+            - mollusk-free
+            - mustard-free
+            - no-oil-added
+            - paleo
+            - peanut-free
+            - pescatarian
+            - pork-free
+            - red-meat-free
+            - sesame-free
+            - shellfish-free
+            - soy-free
+            - sugar-conscious
+            - sulfite-free
+            - tree-nut-free
+            - vegan
+            - vegetarian
+            - wheat-free
+      - name: cuisineType
+        in: query
+        description: The type of cuisine of the recipe
+        explode: true
         schema:
-          type: string
-        example: Italian
-      - in: query
-        name: mealType
-        description: Meal type filter (repeatable), e.g. `Breakfast`.
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+            - American
+            - Asian
+            - British
+            - Caribbean
+            - Central Europe
+            - Chinese
+            - Eastern Europe
+            - French
+            - Greek
+            - Indian
+            - Italian
+            - Japanese
+            - Korean
+            - Kosher
+            - Mediterranean
+            - Mexican
+            - Middle Eastern
+            - Nordic
+            - South American
+            - South East Asian
+      - name: mealType
+        in: query
+        description: The type of meal a recipe belongs to
+        explode: true
         schema:
-          type: string
-        example: Dinner
-      - in: query
-        name: dishType
-        description: Dish type filter (repeatable), e.g. `Main course`.
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+            - Breakfast
+            - Dinner
+            - Lunch
+            - Snack
+            - Teatime
+      - name: dishType
+        in: query
+        description: The dish type a recipe belongs to
+        explode: true
         schema:
-          type: string
-        example: Main course
-      - in: query
-        name: calories
-        description: Calorie range filter, e.g. `100-300`.
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+            - Biscuits and cookies
+            - Bread
+            - Cereals
+            - Condiments and sauces
+            - Desserts
+            - Drinks
+            - Main course
+            - Pancake
+            - Preps
+            - Preserve
+            - Salad
+            - Sandwiches
+            - Side dish
+            - Soup
+            - Starter
+            - Sweets
+      - name: calories
+        in: query
+        description: 'The format is calories=RANGE where RANGE is in one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers. The + symbol needs to be properly encoded. Example: `calories=100-300`
+
+          will return all recipes with which have between 100 and 300 kcal per serving.
+
+          '
         schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
           type: string
-        example: 100-300
-      - in: query
-        name: time
-        description: Preparation time range in minutes, e.g. `1-60`.
+      - name: time
+        in: query
+        description: 'Time range for the total cooking and prep time for a recipe. The format is time=RANGE where RANGE is one of
+
+          MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. The + symbol needs to be properly
+
+          encoded. Example: `time=1%2B` will return all recipes with available total time greater then 1 minute.
+
+          '
         schema:
+          pattern: (?:[+-]?\d+)|(?:(?:[+-]?\d+)-(?:[+-]?\d+))|(?:(?:[+-]?\d+)[+-])
           type: string
-        example: 1-60
-      - in: query
-        name: imageSize
-        description: Requested image resolution.
+      - name: imageSize
+        in: query
+        description: Show only recipes, which have images with selected sizes
+        explode: true
         schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - LARGE
+            - REGULAR
+            - SMALL
+            - THUMBNAIL
+      - name: glycemicIndex
+        in: query
+        description: Filter by glycemic index. The format is FLOAT-RANGE
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
           type: string
-          enum:
-          - THUMBNAIL
-          - SMALL
-          - REGULAR
-          - LARGE
-        example: REGULAR
-      - in: query
-        name: co2EmissionsClass
-        description: Carbon footprint rating filter (requires beta=true).
+      - name: inflammatoryIndex
+        in: query
+        description: Filter by diet inflammatory index. The format is FLOAT-RANGE
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: excluded
+        in: query
+        description: 'Excluding recipes with certain ingredients. The format is `excluded=FOOD` where FOOD is replaced by the name
+
+          of the specific food you don''t want to be present in the recipe results. More than one food can be excluded
+
+          at the same time. Example: excluded=vinegar&excluded=pretzel will exclude any recipes which contain vinegar
+
+          or pretzels in their ingredient list.
+
+          '
+        explode: true
+        schema:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+      - name: random
+        in: query
+        description: 'Select whether you want this query to respond with a random selection of 20 recipes based on the criteria
+
+          filled. If there were only 20 or less possible results, this will return those results in random order.
+
+          '
+        schema:
+          type: boolean
+      - name: nutrients[CA]
+        in: query
+        description: "Calcium, Ca. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are \nnon-negative floating point numbers.<br>\nFor example: `nutrients[CA]=50+` means minimum 50mg calcium, where `50+` has to be properly encoded as\n`50%2B` `nutrients[FAT]=30` means maximum 30g fat and `nutrients[FE]=5-10` means iron between 5mg and 10mg\ninclusive.\n"
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[CHOCDF]
+        in: query
+        description: 'Carbohydrate, by difference. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and
+
+          MAX are non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[CHOCDF.net]
+        in: query
+        description: 'Carbohydrates (net). Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[CHOLE]
+        in: query
+        description: 'Cholesterol. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[ENERC_KCAL]
+        in: query
+        description: 'Energy. Unit: kcal. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[FAMS]
+        in: query
+        description: 'Fatty acids, total monounsaturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN
+
+          and MAX are non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[FAPU]
+        in: query
+        description: 'Fatty acids, total polyunsaturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN
+
+          and MAX are non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[FASAT]
+        in: query
+        description: 'Fatty acids, total saturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and
+
+          MAX are non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[FAT]
+        in: query
+        description: 'Total lipid (fat). Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[FATRN]
+        in: query
+        description: 'Fatty acids, total trans. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX
+
+          are non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[FE]
+        in: query
+        description: 'Iron, Fe. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[FIBTG]
+        in: query
+        description: 'Fiber, total dietary. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[FOLAC]
+        in: query
+        description: 'Folic acid. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[FOLDFE]
+        in: query
+        description: 'Folate, DFE. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[FOLFD]
+        in: query
+        description: 'Folate (food). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[K]
+        in: query
+        description: 'Potassium, K. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[MG]
+        in: query
+        description: 'Magnesium. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[NA]
+        in: query
+        description: 'Sodium, Na. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[NIA]
+        in: query
+        description: 'Niacin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[P]
+        in: query
+        description: 'Phosphorus, P. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[PROCNT]
+        in: query
+        description: 'Protein. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[RIBF]
+        in: query
+        description: 'Riboflavin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[SUGAR]
+        in: query
+        description: 'Sugars, total. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[SUGAR.added]
+        in: query
+        description: 'Sugars, added. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[Sugar.alcohol]
+        in: query
+        description: 'Sugar alcohols. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[THIA]
+        in: query
+        description: 'Thiamin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[TOCPHA]
+        in: query
+        description: 'Vitamin E (alpha-tocopherol). Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and
+
+          MAX are non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[VITA_RAE]
+        in: query
+        description: 'Vitamin A, RAE. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[VITB12]
+        in: query
+        description: 'Vitamin B12. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[VITB6A]
+        in: query
+        description: 'Vitamin B6. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[VITC]
+        in: query
+        description: "Vitamin C, total ascorbic acid. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN \nand MAX are non-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[VITD]
+        in: query
+        description: 'Vitamin D (D2 + D3). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[VITK1]
+        in: query
+        description: 'Vitamin K (phylloquinone). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX
+
+          are non-negative floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[WATER]
+        in: query
+        description: 'Water. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[ZN]
+        in: query
+        description: 'Zinc, Zn. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.<br>
+
+          See calcium for an example for how to fill in the range.
+
+          '
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: field
+        in: query
+        description: Recipe fields to be included in the response.
+        explode: true
+        schema:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+            - uri
+            - label
+            - image
+            - images
+            - source
+            - url
+            - shareAs
+            - yield
+            - dietLabels
+            - healthLabels
+            - cautions
+            - ingredientLines
+            - ingredients
+            - calories
+            - glycemicIndex
+            - inflammatoryIndex
+            - totalCO2Emissions
+            - co2EmissionsClass
+            - totalWeight
+            - totalTime
+            - cuisineType
+            - mealType
+            - dishType
+            - totalNutrients
+            - totalDaily
+            - digest
+            - tags
+            - externalId
+      - name: co2EmissionsClass
+        in: query
+        description: Filter recipes by their CO2 footprint.
         schema:
           type: string
           enum:
@@ -131,327 +744,498 @@ paths:
           - E
           - F
           - G
-        example: A
-      - in: query
-        name: beta
-        description: Enable beta features such as CO2 emissions filtering.
+      - name: tag
+        in: query
+        description: Show only recipes containing the specified tags.
+        explode: true
         schema:
-          type: boolean
-        example: false
-      - in: header
-        name: Edamam-Account-User
-        description: Active user identifier for tracking.
+          type: array
+          items:
+            type: string
+      - name: sysTag
+        in: query
+        description: '_(Beta)_ Show only recipes containing the specified system tags. This field is subject to account
+
+          subscription restrictions.
+
+          '
+        explode: true
+        schema:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+            - live
+      - name: Accept-Language
+        description: Search recipes in the specified language.
+        in: header
         schema:
           type: string
-        example: user-12345
+          default: en
       responses:
         '200':
-          description: Paginated recipe search results
+          description: A list of recipes
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: The localization language.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RecipeSearchResponse'
-              examples:
-                SearchRecipes200Example:
-                  summary: Default searchRecipes 200 response
-                  x-microcks-default: true
-                  value:
-                    from: 1
-                    to: 20
-                    count: 10000
-                    _links:
-                      next:
-                        href: https://api.edamam.com/api/recipes/v2?type=public&q=chicken&_cont=CHcVQ
-                        title: Next page
-                    hits:
-                    - recipe:
-                        uri: http://www.edamam.com/ontologies/edamam.owl#recipe_abc123
-                        label: Chicken Vesuvio
-                        image: https://edamam-product-images.s3.amazonaws.com/web-img/chicken-vesuvio.jpg
-                        source: Serious Eats
-                        url: https://www.seriouseats.com/recipes/chicken-vesuvio.html
-                        yield: 4
-                        dietLabels:
-                        - Low-Carb
-                        healthLabels:
-                        - Sugar-Conscious
-                        - Dairy-Free
-                        cautions:
-                        - Sulfites
-                        ingredientLines:
-                        - 1 whole chicken cut into pieces
-                        - 4 russet potatoes
-                        - 1 cup white wine
-                        calories: 4228.79
-                        totalWeight: 2249.6
-                        totalTime: 60
-                        cuisineType:
-                        - italian
-                        mealType:
-                        - lunch/dinner
-                        dishType:
-                        - main course
-                      _links:
-                        self:
-                          href: https://api.edamam.com/api/recipes/v2/abc123?type=public
-                          title: Self
-        '401':
-          $ref: '#/components/responses/Unauthorized'
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
-  /api/recipes/v2/{id}:
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: A list of errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+        '403':
+          description: A list of errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+      operationId: getApiRecipesV2
+      x-operation-id-source: derived
+  /api/recipes/v2/by-uri:
     get:
-      summary: Edamam Get Recipe by ID
-      description: Retrieve a single recipe record by its Edamam recipe identifier, returning the full recipe object including nutrition, labels, and ingredients.
-      operationId: getRecipeById
       tags:
       - Recipe Search
+      security:
+      - app_id: []
+        app_key: []
+        Edamam-Account-User: []
+      - basic: []
+        Edamam-Account-User: []
+      summary: Lookup Recipe(s) using their URI(s)
+      description: 'Search for recipes by their URI. Note, that the API response doesn''t directly indicate if there are missing
+
+        recipes. Instead, you need to compare he URIs to see if any are missing.'
       parameters:
-      - in: path
-        name: id
-        required: true
-        description: Edamam recipe identifier.
-        schema:
-          type: string
-        example: abc123
-      - in: query
-        name: type
-        required: true
-        description: Recipe access type.
+      - name: type
+        in: query
+        description: This parameter is no longer used. It's kept here for backwards compatibility.
+        required: false
         schema:
           type: string
           enum:
           - public
           - user
-          - any
-          default: public
-        example: public
-      - $ref: '#/components/parameters/AppId'
-      - $ref: '#/components/parameters/AppKey'
+          - edamam-generic
+      - name: beta
+        in: query
+        description: Allow beta features in the request and response
+        schema:
+          type: boolean
+      - name: uri
+        in: query
+        description: Recipe URIs - up to 20
+        required: true
+        explode: true
+        schema:
+          type: array
+          minItems: 1
+          maxItems: 20
+          items:
+            type: string
+      - name: field
+        in: query
+        description: Recipe fields to be included in the response.
+        explode: true
+        schema:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+            - uri
+            - label
+            - image
+            - images
+            - source
+            - url
+            - shareAs
+            - yield
+            - dietLabels
+            - healthLabels
+            - cautions
+            - ingredientLines
+            - ingredients
+            - calories
+            - glycemicIndex
+            - inflammatoryIndex
+            - totalCO2Emissions
+            - co2EmissionsClass
+            - totalWeight
+            - totalTime
+            - cuisineType
+            - mealType
+            - dishType
+            - totalNutrients
+            - totalDaily
+            - digest
+            - tags
+            - externalId
+      - name: Accept-Language
+        description: Search recipes in the specified language.
+        in: header
+        schema:
+          type: string
+          default: en
       responses:
         '200':
-          description: Single recipe record
+          description: A list of recipes
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: The localization language.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/RecipeHit'
-              examples:
-                GetRecipeById200Example:
-                  summary: Default getRecipeById 200 response
-                  x-microcks-default: true
-                  value:
-                    recipe:
-                      uri: http://www.edamam.com/ontologies/edamam.owl#recipe_abc123
-                      label: Chicken Vesuvio
-                      image: https://edamam-product-images.s3.amazonaws.com/web-img/chicken-vesuvio.jpg
-                      source: Serious Eats
-                      url: https://www.seriouseats.com/recipes/chicken-vesuvio.html
-                      yield: 4
-                      dietLabels:
-                      - Low-Carb
-                      healthLabels:
-                      - Sugar-Conscious
-                      - Dairy-Free
-                      cautions:
-                      - Sulfites
-                      ingredientLines:
-                      - 1 whole chicken cut into pieces
-                      - 4 russet potatoes
-                      calories: 4228.79
-                      totalWeight: 2249.6
-                      totalTime: 60
-                      cuisineType:
-                      - italian
-                      mealType:
-                      - lunch/dinner
-                      dishType:
-                      - main course
-                    _links:
-                      self:
-                        href: https://api.edamam.com/api/recipes/v2/abc123?type=public
-                        title: Self
-        '401':
-          $ref: '#/components/responses/Unauthorized'
+                $ref: '#/components/schemas/Response'
+        '400':
+          description: A list of errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+        '403':
+          description: A list of errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+      operationId: getApiRecipesV2ByUri
+      x-operation-id-source: derived
+  /api/recipes/v2/{id}:
+    get:
+      tags:
+      - Recipe Search
+      security:
+      - app_id: []
+        app_key: []
+        Edamam-Account-User: []
+      - basic: []
+        Edamam-Account-User: []
+      summary: Lookup a Specific Recipe by ID
+      description: 'Returns the nutritional information for given recipe. These requests are constructed automatically and can
+
+        be found in `hits[]._links.self.href`.'
+      parameters:
+      - name: id
+        in: path
+        description: The recipe ID
+        schema:
+          type: string
+        required: true
+      - name: type
+        in: query
+        description: This parameter is no longer used. It's kept here for backwards compatibility.
+        required: true
+        schema:
+          type: string
+          enum:
+          - public
+          - user
+          - edamam-generic
+      - name: beta
+        in: query
+        description: Allow beta features in response.
+        schema:
+          type: boolean
+      - name: field
+        in: query
+        description: Recipe fields to be included in the response.
+        explode: true
+        schema:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+            - uri
+            - label
+            - image
+            - images
+            - source
+            - url
+            - shareAs
+            - yield
+            - dietLabels
+            - healthLabels
+            - cautions
+            - ingredientLines
+            - ingredients
+            - calories
+            - glycemicIndex
+            - inflammatoryIndex
+            - totalCO2Emissions
+            - co2EmissionsClass
+            - totalWeight
+            - totalTime
+            - cuisineType
+            - mealType
+            - dishType
+            - totalNutrients
+            - totalDaily
+            - digest
+            - tags
+            - externalId
+      - name: Accept-Language
+        description: Search recipes in the specified language.
+        in: header
+        schema:
+          type: string
+          default: en
+      responses:
+        '200':
+          description: Recipe info
+          headers:
+            Content-Language:
+              schema:
+                type: string
+              description: The localization language.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hit'
+        '400':
+          description: A list of errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+        '403':
+          description: A list of errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
         '404':
-          description: Recipe not found
-      x-microcks-operation:
-        delay: 0
-        dispatcher: FALLBACK
+          description: A list of errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+      operationId: getApiRecipesV2ById
+      x-operation-id-source: derived
 components:
   schemas:
-    Recipe:
-      type: object
+    ImageInfo:
       properties:
-        uri:
-          type: string
-          example: http://www.edamam.com/ontologies/edamam.owl#recipe_abc123
-        label:
-          type: string
-          example: Chicken Vesuvio
-        image:
-          type: string
-          format: uri
-          example: https://edamam-product-images.s3.amazonaws.com/web-img/chicken-vesuvio.jpg
-        source:
-          type: string
-          example: Serious Eats
         url:
           type: string
-          format: uri
-          example: https://www.seriouseats.com/recipes/chicken-vesuvio.html
-        yield:
-          type: number
-          example: 4
-        dietLabels:
-          type: array
-          items:
-            type: string
-          example:
-          - Low-Carb
-        healthLabels:
-          type: array
-          items:
-            type: string
-          example:
-          - Sugar-Conscious
-          - Dairy-Free
-        cautions:
-          type: array
-          items:
-            type: string
-          example:
-          - Sulfites
-        ingredientLines:
-          type: array
-          items:
-            type: string
-          example:
-          - 1 whole chicken cut into pieces
-          - 4 russet potatoes
-          - 1 cup white wine
-        ingredients:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
-        calories:
-          type: number
-          example: 4228.79
-        totalWeight:
-          type: number
-          example: 2249.6
-        totalTime:
-          type: number
-          example: 60
-        cuisineType:
-          type: array
-          items:
-            type: string
-          example:
-          - italian
-        mealType:
-          type: array
-          items:
-            type: string
-          example:
-          - lunch/dinner
-        dishType:
-          type: array
-          items:
-            type: string
-          example:
-          - main course
-        totalNutrients:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Nutrient'
-        totalDaily:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Nutrient'
-    Nutrient:
-      type: object
+        width:
+          type: integer
+        height:
+          type: integer
+    NutrientInfo:
       properties:
         label:
           type: string
-          example: Energy
         quantity:
           type: number
-          example: 4228.79
         unit:
           type: string
-          example: kcal
-    RecipeSearchResponse:
-      type: object
+    NutrientsInfo:
+      additionalProperties:
+        $ref: '#/components/schemas/NutrientInfo'
+    Error:
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        params:
+          type: array
+          items:
+            type: string
+    Response:
       properties:
         from:
           type: integer
-          example: 1
         to:
           type: integer
-          example: 20
         count:
           type: integer
-          example: 10000
         _links:
-          type: object
-          additionalProperties: true
+          $ref: '#/components/schemas/Links'
         hits:
           type: array
           items:
-            $ref: '#/components/schemas/RecipeHit'
-    RecipeHit:
-      type: object
+            $ref: '#/components/schemas/Hit'
+    DigestEntry:
+      properties:
+        label:
+          type: string
+        tag:
+          type: string
+        schemaOrgTag:
+          type: string
+        total:
+          type: number
+        hasRDI:
+          type: boolean
+        daily:
+          type: number
+        unit:
+          type: string
+        sub:
+          $ref: '#/components/schemas/Digest'
+    Links:
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        next:
+          $ref: '#/components/schemas/Link'
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
+    Link:
+      properties:
+        href:
+          type: string
+        title:
+          type: string
+    Hit:
       properties:
         recipe:
           $ref: '#/components/schemas/Recipe'
         _links:
-          type: object
-          additionalProperties: true
-    Error:
-      type: object
+          $ref: '#/components/schemas/Links'
+    Digest:
+      type: array
+      items:
+        $ref: '#/components/schemas/DigestEntry'
+    Recipe:
       properties:
-        error:
+        uri:
           type: string
-          example: unauthorized
-        message:
+        label:
           type: string
-          example: Invalid app_id or app_key
-  parameters:
-    AppId:
+        image:
+          type: string
+        images:
+          properties:
+            THUMBNAIL:
+              $ref: '#/components/schemas/ImageInfo'
+            SMALL:
+              $ref: '#/components/schemas/ImageInfo'
+            REGULAR:
+              $ref: '#/components/schemas/ImageInfo'
+            LARGE:
+              $ref: '#/components/schemas/ImageInfo'
+        source:
+          type: string
+        url:
+          type: string
+        shareAs:
+          type: string
+        yield:
+          type: number
+        dietLabels:
+          type: array
+          items:
+            type: string
+        healthLabels:
+          type: array
+          items:
+            type: string
+        cautions:
+          type: array
+          items:
+            type: string
+        ingredientLines:
+          type: array
+          items:
+            type: string
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredient'
+        calories:
+          type: number
+        glycemicIndex:
+          type: number
+        inflammatoryIndex:
+          type: number
+        totalCO2Emissions:
+          type: number
+        co2EmissionsClass:
+          type: string
+          enum:
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        totalWeight:
+          type: number
+        cuisineType:
+          type: array
+          items:
+            type: string
+        mealType:
+          type: array
+          items:
+            type: string
+        dishType:
+          type: array
+          items:
+            type: string
+        instructionLines:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            type: string
+        externalId:
+          type: string
+        totalNutrients:
+          $ref: '#/components/schemas/NutrientsInfo'
+        totalDaily:
+          $ref: '#/components/schemas/NutrientsInfo'
+        digest:
+          $ref: '#/components/schemas/Digest'
+    Ingredient:
+      properties:
+        text:
+          type: string
+        quantity:
+          type: number
+        measure:
+          type: string
+        food:
+          type: string
+        weight:
+          type: number
+        foodId:
+          type: string
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+    app_id:
+      type: apiKey
       in: query
       name: app_id
-      required: true
-      description: Application identifier from the Edamam developer dashboard.
-      schema:
-        type: string
-      example: 1234abcd
-    AppKey:
-      in: query
-      name: app_key
-      required: true
-      description: Application key from the Edamam developer dashboard.
-      schema:
-        type: string
-      example: 0123456789abcdef0123456789abcdef
-  responses:
-    Unauthorized:
-      description: Invalid or missing app_id / app_key
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-          examples:
-            Unauthorized401Example:
-              summary: Default unauthorized response
-              x-microcks-default: true
-              value:
-                error: unauthorized
-                message: Invalid app_id or app_key
-  securitySchemes:
-    AppCreds:
+      description: The application ID, obtained from the account dashboard, https://developer.edamam.com/admin/applications.
+    app_key:
       type: apiKey
       in: query
       name: app_key
-      description: App key issued by Edamam. Must be sent with the matching `app_id` query parameter.
+      description: The application key, obtained from the account dashboard, https://developer.edamam.com/admin/applications.
+    Edamam-Account-User:
+      type: apiKey
+      in: header
+      name: Edamam-Account-User
+      description: ID of the account user. Should be used *only* if the account is configured for active user tracking.

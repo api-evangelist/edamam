@@ -1,0 +1,241 @@
+openapi: 3.2.0
+info:
+  version: '2.9'
+  title: Recipe Search Shopping List API
+  description: 'The *Shopping List API* provides aggregation of shopping item quantities over one or more ingredient lists, and
+
+    optional referral to external shopping services.
+
+
+    A `shopping-list` call may be issued on a recipe preparation plan, e.g. for recipes assigned to a meal plan''s
+
+    slots, to obtain total shopping quantities for the products involved. Each item in the plan may be scaled
+
+    individually for the shopping list by indicating the planned consumption as a number of servings; in the absence
+
+    of such indication, consumption (and therefore preparation) of the complete output of the recipe will be assumed.
+
+    Both recipes and directly consumable foodstuffs are supported as items in the plan.'
+servers:
+- url: https://api.edamam.com
+tags:
+- name: Shopping List
+  description: 'The *Shopping List API* provides aggregation of shopping item quantities over one or more ingredient lists, and
+
+    optional referral to external shopping services.
+
+
+    A `shopping-list` call may be issued on a recipe preparation plan, e.g. for recipes assigned to a meal plan''s
+
+    slots, to obtain total shopping quantities for the products involved. Each item in the plan may be scaled
+
+    individually for the shopping list by indicating the planned consumption as a number of servings; in the absence
+
+    of such indication, consumption (and therefore preparation) of the complete output of the recipe will be assumed.
+
+    Both recipes and directly consumable foodstuffs are supported as items in the plan.'
+paths:
+  /api/shopping-list/v2:
+    post:
+      tags:
+      - Shopping List
+      summary: Create shopping list from total meal quantities
+      parameters:
+      - name: beta
+        in: query
+        schema:
+          type: boolean
+        description: Turn on support for beta features
+      - name: shopping-cart
+        in: query
+        required: false
+        schema:
+          type: boolean
+        description: (BETA only) Generate a shopping cart page for the the foods aggregated in the shopping list
+      requestBody:
+        description: Meal quantities
+        content:
+          application/json:
+            schema:
+              properties:
+                entries:
+                  description: Recipe preparation plan, as product quantity required for each given recipe
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/RecipeEntry'
+            examples:
+              Recipe preparation plan, by servings:
+                $ref: '#/components/examples/Recipe_preparation_plan_-_by_servings'
+              Recipe preparation plan, by total quantity:
+                $ref: '#/components/examples/Recipe_preparation_plan_-_by_total_quantity'
+      responses:
+        200:
+          description: Shopping list generated successfully
+          content:
+            application/json:
+              schema:
+                properties:
+                  entries:
+                    description: Aggregated ingredient quantities.
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ShoppingEntry'
+                  _links:
+                    description: Links to resources related to the generated shopping list
+                    type: object
+                    properties:
+                      shopping-cart:
+                        allOf:
+                        - description: (BETA only) Shopping cart link
+                        - $ref: '#/components/schemas/LinkEntry'
+              examples:
+                Shopping list:
+                  $ref: '#/components/examples/Shopping_list'
+        400:
+          description: Malformed or invalid request
+      security:
+      - app_id: []
+        app_key: []
+        Edamam-Account-User: []
+      - basic: []
+        Edamam-Account-User: []
+      operationId: postApiShoppingListV2
+      x-operation-id-source: derived
+components:
+  schemas:
+    RecipeEntry:
+      type: object
+      required:
+      - quantity
+      - item
+      properties:
+        quantity:
+          description: 'Total quantity of the specified recipe''s product that will be prepared, in given units of measure (see `measure`)
+
+            '
+          type: number
+        measure:
+          description: 'Unit of measure (URI) for the total quantity; if omitted, the unit is the total quantity of a single preparation of the given recipe
+
+            '
+          type: string
+          enum:
+          - http://www.edamam.com/ontologies/edamam.owl#Measure_serving
+        item:
+          description: Item (recipe of food) URI
+          type: string
+    ShoppingEntry:
+      type: object
+      properties:
+        foodId:
+          description: Food ID
+          type: string
+        food:
+          description: Food label
+          type: string
+        quantities:
+          description: 'Total quantity required of the specified food item for fulfillment of the requested quantities for the complete recipe preparation plan.  One sub-total is given per each specific shopping measure type.
+
+            '
+          type: array
+          items:
+            type: object
+            required:
+            - quantity
+            - measure
+            properties:
+              quantity:
+                description: Required quantity of the specified units of measure
+                type: number
+              measure:
+                description: Unit of measure (URI)
+                type: string
+              qualifiers:
+                description: Qualifiers applicable to the shopping item, e.g. "large", "small", etc.
+                type: array
+                items:
+                  type: string
+    LinkEntry:
+      type: object
+      required:
+      - href
+      properties:
+        title:
+          description: Human-readable link title
+          type: string
+        href:
+          description: Target URL
+          type: string
+  examples:
+    Recipe_preparation_plan_-_by_servings:
+      value:
+        entries:
+        - quantity: 1
+          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_1
+        - quantity: 3
+          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_2
+        - quantity: 2
+          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_3
+    Recipe_preparation_plan_-_by_total_quantity:
+      value:
+        entries:
+        - quantity: 1
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_1
+        - quantity: 1
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_2
+        - quantity: 2
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_3
+    Shopping_list:
+      value:
+        entries:
+        - foodId: food_abcdefghijklmnoprqstuvwxyzab
+          food: ABC
+          quantities:
+          - quantity: 2
+            measure: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
+            qualifiers:
+            - large
+          - quantity: 5
+            measure: http://www.edamam.com/ontologies/edamam.owl#Measure_unit
+        - foodId: food_defghijklmnoprqstuvwxyzabcde
+          food: DEF
+          quantities:
+          - quantity: 1500
+            measure: http://www.edamam.com/ontologies/edamam.owl#Measure_milliliter
+        - foodId: food_ghijklmnoprqstuvwxyzabcdefgh
+          food: GHI
+          quantities:
+          - quantity: 120
+            measure: http://www.edamam.com/ontologies/edamam.owl#Measure_milliliter
+        - foodId: food_jklmnoprqstuvwxyzabcdefghijk
+          food: JKL
+          quantities:
+          - quantity: 230
+            measure: http://www.edamam.com/ontologies/edamam.owl#Measure_gram
+        - foodId: food_xyzabcdefghijklmnoprqstuvwxy
+          food: XYZ
+          quantities:
+          - quantity: 300
+            measure: http://www.edamam.com/ontologies/edamam.owl#Measure_gram
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+    app_id:
+      type: apiKey
+      in: query
+      name: app_id
+      description: The application ID, obtained from the account dashboard, https://developer.edamam.com/admin/applications.
+    app_key:
+      type: apiKey
+      in: query
+      name: app_key
+      description: The application key, obtained from the account dashboard, https://developer.edamam.com/admin/applications.
+    Edamam-Account-User:
+      type: apiKey
+      in: header
+      name: Edamam-Account-User
+      description: ID of the account user. Should be used *only* if the account is configured for active user tracking.
