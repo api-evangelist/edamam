@@ -5,7 +5,7 @@
       "source": "https://www.edamam.com/blog/",
       "feed_url": "https://www.edamam.com/blog/feed/",
       "title": "",
-      "saved": 1,
+      "saved": 0,
       "method": "discovered"
     },
     {
@@ -16,6 +16,6 @@
       "method": "feed"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-10-10T13:15:00Z"
+  "post_count": 5,
+  "fetched": "2026-10-17T14:53:57Z"
 }

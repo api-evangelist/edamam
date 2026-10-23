@@ -150,6 +150,8 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.23'
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/edamam/overview
   - url: https://www.edamam.com/blog/
     type: Blog
   - url: https://www.edamam.com/blog/feed/
