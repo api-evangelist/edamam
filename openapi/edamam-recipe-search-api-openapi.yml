@@ -1239,3 +1239,9 @@ components:
       in: header
       name: Edamam-Account-User
       description: ID of the account user. Should be used *only* if the account is configured for active user tracking.
+x-provenance:
+  method: harvested
+  publisher: Edamam
+  source: https://api.edamam.com/doc/open-api/recipe-search-v2.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
