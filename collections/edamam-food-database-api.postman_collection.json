@@ -1,478 +1,521 @@
 {
+  "info": {
+    "_postman_id": "1e916709-a2f8-4028-a2db-62a6990fcdc0",
+    "name": "Edamam Food and Grocery Database Food Database API",
+    "description": "REST API for the Edamam Food and Grocery Database. Search a database of\nclose to 900,000 generic foods, branded packaged foods, and over 680,000\nunique UPC/barcode entries by keyword, food name, or barcode, then resolve\nfull nutrition for a given food, quantity, and measure. Requests are\nauthenticated with `app_id` and `app_key` query parameters issued from the\nEdamam developer dashboard. This specification is a best-effort,\ndocumentation-derived description and may omit fields.\n\nContact Support:\n Name: Edamam",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:18:31.000Z",
+    "updatedAt": "2026-10-22T01:18:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1e916709-a2f8-4028-a2db-62a6990fcdc0"
+  },
   "item": [
     {
-      "id": "48a6238e-d84c-4898-8d74-fe98d33722aa",
-      "name": "Food Database",
-      "description": {
-        "content": "Search foods by keyword or barcode and resolve nutrition.",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "6f0b4835-b423-4383-94c9-130b42c2fbd6",
-          "name": "Edamam Search Foods by Keyword or Barcode",
-          "request": {
-            "name": "Edamam Search Foods by Keyword or Barcode",
-            "description": {
-              "content": "Search the food and grocery database by keyword, food name, or UPC/EAN barcode. Returns a parsed top match plus a ranked list of hints, each including the food record and its available measures and qualifiers.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "food-database",
-                "v2",
-                "parser"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "app_id",
-                  "value": "<string>",
-                  "description": "(Required) Application identifier from the Edamam developer dashboard."
-                },
-                {
-                  "disabled": false,
-                  "key": "app_key",
-                  "value": "<string>",
-                  "description": "(Required) Application key from the Edamam developer dashboard."
-                },
-                {
-                  "disabled": false,
-                  "key": "ingr",
-                  "value": "<string>",
-                  "description": "Food keyword or name to search for."
-                },
-                {
-                  "disabled": false,
-                  "key": "upc",
-                  "value": "<string>",
-                  "description": "UPC/EAN barcode to look up."
-                },
-                {
-                  "disabled": false,
-                  "key": "category",
-                  "value": "<string>",
-                  "description": "Filter results by food category."
-                },
-                {
-                  "disabled": false,
-                  "key": "categoryLabel",
-                  "value": "<string>",
-                  "description": "Broader category filter."
-                },
-                {
-                  "disabled": false,
-                  "key": "nutrition-type",
-                  "value": "<string>",
-                  "description": "Nutrient profile to apply to returned foods."
-                },
-                {
-                  "disabled": false,
-                  "key": "health",
-                  "value": "<string>",
-                  "description": "Health label filter (repeatable)."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "Active user identifier for tracking (required when account tracking is enabled).",
-                "key": "Edamam-Account-User",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "food-database",
+          "item": [
             {
-              "id": "8d0210bf-4a20-4662-a7be-0e67c7cf3c5d",
-              "name": "Parsed match and ranked hints",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "food-database",
-                    "v2",
-                    "parser"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+              "name": "v2",
+              "item": [
+                {
+                  "name": "parser",
+                  "item": [
                     {
-                      "key": "app_id",
-                      "value": "1234abcd"
-                    },
-                    {
-                      "key": "app_key",
-                      "value": "0123456789abcdef0123456789abcdef"
-                    },
-                    {
-                      "key": "ingr",
-                      "value": "apple"
-                    },
-                    {
-                      "key": "upc",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "category",
-                      "value": "generic-foods"
-                    },
-                    {
-                      "key": "categoryLabel",
-                      "value": "food"
-                    },
-                    {
-                      "key": "nutrition-type",
-                      "value": "cooking"
-                    },
-                    {
-                      "key": "health",
-                      "value": "vegan"
-                    },
-                    {
-                      "key": "app_key",
-                      "value": "<API Key>"
+                      "name": "Edamam Search Foods by Keyword or Barcode",
+                      "id": "43c7c59f-ae0b-4d84-966e-b5cc453fb9de",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Active user identifier for tracking (required when account tracking is enabled).",
+                            "key": "Edamam-Account-User",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/food-database/v2/parser?app_id=<string>&app_key=<string>&ingr=<string>&upc=<string>&category=packaged-foods&categoryLabel=meal&nutrition-type=logging&health=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "food-database",
+                            "v2",
+                            "parser"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Application identifier from the Edamam developer dashboard.",
+                              "key": "app_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Application key from the Edamam developer dashboard.",
+                              "key": "app_key",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Food keyword or name to search for.",
+                              "key": "ingr",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "UPC/EAN barcode to look up.",
+                              "key": "upc",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter results by food category.",
+                              "key": "category",
+                              "value": "packaged-foods"
+                            },
+                            {
+                              "description": "Broader category filter.",
+                              "key": "categoryLabel",
+                              "value": "meal"
+                            },
+                            {
+                              "description": "Nutrient profile to apply to returned foods.",
+                              "key": "nutrition-type",
+                              "value": "logging"
+                            },
+                            {
+                              "description": "Health label filter (repeatable).",
+                              "key": "health",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "Search the food and grocery database by keyword, food name, or UPC/EAN barcode. Returns a parsed top match plus a ranked list of hints, each including the food record and its available measures and qualifiers."
+                      },
+                      "response": [
+                        {
+                          "id": "26a63d02-282c-4e3f-aab4-dac1ae3c72fd",
+                          "name": "Parsed match and ranked hints",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Active user identifier for tracking (required when account tracking is enabled).",
+                                "key": "Edamam-Account-User",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/food-database/v2/parser?app_id=<string>&app_key=<API Key>&ingr=<string>&upc=<string>&category=packaged-foods&categoryLabel=meal&nutrition-type=logging&health=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "food-database",
+                                "v2",
+                                "parser"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Application identifier from the Edamam developer dashboard.",
+                                  "key": "app_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) Application key from the Edamam developer dashboard.",
+                                  "key": "app_key",
+                                  "value": "<API Key>"
+                                },
+                                {
+                                  "description": "Food keyword or name to search for.",
+                                  "key": "ingr",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "UPC/EAN barcode to look up.",
+                                  "key": "upc",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter results by food category.",
+                                  "key": "category",
+                                  "value": "packaged-foods"
+                                },
+                                {
+                                  "description": "Broader category filter.",
+                                  "key": "categoryLabel",
+                                  "value": "meal"
+                                },
+                                {
+                                  "description": "Nutrient profile to apply to returned foods.",
+                                  "key": "nutrition-type",
+                                  "value": "logging"
+                                },
+                                {
+                                  "description": "Health label filter (repeatable).",
+                                  "key": "health",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"text\": \"<string>\",\n  \"parsed\": [\n    {\n      \"food\": {\n        \"foodId\": \"<string>\",\n        \"label\": \"<string>\",\n        \"knownAs\": \"<string>\",\n        \"nutrients\": {\n          \"adipisicingd_\": \"<number>\",\n          \"sintb\": \"<number>\"\n        },\n        \"category\": \"<string>\",\n        \"categoryLabel\": \"<string>\",\n        \"image\": \"<uri>\"\n      }\n    },\n    {\n      \"food\": {\n        \"foodId\": \"<string>\",\n        \"label\": \"<string>\",\n        \"knownAs\": \"<string>\",\n        \"nutrients\": {\n          \"ex_0b5\": \"<number>\",\n          \"voluptate1_4\": \"<number>\",\n          \"adipisicing93\": \"<number>\",\n          \"ex_8c5\": \"<number>\"\n        },\n        \"category\": \"<string>\",\n        \"categoryLabel\": \"<string>\",\n        \"image\": \"<uri>\"\n      }\n    }\n  ],\n  \"hints\": [\n    {\n      \"food\": {\n        \"foodId\": \"<string>\",\n        \"label\": \"<string>\",\n        \"knownAs\": \"<string>\",\n        \"nutrients\": {\n          \"Lorem_4d8\": \"<number>\"\n        },\n        \"category\": \"<string>\",\n        \"categoryLabel\": \"<string>\",\n        \"image\": \"<uri>\"\n      },\n      \"measures\": [\n        {\n          \"uri\": \"<string>\",\n          \"label\": \"<string>\",\n          \"weight\": \"<number>\"\n        },\n        {\n          \"uri\": \"<string>\",\n          \"label\": \"<string>\",\n          \"weight\": \"<number>\"\n        }\n      ]\n    },\n    {\n      \"food\": {\n        \"foodId\": \"<string>\",\n        \"label\": \"<string>\",\n        \"knownAs\": \"<string>\",\n        \"nutrients\": {\n          \"eiusmod_995\": \"<number>\",\n          \"aute_2\": \"<number>\"\n        },\n        \"category\": \"<string>\",\n        \"categoryLabel\": \"<string>\",\n        \"image\": \"<uri>\"\n      },\n      \"measures\": [\n        {\n          \"uri\": \"<string>\",\n          \"label\": \"<string>\",\n          \"weight\": \"<number>\"\n        },\n        {\n          \"uri\": \"<string>\",\n          \"label\": \"<string>\",\n          \"weight\": \"<number>\"\n        }\n      ]\n    }\n  ],\n  \"_links\": {\n    \"ind\": true,\n    \"magnae3a\": \"ipsum sunt occaecat sit\"\n  }\n}",
+                          "createdAt": "2026-10-22T01:18:32.000Z",
+                          "updatedAt": "2026-10-22T01:18:32.000Z",
+                          "uid": "35240-26a63d02-282c-4e3f-aab4-dac1ae3c72fd"
+                        },
+                        {
+                          "id": "91b009e6-d978-4db5-95a1-8c451a19503c",
+                          "name": "Invalid or missing app_id / app_key",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Active user identifier for tracking (required when account tracking is enabled).",
+                                "key": "Edamam-Account-User",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/food-database/v2/parser?app_id=<string>&app_key=<API Key>&ingr=<string>&upc=<string>&category=packaged-foods&categoryLabel=meal&nutrition-type=logging&health=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "food-database",
+                                "v2",
+                                "parser"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Application identifier from the Edamam developer dashboard.",
+                                  "key": "app_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) Application key from the Edamam developer dashboard.",
+                                  "key": "app_key",
+                                  "value": "<API Key>"
+                                },
+                                {
+                                  "description": "Food keyword or name to search for.",
+                                  "key": "ingr",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "UPC/EAN barcode to look up.",
+                                  "key": "upc",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter results by food category.",
+                                  "key": "category",
+                                  "value": "packaged-foods"
+                                },
+                                {
+                                  "description": "Broader category filter.",
+                                  "key": "categoryLabel",
+                                  "value": "meal"
+                                },
+                                {
+                                  "description": "Nutrient profile to apply to returned foods.",
+                                  "key": "nutrition-type",
+                                  "value": "logging"
+                                },
+                                {
+                                  "description": "Health label filter (repeatable).",
+                                  "key": "health",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:18:32.000Z",
+                          "updatedAt": "2026-10-22T01:18:32.000Z",
+                          "uid": "35240-91b009e6-d978-4db5-95a1-8c451a19503c"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:18:32.000Z",
+                      "updatedAt": "2026-10-22T01:18:32.000Z",
+                      "uid": "35240-43c7c59f-ae0b-4d84-966e-b5cc453fb9de"
                     }
                   ],
-                  "variable": []
+                  "id": "87dbb5ab-4953-4ce3-8d00-be4ce86d6819",
+                  "createdAt": "2026-10-22T01:18:32.000Z",
+                  "updatedAt": "2026-10-22T01:18:32.000Z",
+                  "uid": "35240-87dbb5ab-4953-4ce3-8d00-be4ce86d6819"
                 },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "Active user identifier for tracking (required when account tracking is enabled).",
-                    "key": "Edamam-Account-User",
-                    "value": "user-12345"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"text\": \"apple\",\n  \"parsed\": [\n    {\n      \"food\": {\n        \"foodId\": \"food_bpdj2labtmnvf2a8tk4nqa1y9pty\",\n        \"label\": \"Apple\",\n        \"knownAs\": \"apple\",\n        \"nutrients\": {\n          \"ENERC_KCAL\": 52,\n          \"PROCNT\": 0.26,\n          \"FAT\": 0.17,\n          \"CHOCDF\": 13.81\n        },\n        \"category\": \"Generic foods\",\n        \"categoryLabel\": \"food\",\n        \"image\": \"https://www.edamam.com/food-img/apple.jpg\"\n      }\n    }\n  ],\n  \"hints\": [\n    {\n      \"food\": {\n        \"foodId\": \"food_bpdj2labtmnvf2a8tk4nqa1y9pty\",\n        \"label\": \"Apple\",\n        \"knownAs\": \"apple\",\n        \"nutrients\": {\n          \"ENERC_KCAL\": 52\n        },\n        \"category\": \"Generic foods\",\n        \"categoryLabel\": \"food\",\n        \"image\": \"https://www.edamam.com/food-img/apple.jpg\"\n      },\n      \"measures\": [\n        {\n          \"uri\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_unit\",\n          \"label\": \"Whole\",\n          \"weight\": 182\n        }\n      ]\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "14dce005-8edd-4820-814b-b694d704bc7f",
-              "name": "Invalid or missing app_id / app_key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "food-database",
-                    "v2",
-                    "parser"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+                  "name": "nutrients",
+                  "item": [
                     {
-                      "key": "app_id",
-                      "value": "1234abcd"
-                    },
-                    {
-                      "key": "app_key",
-                      "value": "0123456789abcdef0123456789abcdef"
-                    },
-                    {
-                      "key": "ingr",
-                      "value": "apple"
-                    },
-                    {
-                      "key": "upc",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "category",
-                      "value": "generic-foods"
-                    },
-                    {
-                      "key": "categoryLabel",
-                      "value": "food"
-                    },
-                    {
-                      "key": "nutrition-type",
-                      "value": "cooking"
-                    },
-                    {
-                      "key": "health",
-                      "value": "vegan"
-                    },
-                    {
-                      "key": "app_key",
-                      "value": "<API Key>"
+                      "name": "Edamam Resolve Nutrients for Selected Foods",
+                      "id": "82f4f501-eca2-492f-b11e-6132482aac82",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Active user identifier for tracking.",
+                            "key": "Edamam-Account-User",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"ingredients\": [\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"foodId\": \"<string>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"foodId\": \"<string>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/food-database/v2/nutrients?app_id=<string>&app_key=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "food-database",
+                            "v2",
+                            "nutrients"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) Application identifier from the Edamam developer dashboard.",
+                              "key": "app_id",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "(Required) Application key from the Edamam developer dashboard.",
+                              "key": "app_key",
+                              "value": "<string>"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve the full nutrient breakdown for one or more foods at specific quantities and measures, using the `foodId` and `measureURI` values returned by the parser endpoint."
+                      },
+                      "response": [
+                        {
+                          "id": "b3671164-257f-4f23-b1a3-bb65da16e6ec",
+                          "name": "Full nutrient breakdown for the requested foods",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Active user identifier for tracking.",
+                                "key": "Edamam-Account-User",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"ingredients\": [\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"foodId\": \"<string>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"foodId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/food-database/v2/nutrients?app_id=<string>&app_key=<API Key>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "food-database",
+                                "v2",
+                                "nutrients"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Application identifier from the Edamam developer dashboard.",
+                                  "key": "app_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) Application key from the Edamam developer dashboard.",
+                                  "key": "app_key",
+                                  "value": "<API Key>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"uri\": \"<string>\",\n  \"calories\": \"<integer>\",\n  \"totalWeight\": \"<number>\",\n  \"dietLabels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"healthLabels\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"totalNutrients\": {\n    \"minim_50c\": {\n      \"label\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit\": \"<string>\"\n    },\n    \"deserunt4d\": {\n      \"label\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit\": \"<string>\"\n    },\n    \"elit_1\": {\n      \"label\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit\": \"<string>\"\n    },\n    \"enim_f9f\": {\n      \"label\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit\": \"<string>\"\n    }\n  },\n  \"totalDaily\": {\n    \"nonfd\": {\n      \"label\": \"<string>\",\n      \"quantity\": \"<number>\",\n      \"unit\": \"<string>\"\n    }\n  }\n}",
+                          "createdAt": "2026-10-22T01:18:32.000Z",
+                          "updatedAt": "2026-10-22T01:18:32.000Z",
+                          "uid": "35240-b3671164-257f-4f23-b1a3-bb65da16e6ec"
+                        },
+                        {
+                          "id": "bdc0ec0c-206a-4995-9da6-6647594e2a48",
+                          "name": "Invalid or missing app_id / app_key",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "Active user identifier for tracking.",
+                                "key": "Edamam-Account-User",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"ingredients\": [\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"foodId\": \"<string>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"foodId\": \"<string>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/food-database/v2/nutrients?app_id=<string>&app_key=<API Key>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "food-database",
+                                "v2",
+                                "nutrients"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) Application identifier from the Edamam developer dashboard.",
+                                  "key": "app_id",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) Application key from the Edamam developer dashboard.",
+                                  "key": "app_key",
+                                  "value": "<API Key>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T01:18:32.000Z",
+                          "updatedAt": "2026-10-22T01:18:32.000Z",
+                          "uid": "35240-bdc0ec0c-206a-4995-9da6-6647594e2a48"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T01:18:32.000Z",
+                      "updatedAt": "2026-10-22T01:18:32.000Z",
+                      "uid": "35240-82f4f501-eca2-492f-b11e-6132482aac82"
                     }
                   ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "Active user identifier for tracking (required when account tracking is enabled).",
-                    "key": "Edamam-Account-User",
-                    "value": "user-12345"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "ccbb7b9c-7bec-48d6-badd-8e0a04121b0e",
+                  "createdAt": "2026-10-22T01:18:32.000Z",
+                  "updatedAt": "2026-10-22T01:18:32.000Z",
+                  "uid": "35240-ccbb7b9c-7bec-48d6-badd-8e0a04121b0e"
                 }
               ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid app_id or app_key\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "376049ca-4eba-42a4-bc89-7ae92743dcc3",
+              "createdAt": "2026-10-22T01:18:32.000Z",
+              "updatedAt": "2026-10-22T01:18:32.000Z",
+              "uid": "35240-376049ca-4eba-42a4-bc89-7ae92743dcc3"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "23d8c79c-678c-425b-8cf6-3863a62a3f6f",
-          "name": "Edamam Resolve Nutrients for Selected Foods",
-          "request": {
-            "name": "Edamam Resolve Nutrients for Selected Foods",
-            "description": {
-              "content": "Retrieve the full nutrient breakdown for one or more foods at specific quantities and measures, using the `foodId` and `measureURI` values returned by the parser endpoint.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "food-database",
-                "v2",
-                "nutrients"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "app_id",
-                  "value": "<string>",
-                  "description": "(Required) Application identifier from the Edamam developer dashboard."
-                },
-                {
-                  "disabled": false,
-                  "key": "app_key",
-                  "value": "<string>",
-                  "description": "(Required) Application key from the Edamam developer dashboard."
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "Active user identifier for tracking.",
-                "key": "Edamam-Account-User",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"ingredients\": [\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"foodId\": \"<string>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"foodId\": \"<string>\"\n    }\n  ]\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "512c86fa-ee76-4b91-99cd-7f93d5ecf37e",
-              "name": "Full nutrient breakdown for the requested foods",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "food-database",
-                    "v2",
-                    "nutrients"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "app_id",
-                      "value": "1234abcd"
-                    },
-                    {
-                      "key": "app_key",
-                      "value": "0123456789abcdef0123456789abcdef"
-                    },
-                    {
-                      "key": "app_key",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "Active user identifier for tracking.",
-                    "key": "Edamam-Account-User",
-                    "value": "user-12345"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"ingredients\": [\n    {\n      \"quantity\": 1,\n      \"measureURI\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_unit\",\n      \"foodId\": \"food_bpdj2labtmnvf2a8tk4nqa1y9pty\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"uri\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_xyz789\",\n  \"calories\": 95,\n  \"totalWeight\": 182,\n  \"dietLabels\": [\n    \"Low-Fat\",\n    \"Low-Sodium\"\n  ],\n  \"healthLabels\": [\n    \"Vegan\",\n    \"Vegetarian\"\n  ],\n  \"totalNutrients\": {\n    \"ENERC_KCAL\": {\n      \"label\": \"Energy\",\n      \"quantity\": 95,\n      \"unit\": \"kcal\"\n    }\n  },\n  \"totalDaily\": {\n    \"ENERC_KCAL\": {\n      \"label\": \"Energy\",\n      \"quantity\": 4.75,\n      \"unit\": \"%\"\n    }\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6ec1da15-7fcd-4194-a715-f8868b0182cf",
-              "name": "Invalid or missing app_id / app_key",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "food-database",
-                    "v2",
-                    "nutrients"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "app_id",
-                      "value": "1234abcd"
-                    },
-                    {
-                      "key": "app_key",
-                      "value": "0123456789abcdef0123456789abcdef"
-                    },
-                    {
-                      "key": "app_key",
-                      "value": "<API Key>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "Active user identifier for tracking.",
-                    "key": "Edamam-Account-User",
-                    "value": "user-12345"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"ingredients\": [\n    {\n      \"quantity\": 1,\n      \"measureURI\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_unit\",\n      \"foodId\": \"food_bpdj2labtmnvf2a8tk4nqa1y9pty\"\n    }\n  ]\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": \"unauthorized\",\n  \"message\": \"Invalid app_id or app_key\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "ab2298ca-44ed-4cb4-a100-879a789efd2c",
+          "createdAt": "2026-10-22T01:18:32.000Z",
+          "updatedAt": "2026-10-22T01:18:32.000Z",
+          "uid": "35240-ab2298ca-44ed-4cb4-a100-879a789efd2c"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://api.edamam.com",
-      "key": "baseUrl"
+      "id": "721edd3a-59ad-42ad-a3c0-283f0a8dff1f",
+      "createdAt": "2026-10-22T01:18:32.000Z",
+      "updatedAt": "2026-10-22T01:18:32.000Z",
+      "uid": "35240-721edd3a-59ad-42ad-a3c0-283f0a8dff1f"
     }
   ],
   "auth": {
@@ -480,25 +523,25 @@
     "apikey": [
       {
         "key": "key",
-        "value": "app_key"
+        "value": "app_key",
+        "type": "string"
       },
       {
         "key": "value",
-        "value": "{{apiKey}}"
+        "value": "{{apiKey}}",
+        "type": "string"
       },
       {
         "key": "in",
-        "value": "query"
+        "value": "query",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "d922f470-34c0-406e-9a83-337f67c2b679",
-    "name": "Edamam Food and Grocery Database Food Database API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "REST API for the Edamam Food and Grocery Database. Search a database of\nclose to 900,000 generic foods, branded packaged foods, and over 680,000\nunique UPC/barcode entries by keyword, food name, or barcode, then resolve\nfull nutrition for a given food, quantity, and measure. Requests are\nauthenticated with `app_id` and `app_key` query parameters issued from the\nEdamam developer dashboard. This specification is a best-effort,\ndocumentation-derived description and may omit fields.\n\n\nContact Support:\n Name: Edamam",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.edamam.com"
     }
-  }
+  ]
 }

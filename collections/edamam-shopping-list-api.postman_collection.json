@@ -1,0 +1,256 @@
+{
+  "info": {
+    "_postman_id": "8a380a5e-c27a-4865-8769-0ce0b4206c7f",
+    "name": "Recipe Search Shopping List API",
+    "description": "The *Shopping List API* provides aggregation of shopping item quantities over one or more ingredient lists, and\noptional referral to external shopping services.\n\nA `shopping-list` call may be issued on a recipe preparation plan, e.g. for recipes assigned to a meal plan's\nslots, to obtain total shopping quantities for the products involved. Each item in the plan may be scaled\nindividually for the shopping list by indicating the planned consumption as a number of servings; in the absence\nof such indication, consumption (and therefore preparation) of the complete output of the recipe will be assumed.\nBoth recipes and directly consumable foodstuffs are supported as items in the plan.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T01:18:37.000Z",
+    "updatedAt": "2026-10-22T01:18:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8a380a5e-c27a-4865-8769-0ce0b4206c7f"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "shopping-list",
+          "item": [
+            {
+              "name": "v2",
+              "item": [
+                {
+                  "name": "Create shopping list from total meal quantities",
+                  "id": "db4644ac-ee8a-4676-8e1e-518e310d3e83",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "apikey",
+                      "apikey": [
+                        {
+                          "key": "key",
+                          "value": "app_id",
+                          "type": "string"
+                        },
+                        {
+                          "key": "value",
+                          "value": "{{apiKey}}",
+                          "type": "string"
+                        },
+                        {
+                          "key": "in",
+                          "value": "query",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"entries\": [\n    {\n      \"quantity\": \"<number>\",\n      \"item\": \"<string>\",\n      \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_serving\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"item\": \"<string>\",\n      \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_serving\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/shopping-list/v2?beta=<boolean>&shopping-cart=<boolean>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "shopping-list",
+                        "v2"
+                      ],
+                      "query": [
+                        {
+                          "description": "Turn on support for beta features",
+                          "key": "beta",
+                          "value": "<boolean>"
+                        },
+                        {
+                          "description": "(BETA only) Generate a shopping cart page for the the foods aggregated in the shopping list",
+                          "key": "shopping-cart",
+                          "value": "<boolean>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "804d1eea-ce51-4da6-8f82-07ec16d02deb",
+                      "name": "Shopping list generated successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"entries\": [\n    {\n      \"quantity\": \"<number>\",\n      \"item\": \"<string>\",\n      \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_serving\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"item\": \"<string>\",\n      \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_serving\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/shopping-list/v2?beta=<boolean>&shopping-cart=<boolean>&app_id=<API Key>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "shopping-list",
+                            "v2"
+                          ],
+                          "query": [
+                            {
+                              "description": "Turn on support for beta features",
+                              "key": "beta",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "(BETA only) Generate a shopping cart page for the the foods aggregated in the shopping list",
+                              "key": "shopping-cart",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Added as a part of security scheme: apikey",
+                              "key": "app_id",
+                              "value": "<API Key>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"entries\": [\n    {\n      \"foodId\": \"<string>\",\n      \"food\": \"<string>\",\n      \"quantities\": [\n        {\n          \"quantity\": \"<number>\",\n          \"measure\": \"<string>\",\n          \"qualifiers\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"quantity\": \"<number>\",\n          \"measure\": \"<string>\",\n          \"qualifiers\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    },\n    {\n      \"foodId\": \"<string>\",\n      \"food\": \"<string>\",\n      \"quantities\": [\n        {\n          \"quantity\": \"<number>\",\n          \"measure\": \"<string>\",\n          \"qualifiers\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        {\n          \"quantity\": \"<number>\",\n          \"measure\": \"<string>\",\n          \"qualifiers\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"_links\": {\n    \"shopping-cart\": {\n      \"href\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-10-22T01:18:38.000Z",
+                      "updatedAt": "2026-10-22T01:18:38.000Z",
+                      "uid": "35240-804d1eea-ce51-4da6-8f82-07ec16d02deb"
+                    },
+                    {
+                      "id": "8c20fa97-33c1-4f08-a95b-969191e94c22",
+                      "name": "Malformed or invalid request",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"entries\": [\n    {\n      \"quantity\": \"<number>\",\n      \"item\": \"<string>\",\n      \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_serving\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"item\": \"<string>\",\n      \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_serving\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/shopping-list/v2?beta=<boolean>&shopping-cart=<boolean>&app_id=<API Key>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "shopping-list",
+                            "v2"
+                          ],
+                          "query": [
+                            {
+                              "description": "Turn on support for beta features",
+                              "key": "beta",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "(BETA only) Generate a shopping cart page for the the foods aggregated in the shopping list",
+                              "key": "shopping-cart",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Added as a part of security scheme: apikey",
+                              "key": "app_id",
+                              "value": "<API Key>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T01:18:38.000Z",
+                      "updatedAt": "2026-10-22T01:18:38.000Z",
+                      "uid": "35240-8c20fa97-33c1-4f08-a95b-969191e94c22"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T01:18:38.000Z",
+                  "updatedAt": "2026-10-22T01:18:38.000Z",
+                  "uid": "35240-db4644ac-ee8a-4676-8e1e-518e310d3e83"
+                }
+              ],
+              "id": "17321b76-9e56-43da-b7ad-6851655fbee4",
+              "createdAt": "2026-10-22T01:18:38.000Z",
+              "updatedAt": "2026-10-22T01:18:38.000Z",
+              "uid": "35240-17321b76-9e56-43da-b7ad-6851655fbee4"
+            }
+          ],
+          "id": "797fc5f3-ec9c-431c-b940-a1a534a32d6f",
+          "createdAt": "2026-10-22T01:18:38.000Z",
+          "updatedAt": "2026-10-22T01:18:38.000Z",
+          "uid": "35240-797fc5f3-ec9c-431c-b940-a1a534a32d6f"
+        }
+      ],
+      "id": "cffdbc12-6b26-4bed-80e4-703d1d95ca24",
+      "createdAt": "2026-10-22T01:18:38.000Z",
+      "updatedAt": "2026-10-22T01:18:38.000Z",
+      "uid": "35240-cffdbc12-6b26-4bed-80e4-703d1d95ca24"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.edamam.com"
+    }
+  ]
+}
