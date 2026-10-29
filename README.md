@@ -1,4 +1,4 @@
-# Edamam (edamam)
+# Edamam
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,161 +66,217 @@
 
 Edamam is a leading provider of nutrition data and analytics. They offer nutrition analysis, food database, recipe search, and meal planning APIs that power thousands of health, fitness, and food apps. Their databases contain close to 900,000 foods, over 2 million recipes, and comprehensive nutritional information.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-search/edamam/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-search/edamam/refs/heads/main/apis.yml)
+**Areas:** Restaurant · Food · Nutrition · UPC · Food and Beverage
 
-## Scope
+## Edamam on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Edamam is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/edamam/](https://apis.io/providers/edamam/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (4)
 
-- Restaurant
-- Food
-- Nutrition
-- UPC
+- [Edamam Nutrition Analysis API](https://apis.io/apis/edamam/edamam-nutrition-analysis-api/) — The Edamam Nutrition Analysis API provides detailed nutrition data for recipes and food items. Send a recipe or food description and receive comprehensive…
+- [Edamam Recipe Search API](https://apis.io/apis/edamam/edamam-recipe-search-api/) — The Edamam Recipe Search API provides access to over 2 million recipes with full nutritional analysis, diet and health labels, ingredient details, and…
+- [Edamam Meal Planner API](https://apis.io/apis/edamam/edamam-meal-planner-api/) — The Edamam Meal Planner API provides personalized meal planning capabilities based on dietary preferences, nutrition goals, and available ingredients.
+- [Edamam Food Database API](https://apis.io/apis/edamam/edamam-food-database-api/) — Search foods by keyword or barcode and resolve nutrition.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2024-11-13
-- **Modified:** 2026-06-02
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Edamam Nutrition Analysis API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-The Edamam Nutrition Analysis API provides detailed nutrition data for recipes and food items. Send a recipe or food description and receive comprehensive nutritional information including calories, macros, and micronutrients.
+- [Edamam Agentic Access](https://apis.io/agentic-access/edamam/edamam-agentic-access/)
 
-- **Human URL:** [https://developer.edamam.com/edamam-docs-nutrition-api](https://developer.edamam.com/edamam-docs-nutrition-api)
-- **Base URL:** `https://api.edamam.com`
+#### JSON Schema (19)
 
-#### Tags
+The data models the API reads and writes.
 
-- Food
-- Health
-- Nutrition
+- [Food](https://apis.io/schemas/edamam/food-and-grocery-database-api-food/)
+- [FoodHint](https://apis.io/schemas/edamam/food-and-grocery-database-api-food-hint/)
+- [Measure](https://apis.io/schemas/edamam/food-and-grocery-database-api-measure/)
+- [Nutrient](https://apis.io/schemas/edamam/food-and-grocery-database-api-nutrient/)
+- [NutrientsRequest](https://apis.io/schemas/edamam/food-and-grocery-database-api-nutrients-request/)
+- [NutrientsResponse](https://apis.io/schemas/edamam/food-and-grocery-database-api-nutrients-response/)
+- [ParserResponse](https://apis.io/schemas/edamam/food-and-grocery-database-api-parser-response/)
+- [Constraint](https://apis.io/schemas/edamam/meal-planner-api-constraint/)
+- [MealPlanRequest](https://apis.io/schemas/edamam/meal-planner-api-meal-plan-request/)
+- [MealPlanResponse](https://apis.io/schemas/edamam/meal-planner-api-meal-plan-response/)
+- [NutrientRange](https://apis.io/schemas/edamam/meal-planner-api-nutrient-range/)
+- [Section](https://apis.io/schemas/edamam/meal-planner-api-section/)
+- [Nutrient](https://apis.io/schemas/edamam/nutrition-analysis-api-nutrient/)
+- [NutritionResponse](https://apis.io/schemas/edamam/nutrition-analysis-api-nutrition-response/)
+- [RecipeRequest](https://apis.io/schemas/edamam/nutrition-analysis-api-recipe-request/)
+- [Nutrient](https://apis.io/schemas/edamam/recipe-search-api-nutrient/)
+- [Recipe](https://apis.io/schemas/edamam/recipe-search-api-recipe/)
+- [RecipeHit](https://apis.io/schemas/edamam/recipe-search-api-recipe-hit/)
+- [RecipeSearchResponse](https://apis.io/schemas/edamam/recipe-search-api-recipe-search-response/)
 
-#### Properties
+#### JSON Structure (19)
 
-- [Documentation](https://developer.edamam.com/edamam-docs-nutrition-api)
-- [Pricing](https://developer.edamam.com/edamam-nutrition-api)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-nutrition-analysis-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/edamam-food-and-grocery-database-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-food-and-grocery-database-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/edamam-meal-planner-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-meal-planner-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/edamam-nutrition-analysis-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-nutrition-analysis-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/edamam-recipe-search-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-recipe-search-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Data models expressed in JSON Structure.
 
-### Edamam Food and Grocery Database API
+- [Food And Grocery Database Api Food Hint Structure](https://apis.io/json-structure/edamam/food-and-grocery-database-api-food-hint-structure/)
+- [Food And Grocery Database Api Food Structure](https://apis.io/json-structure/edamam/food-and-grocery-database-api-food-structure/)
+- [Food And Grocery Database Api Measure Structure](https://apis.io/json-structure/edamam/food-and-grocery-database-api-measure-structure/)
+- [Food And Grocery Database Api Nutrient Structure](https://apis.io/json-structure/edamam/food-and-grocery-database-api-nutrient-structure/)
+- [Food And Grocery Database Api Nutrients Request Structure](https://apis.io/json-structure/edamam/food-and-grocery-database-api-nutrients-request-structure/)
+- [Food And Grocery Database Api Nutrients Response Structure](https://apis.io/json-structure/edamam/food-and-grocery-database-api-nutrients-response-structure/)
+- [Food And Grocery Database Api Parser Response Structure](https://apis.io/json-structure/edamam/food-and-grocery-database-api-parser-response-structure/)
+- [Meal Planner Api Constraint Structure](https://apis.io/json-structure/edamam/meal-planner-api-constraint-structure/)
+- [Meal Planner Api Meal Plan Request Structure](https://apis.io/json-structure/edamam/meal-planner-api-meal-plan-request-structure/)
+- [Meal Planner Api Meal Plan Response Structure](https://apis.io/json-structure/edamam/meal-planner-api-meal-plan-response-structure/)
+- [Meal Planner Api Nutrient Range Structure](https://apis.io/json-structure/edamam/meal-planner-api-nutrient-range-structure/)
+- [Meal Planner Api Section Structure](https://apis.io/json-structure/edamam/meal-planner-api-section-structure/)
+- [Nutrition Analysis Api Nutrient Structure](https://apis.io/json-structure/edamam/nutrition-analysis-api-nutrient-structure/)
+- [Nutrition Analysis Api Nutrition Response Structure](https://apis.io/json-structure/edamam/nutrition-analysis-api-nutrition-response-structure/)
+- [Nutrition Analysis Api Recipe Request Structure](https://apis.io/json-structure/edamam/nutrition-analysis-api-recipe-request-structure/)
+- [Recipe Search Api Nutrient Structure](https://apis.io/json-structure/edamam/recipe-search-api-nutrient-structure/)
+- [Recipe Search Api Recipe Hit Structure](https://apis.io/json-structure/edamam/recipe-search-api-recipe-hit-structure/)
+- [Recipe Search Api Recipe Search Response Structure](https://apis.io/json-structure/edamam/recipe-search-api-recipe-search-response-structure/)
+- [Recipe Search Api Recipe Structure](https://apis.io/json-structure/edamam/recipe-search-api-recipe-structure/)
 
-The Edamam Food and Grocery Database API provides access to a database of close to 900,000 foods and over 680,000 unique UPC codes with full nutritional information.
+#### JSON-LD (4)
 
-- **Human URL:** [https://developer.edamam.com/food-database-api-docs](https://developer.edamam.com/food-database-api-docs)
-- **Base URL:** `https://api.edamam.com`
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Edamam Food And Grocery Database Api Context](https://apis.io/jsonld/edamam/edamam-food-and-grocery-database-api-context/)
+- [Edamam Meal Planner Api Context](https://apis.io/jsonld/edamam/edamam-meal-planner-api-context/)
+- [Edamam Nutrition Analysis Api Context](https://apis.io/jsonld/edamam/edamam-nutrition-analysis-api-context/)
+- [Edamam Recipe Search Api Context](https://apis.io/jsonld/edamam/edamam-recipe-search-api-context/)
 
-- Food
-- Grocery
-- Nutrition
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://developer.edamam.com/food-database-api-docs)
-- [Pricing](https://developer.edamam.com/food-database-api)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-food-and-grocery-database-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/edamam-food-and-grocery-database-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-food-and-grocery-database-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/edamam-meal-planner-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-meal-planner-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/edamam-nutrition-analysis-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-nutrition-analysis-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/edamam-recipe-search-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-recipe-search-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Edamam Vocabulary](https://apis.io/vocabularies/edamam/edamam-vocabulary/)
 
-### Edamam Recipe Search API
+#### Examples (19)
 
-The Edamam Recipe Search API provides access to over 2 million recipes with full nutritional analysis, diet and health labels, ingredient details, and cuisine type.
+Example requests and responses.
 
-- **Human URL:** [https://developer.edamam.com/edamam-docs-recipe-api](https://developer.edamam.com/edamam-docs-recipe-api)
-- **Base URL:** `https://api.edamam.com`
+- [Food And Grocery Database Api Food Example](https://apis.io/examples/edamam/food-and-grocery-database-api-food-example/)
+- [Food And Grocery Database Api Food Hint Example](https://apis.io/examples/edamam/food-and-grocery-database-api-food-hint-example/)
+- [Food And Grocery Database Api Measure Example](https://apis.io/examples/edamam/food-and-grocery-database-api-measure-example/)
+- [Food And Grocery Database Api Nutrient Example](https://apis.io/examples/edamam/food-and-grocery-database-api-nutrient-example/)
+- [Food And Grocery Database Api Nutrients Request Example](https://apis.io/examples/edamam/food-and-grocery-database-api-nutrients-request-example/)
+- [Food And Grocery Database Api Nutrients Response Example](https://apis.io/examples/edamam/food-and-grocery-database-api-nutrients-response-example/)
+- [Food And Grocery Database Api Parser Response Example](https://apis.io/examples/edamam/food-and-grocery-database-api-parser-response-example/)
+- [Meal Planner Api Constraint Example](https://apis.io/examples/edamam/meal-planner-api-constraint-example/)
+- [Meal Planner Api Meal Plan Request Example](https://apis.io/examples/edamam/meal-planner-api-meal-plan-request-example/)
+- [Meal Planner Api Meal Plan Response Example](https://apis.io/examples/edamam/meal-planner-api-meal-plan-response-example/)
+- [Meal Planner Api Nutrient Range Example](https://apis.io/examples/edamam/meal-planner-api-nutrient-range-example/)
+- [Meal Planner Api Section Example](https://apis.io/examples/edamam/meal-planner-api-section-example/)
+- [Nutrition Analysis Api Nutrient Example](https://apis.io/examples/edamam/nutrition-analysis-api-nutrient-example/)
+- [Nutrition Analysis Api Nutrition Response Example](https://apis.io/examples/edamam/nutrition-analysis-api-nutrition-response-example/)
+- [Nutrition Analysis Api Recipe Request Example](https://apis.io/examples/edamam/nutrition-analysis-api-recipe-request-example/)
+- [Recipe Search Api Nutrient Example](https://apis.io/examples/edamam/recipe-search-api-nutrient-example/)
+- [Recipe Search Api Recipe Example](https://apis.io/examples/edamam/recipe-search-api-recipe-example/)
+- [Recipe Search Api Recipe Hit Example](https://apis.io/examples/edamam/recipe-search-api-recipe-hit-example/)
+- [Recipe Search Api Recipe Search Response Example](https://apis.io/examples/edamam/recipe-search-api-recipe-search-response-example/)
 
-#### Tags
+#### Collections (5)
 
-- Food
-- Nutrition
-- Recipes
+Postman and Open Collection request collections.
 
-#### Properties
+- [Edamam Food and Grocery Database API](https://apis.io/collections/edamam/open-edamam-food-and-grocery-database-api/)
+- [Edamam Food and Grocery Database Food Database API](https://apis.io/collections/edamam/open-edamam-food-database-api/)
+- [Edamam Food and Grocery Database Food Database Meal Planner API](https://apis.io/collections/edamam/open-edamam-meal-planner-api/)
+- [Edamam Food and Grocery Database Food Database Nutrition Analysis API](https://apis.io/collections/edamam/open-edamam-nutrition-analysis-api/)
+- [Edamam Food and Grocery Database Food Database Recipe Search API](https://apis.io/collections/edamam/open-edamam-recipe-search-api/)
 
-- [Documentation](https://developer.edamam.com/edamam-docs-recipe-api)
-- [Pricing](https://developer.edamam.com/edamam-recipe-api)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-recipe-search-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/edamam-food-and-grocery-database-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-food-and-grocery-database-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/edamam-meal-planner-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-meal-planner-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/edamam-nutrition-analysis-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-nutrition-analysis-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/edamam-recipe-search-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-recipe-search-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (2)
 
-### Edamam Meal Planner API
+Spectral rulesets for the provider's contracts.
 
-The Edamam Meal Planner API provides personalized meal planning capabilities based on dietary preferences, nutrition goals, and available ingredients.
+- [Edamam — jsonschema rules](https://apis.io/rules/edamam/edamam-jsonschema-spectral-rules/)
+- [Edamam API Rules](https://apis.io/rules/edamam/edamam-spectral-rules/)
 
-- **Human URL:** [https://developer.edamam.com/edamam-docs-meal-planner-api](https://developer.edamam.com/edamam-docs-meal-planner-api)
-- **Base URL:** `https://api.edamam.com`
+#### Security (2)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Food
-- Meal Planning
-- Nutrition
+- [Edamam Authentication](https://apis.io/security/edamam/edamam-authentication/)
+- [Edamam Domain Security](https://apis.io/security/edamam/edamam-domain-security/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://developer.edamam.com/edamam-docs-meal-planner-api)
-- [Pricing](https://developer.edamam.com/meal-planner-api)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/edamam/main/openapi/edamam-meal-planner-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/edamam-food-and-grocery-database-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-food-and-grocery-database-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/edamam-meal-planner-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-meal-planner-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/edamam-nutrition-analysis-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-nutrition-analysis-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/edamam-recipe-search-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/edamam-recipe-search-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-## Common Properties
+- [Edamam Plans Pricing](https://apis.io/plans/edamam/edamam-plans-pricing/)
 
-- [GitHub Organization](https://github.com/edamam)
-- [LinkedIn](https://www.linkedin.com/company/edamam)
-- [Tools](https://github.com/edamam-llc/mcp-edamam-food)
-- [Tools](https://developer.edamam.com/mcp-edamam-food)
-- [Code Examples](https://github.com/edamam-llc/edamam-api-demo)
-- [Spectral Rules](rules/edamam-spectral-rules.yml) — [Spectral](https://docs.stoplight.io/docs/spectral)
-- [Vocabulary](vocabulary/edamam-vocabulary.yaml)
-- [Plans](plans/edamam-plans-pricing.yml)
-- [Rate Limits](rate-limits/edamam-rate-limits.yml)
-- [Fin Ops](finops/edamam-finops.yml)
-- [JSON-LD](json-ld/edamam-nutrition-analysis-api-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON-LD](json-ld/edamam-food-and-grocery-database-api-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON-LD](json-ld/edamam-recipe-search-api-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [JSON-LD](json-ld/edamam-meal-planner-api-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [F A Q](https://developer.edamam.com/api/faq)
-- [Attribution](https://developer.edamam.com/attribution)
-- [Data Licensing](https://www.edamam.com/data-licensing/)
-- [Partners](https://www.edamam.com/partners/)
-- [Portal](https://www.edamam.com/)
-- [Privacy Policy](https://www.edamam.com/privacy/)
-- [Terms of Service](https://www.edamam.com/terms/api/)
+#### Rate limits (1)
 
-## Maintainers
+Published request limits.
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+- [Edamam Rate Limits](https://apis.io/rate-limits/edamam/edamam-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Edamam Finops](https://apis.io/finops/edamam/edamam-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.edamam.com/)
+- [Blog](https://www.edamam.com/blog/)
+- [Terms of service](https://www.edamam.com/terms/api/)
+- [Privacy policy](https://www.edamam.com/privacy/)
+- [GitHub](https://github.com/edamam)
+
+## API Evangelist rating
+
+**Kin Score 33.3** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 71.4 |
+| Contract quality | 25.0 |
+| Contract governance | 27.3 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 33.3 |
+| Access clarity | 39.5 |
+
+**Agent readiness 22.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/edamam/](https://apis.io/providers/edamam/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Edamam: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/edamam/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
